@@ -38,7 +38,7 @@ public class FacilityService {
                 facility.setFacilityType(newFacility.getFacilityType());
                 facility.setDescription(newFacility.getDescription());
                 facility.setOpenTime(newFacility.getOpenTime());
-                facility.setEndTime(newFacility.getEndTime());
+                facility.setClosingTime(newFacility.getClosingTime());
                 return facilities.save(facility);
             }).orElse(null);
     }

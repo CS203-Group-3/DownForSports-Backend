@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.cs203g1t3.repository.RoleRepository;
 import com.example.cs203g1t3.repository.UserRepository;
+// import com.example.cs203g1t3.services.FacilityInitialisationService;
 import com.example.cs203g1t3.services.FacilityInitialisationService;
 
 import java.util.*;
@@ -28,9 +29,6 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
     @Override
     public void run(String...args) {
-        // Create facility badminton
-        facilityInitialisationService.initialiseFacilities();
-
         // Initialize user with admin role
         Role adminRole = new Role(ERole.ROLE_ADMIN);
         roleRepository.save(adminRole);
@@ -42,5 +40,9 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
         User admin = new User("admin", null, encodedPassword);
         admin.setRoles(roles);
         userRepository.save(admin);
+
+        // Initialize facilities
+        facilityInitialisationService.initialiseFacilities(); // error
+
     }
 }

@@ -1,13 +1,17 @@
 package com.example.cs203g1t3.models;
 
 import java.time.LocalTime;
+import java.util.List;
 
+import org.springframework.cglib.core.Local;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -35,18 +39,27 @@ public class Facility {
     @GeneratedValue (strategy =  GenerationType.IDENTITY)
     private Long facilityId;
     private String facilityType;
-    @Column(columnDefinition = "TIME")
-    private LocalTime openTime;
-    @Column(columnDefinition = "TIME")
-    private LocalTime endTime;
-    private boolean isCurrentlyBooked;
     private String description;
+    private LocalTime openTime;
+    private LocalTime closingTime;
+
+    @OneToMany(mappedBy = "facility", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<FacilityDate> facilityDates;
+
+    @OneToMany(mappedBy = "facility", orphanRemoval = true, cascade = CascadeType.ALL)
+    private List<Booking> bookings;
 
     public Facility(String facilityType, String description) {
         this.facilityType = facilityType;
         this.description = description;
     }
 
+    public Facility(String facilityType, String description, LocalTime openTime, LocalTime closingTime) {
+        this.facilityType = facilityType;
+        this.description = description;
+        this.openTime = openTime;
+        this.closingTime = closingTime;
+    }
 
 
 }
