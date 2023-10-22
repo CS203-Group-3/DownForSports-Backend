@@ -39,7 +39,7 @@ public class FacilityDate {
     @JoinColumn(name = "facility_id")
     private Facility facility;
     
-    @OneToMany(mappedBy = "facilityDate", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "facilityDate", orphanRemoval = true, cascade = CascadeType.MERGE)
     private List<TimeSlots> timeSlots;
     private LocalDate date;
 

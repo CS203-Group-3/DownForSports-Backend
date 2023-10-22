@@ -116,7 +116,7 @@ POST http://localhost:8080/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "S8217079D",
+    "username": "admin",
     "password": "Pass1234!"
 }
 

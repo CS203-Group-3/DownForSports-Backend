@@ -21,24 +21,24 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class Booking {
+    public class Booking {
 
-    @Id
-    @GeneratedValue (strategy =  GenerationType.IDENTITY)
-    private Long bookingId;
+        @Id
+        @GeneratedValue (strategy =  GenerationType.IDENTITY)
+        private Long bookingId;
 
-    @Column(columnDefinition = "TIME")
-    private LocalTime startTime;
-    @Column(columnDefinition = "TIME")
-    private LocalTime endTime;
+        @Column(columnDefinition = "TIME")
+        private LocalTime startTime;
+        @Column(columnDefinition = "TIME")
+        private LocalTime endTime;
 
-    private LocalDate dateCreated;
-    
+        private LocalDate dateCreated;
+        
 
-    @ManyToOne
-    @JoinColumn(name = "facility_id")
-    private Facility facility;
+        @ManyToOne
+        @JoinColumn(name = "facility_id")
+        private Facility facility;
 
 
 
-}
+    }
