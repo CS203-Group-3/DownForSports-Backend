@@ -3,6 +3,8 @@ import java.time.LocalTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,6 +36,7 @@ public class TimeSlots {
 
     @ManyToOne
     @JoinColumn(name = "facilityDate_id")
+    @JsonIgnore
     private FacilityDate facilityDate;
 
     @Autowired
