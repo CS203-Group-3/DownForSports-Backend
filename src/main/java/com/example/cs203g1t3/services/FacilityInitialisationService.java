@@ -36,16 +36,16 @@ public class FacilityInitialisationService {
     public void initialiseFacilities() {
         Facility badminton = new Facility("Badminton Court", "Opens from 10am to 6pm", LocalTime.of(10,0), LocalTime.of(18,0));
         List<FacilityDate> facilityDates = generateFacilityDates(LocalDate.now());
-        for (FacilityDate a : facilityDates) {
+        for (FacilityDate currentDate : facilityDates) {
             List<TimeSlots> timeSlots = generateTimeSlots(badminton.getOpenTime(), badminton.getClosingTime().plusHours(1));
-            a.setFacility(badminton);
-            a.setTimeSlots(timeSlots);
-            for (TimeSlots b : timeSlots) {
-                b.setFacilityDate(a);
-                timeSlotsRepository.save(b);
+            currentDate.setFacility(badminton);
+            currentDate.setTimeSlots(timeSlots);
+            for (TimeSlots currentTimeSlot : timeSlots) {
+                currentTimeSlot.setFacilityDate(currentDate);
+                timeSlotsRepository.save(currentTimeSlot);
             }
             // timeSlotsRepository.saveAll(timeSlots);
-            facilityDateRepository.save(a);
+            facilityDateRepository.save(currentDate);
         }
         badminton.setFacilityDates(facilityDates);
         facilityRepository.save(badminton);
