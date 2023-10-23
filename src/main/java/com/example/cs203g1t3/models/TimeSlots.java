@@ -1,4 +1,5 @@
 package com.example.cs203g1t3.models;
+import java.sql.Time;
 import java.time.LocalTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class TimeSlots {
+public class TimeSlots implements Comparable{
     @Id
     @GeneratedValue (strategy =  GenerationType.IDENTITY)
     private Long timeSlotsId;
@@ -43,6 +44,12 @@ public class TimeSlots {
     public TimeSlots(LocalTime startTime, boolean isAvailable) {
         this.startTime = startTime;
         this.isAvailable = isAvailable;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        TimeSlots temp = (TimeSlots)o;
+        return startTime.compareTo(temp.getStartTime());
     }
 
     
