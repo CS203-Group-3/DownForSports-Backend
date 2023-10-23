@@ -31,20 +31,12 @@
          this.userService = userService;
      }
 
-     public List<Booking> listBookings() {
-         return bookingRepository.findAll();
-     }
-
      public Booking getBooking(Long bookingId) {
          return bookingRepository.findById(bookingId).orElse(null);
      }
 
      public List<Booking> getAllBookings() {
          return bookingRepository.findAll();
-     }
-
-     public Booking createBooking(Booking booking) {
-         return bookingRepository.save(booking);
      }
 
      public void deleteBooking(CancelBookingRequest cancelBookingRequest) {
@@ -72,6 +64,7 @@
         }
         booking.setBookingAttendanceChecked(true);
      }
+
 
      public List<LocalTime> listBookingTimeslot(Booking booking){
          List<LocalTime> list = new ArrayList<>();
