@@ -129,3 +129,48 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTODIxNzA3OUQiLCJpYXQiOjE2O
     "facilityType": "FacilityOne",
     "description": "Default Description"
 }
+
+###
+GET http://localhost:8080/api/facilities
+Content-Type: application/json
+
+
+### Register admin
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "T0127510G",
+    "email": "aqqzzq@gmail.com",
+    "password": "Pass1234!",
+    "role": ["user"]
+}
+
+
+### Change Password
+POST http://localhost:8080/api/user/2
+Content-Type: application/json
+
+{
+    "currentPassword": "Pasggs1234!",
+    "newPassword": "B@llsD33p69"
+}
+
+### Change Password
+POST http://localhost:8080/api/user/2
+Content-Type: application/json
+
+{
+    "currentPassword": "Pass1234!",
+    "newPassword": "B@llsD33p69"
+}
+
+
+### Login successful
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "T0127510G",
+    "password": "B@llsD33p69"
+}
