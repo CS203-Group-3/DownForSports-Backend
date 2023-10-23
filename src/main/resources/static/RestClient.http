@@ -133,4 +133,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0N
 ### Get facility
 GET http://localhost:8080/api/facilities
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0ODM3MywiZXhwIjoxNjk4MTM0NzczfQ.w4SYtTL5uz8M6kB4oFCQcRKVytf0hn4EwKY0x-5HoNE
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA1NTM2NywiZXhwIjoxNjk4MTQxNzY3fQ._pif7SEQzKWWdUvtyRo8b7HW3DBUGTDiGQ68_VeZrJI
