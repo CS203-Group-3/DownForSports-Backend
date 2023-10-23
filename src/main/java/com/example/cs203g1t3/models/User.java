@@ -51,13 +51,16 @@ public class User{
 //     private LocalDateTime lastActive;
 
 //    //Variables to be used in the service later on
-    private int creditScore;
+    private double creditScore;
 //    private int noOfBookingsLeft;
 //    private boolean isMember;
 
     //Email One Time Password
     @OneToOne(mappedBy="user",cascade=CascadeType.ALL)
     private OneTimePassword oneTimePassword;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Booking> bookings;
 
 
     public User(String username, String email, String password) {

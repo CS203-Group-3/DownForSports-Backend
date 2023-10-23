@@ -27,6 +27,10 @@ import lombok.*;
         @GeneratedValue (strategy =  GenerationType.IDENTITY)
         private Long bookingId;
 
+        @ManyToOne
+        @JoinColumn(name="userId")
+        private User user;
+
         @Column(columnDefinition = "TIME")
         private LocalTime startTime;
         @Column(columnDefinition = "TIME")
@@ -39,6 +43,11 @@ import lombok.*;
         @JoinColumn(name = "facility_id")
         private Facility facility;
 
+        @Column(name = "bookingAttendanceChecked")
+        private boolean bookingAttendanceChecked;
+
+        @Column(name = "creditDeducted")
+        private int creditDeducted;
 
 
     }
