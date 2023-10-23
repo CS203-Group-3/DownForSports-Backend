@@ -104,23 +104,22 @@ public class UserService {
 //    }
 
 
-    public void changePassword(User user, String newPassword) {
+    public void changePassword(Long userID, String newPassword) {
         // Encode the new password
         String encodedPassword = encoder.encode(newPassword);
         
         // Save the updated user with the new password
-        userRepository.updatePassword(user.getUserID(), encodedPassword);
+        userRepository.updatePassword(userID, encodedPassword);
     }
 
-    public boolean checkPassword(User user, String password) {
-        // Encode the password
-        String encodedPassword = encoder.encode(password);
-        // Retrieve the id
-        String username = user.getUsername();
+    public boolean checkPassword(Long userID, String password) {
+
         // Check if the id and password matches that of the database
-        Optional<User> userOptional = userRepository.findByUsernameAndPassword(username, encodedPassword);
+        Optional<User> userOptional = userRepository.findByUserID(userID);
+
+        String currentHash = userOptional.get().getPassword();
         // Return whether it exist
-        return userOptional.isPresent();
+        return encoder.matches(password, currentHash);
     }
 
     public ResponseEntity<?> registerAccount(SignupRequest signUpRequest, Role role) {

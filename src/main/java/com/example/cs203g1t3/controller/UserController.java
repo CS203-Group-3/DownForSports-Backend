@@ -40,12 +40,9 @@ public class UserController {
         // Assuming ChangePasswordRequest is a class that holds new password and other necessary data
         String newPassword = changePasswordRequest.getNewPassword();
         String currentPassword = changePasswordRequest.getCurrentPassword();
-
-        // Implement authentication logic to ensure the user is authorized
-        User user = userService.getUser(userId);
         
         // Check if the current password provided matches the user's current password
-        if (userService.checkPassword(user, currentPassword)) {
+        if (!userService.checkPassword(userId, currentPassword)) {
             return ResponseEntity.badRequest().body("Current password is incorrect");
         }
 
@@ -53,7 +50,7 @@ public class UserController {
         // If validation fails, return an error response.
 
         // Update the user's password in the database
-        userService.changePassword(user, newPassword);
+        userService.changePassword(userId, newPassword);
 
         return ResponseEntity.ok("Password changed successfully");
     }

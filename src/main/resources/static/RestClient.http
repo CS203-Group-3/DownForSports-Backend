@@ -130,7 +130,47 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0N
     "description": "Default Description"
 }
 
-### Get facility
+###
 GET http://localhost:8080/api/facilities
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0ODM3MywiZXhwIjoxNjk4MTM0NzczfQ.w4SYtTL5uz8M6kB4oFCQcRKVytf0hn4EwKY0x-5HoNE
+
+
+### Register admin
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "T0127510G",
+    "email": "aqqzzq@gmail.com",
+    "password": "Pass1234!",
+    "role": ["user"]
+}
+
+
+### Change Password
+POST http://localhost:8080/api/user/2
+Content-Type: application/json
+
+{
+    "currentPassword": "Pasggs1234!",
+    "newPassword": "B@llsD33p69"
+}
+
+### Change Password
+POST http://localhost:8080/api/user/2
+Content-Type: application/json
+
+{
+    "currentPassword": "Pass1234!",
+    "newPassword": "B@llsD33p69"
+}
+
+
+### Login successful
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "T0127510G",
+    "password": "B@llsD33p69"
+}
