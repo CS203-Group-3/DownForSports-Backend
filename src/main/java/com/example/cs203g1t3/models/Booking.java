@@ -1,6 +1,7 @@
 package com.example.cs203g1t3.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import jakarta.persistence.ManyToOne;
 
@@ -33,12 +34,20 @@ import lombok.*;
         private LocalTime endTime;
 
         private LocalDate dateCreated;
-        
+
+
+        private int creditDeducted;
+        private boolean bookingAttended;
 
         @ManyToOne
         @JoinColumn(name = "facility_id")
         private Facility facility;
 
 
-
+        public Booking(LocalTime startTime,LocalTime endTime,LocalDate dateCreated, int creditDeducted){
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.dateCreated = dateCreated;
+            this.creditDeducted = creditDeducted;
+        }
     }

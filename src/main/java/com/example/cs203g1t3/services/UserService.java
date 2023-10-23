@@ -5,6 +5,7 @@ import com.example.cs203g1t3.models.User;
 import com.example.cs203g1t3.payload.request.SignupRequest;
 import com.example.cs203g1t3.payload.response.MessageResponse;
 import com.example.cs203g1t3.DTO.LoginResponse;
+import com.example.cs203g1t3.exception.NotEnoughCreditException;
 import com.example.cs203g1t3.repository.UserRepository;
 import com.example.cs203g1t3.security.jwt.JwtUtils;
 
@@ -224,4 +225,18 @@ public class UserService {
         return nric.charAt(8) == checksumLetters[checksum % 11];
     }
 
+    public void deductCredit(Long userId, int creditDeducted){
+        User user = userRepository.findById(userId).orElse(null);
+        if(user == null){
+            return;
+        }
+
+        int currentCreditScore = user.getCreditScore();
+        if(currentCreditScore < creditDeducted){
+            throw new NotEnoughCreditException();
+        }
+
+        user.setCreditScore(currentCreditScore-creditDeducted);
+        userRepository.save(user);
+    }
 }

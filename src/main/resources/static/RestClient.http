@@ -130,7 +130,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0N
     "description": "Default Description"
 }
 
-###
+### view facility
 GET http://localhost:8080/api/facilities/1
 Content-Type: application/json
 
@@ -173,4 +173,30 @@ Content-Type: application/json
 {
     "username": "T0127510G",
     "password": "B@llsD33p69"
+}
+
+
+
+
+
+
+### view facility
+GET http://localhost:8080/api/facilities/1
+Content-Type: application/json
+
+### make booking
+POST http://localhost:8080/api/facilities/1/bookings
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+
+{
+    "userId":2,
+    "facilityId":1,
+    "timeBookingMade":"2023-10-20",
+    "facilityDate":"2023-10-23",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "10:00:00",
+          "available": true
+        }]
 }

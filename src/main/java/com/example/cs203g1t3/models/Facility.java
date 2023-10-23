@@ -42,6 +42,7 @@ public class Facility {
     private String description;
     private LocalTime openTime;
     private LocalTime closingTime;
+    private int creditValue;
 
     @OneToMany(mappedBy = "facility", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<FacilityDate> facilityDates;

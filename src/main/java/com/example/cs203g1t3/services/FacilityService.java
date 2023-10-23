@@ -1,9 +1,11 @@
 package com.example.cs203g1t3.services;
 
 import com.example.cs203g1t3.models.Booking;
-import com.example.cs203g1t3.models.Facility;
+import com.example.cs203g1t3.models.*;
+import com.example.cs203g1t3.models.TimeSlots;
 import com.example.cs203g1t3.repository.FacilityRepository;
 import java.util.*;
+import java.time.*;
 
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,38 @@ public class FacilityService {
         this.facilities = facilities;
     }
 
+    public List<TimeSlots> getSpecificTimeSlotsAvailable(LocalDate date, Long facilityId){
+        Facility facility = getFacility(facilityId);
 
+        //checking if facility exist
+        if(facility == null){
+            return null;
+        }
+
+        //Get the List<FacilityDate> in facility object
+        List<FacilityDate> facilitydatesList = facility.getFacilityDates();
+
+        //Creating list to save TimeSlot into a list and output when done
+        List<TimeSlots> availableTimeSlotsList = new ArrayList<>();
+
+        //Loop through List<FacilityDate> in the facility
+        for(FacilityDate facilityDate: facilitydatesList){
+
+            //check if facilityDate LocalDate is the same as the parameter LocalDate
+            if(facilityDate.getDate().equals(date)){
+
+                //Loop through List<TimeSlot>
+                for(TimeSlots timings:facilityDate.getTimeSlots()){
+
+                    //Checking if timeslot is available, it returns false if it is taken
+                    if(timings.isAvailable()){
+                        availableTimeSlotsList.add(timings);
+                    }
+                }
+            }
+        }
+        return availableTimeSlotsList;
+    }
 
     public List<Facility> listFacilities() {
         return facilities.findAll();
