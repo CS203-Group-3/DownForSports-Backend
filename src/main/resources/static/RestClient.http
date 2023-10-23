@@ -123,9 +123,14 @@ Content-Type: application/json
 ### Add facility
 POST http://localhost:8080/api/facilities
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTODIxNzA3OUQiLCJpYXQiOjE2OTY4Mzg5NDMsImV4cCI6MTY5NjkyNTM0M30.W8TxmQpl-DaMRJI7O7nv5KTMIcAK0BDVMZSl4F1pcrQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
 
 {
     "facilityType": "FacilityOne",
     "description": "Default Description"
 }
+
+### Get facility
+GET http://localhost:8080/api/facilities
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0ODM3MywiZXhwIjoxNjk4MTM0NzczfQ.w4SYtTL5uz8M6kB4oFCQcRKVytf0hn4EwKY0x-5HoNE

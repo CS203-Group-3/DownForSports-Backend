@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RestController
 @RequestMapping("/api/facilities")
 public class FacilityController {
+
     @Autowired
     private FacilityService facilityService;
 
@@ -54,7 +55,7 @@ public class FacilityController {
 
     // Include PUT and DELETE methods to update and delete facilities respectively.
 
-        @PutMapping("/{facilityId}")
+    @PutMapping("/{facilityId}")
     @PreAuthorize("hasRole('ADMIN')") // Example: Only admins can update facilities
     public ResponseEntity<?> updateFacility(@PathVariable Long facilityId, @Valid @RequestBody Facility newFacilityInfo) {
         Facility facility = facilityService.updateFacility(facilityId, newFacilityInfo);
