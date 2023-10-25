@@ -174,3 +174,21 @@ Content-Type: application/json
     "username": "T0127510G",
     "password": "B@llsD33p69"
 }
+
+### Create facility 
+POST http://localhost:8080/api/facilities
+Content-Type: application/json
+
+{
+    "facilityType": "basketball court",
+    "description": "indoor court",
+    "openTime": "09:00",
+    "closingTime": "18:00",
+    "creditCost": "50",
+    "locationString": "ActiveSG Sengkang" 
+}
+
+
+### Get faci
+GET http://localhost:8080/api/facilities
+Content-Type: application/json

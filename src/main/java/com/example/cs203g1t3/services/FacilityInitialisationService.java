@@ -21,40 +21,29 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class FacilityInitialisationService {
+    private FacilityService facilityService;
     private FacilityRepository facilityRepository;
     private TimeSlotsRepository timeSlotsRepository;
     private FacilityDateRepository facilityDateRepository;
 
     @Autowired
-    public FacilityInitialisationService(FacilityRepository facilityRepository, FacilityDateRepository facilityDateRepository, TimeSlotsRepository timeSlotsRepository) {
+    public FacilityInitialisationService(FacilityRepository facilityRepository, FacilityDateRepository facilityDateRepository, TimeSlotsRepository timeSlotsRepository, FacilityService facilityService) {
         this.facilityRepository = facilityRepository;
         this.facilityDateRepository = facilityDateRepository;
         this.timeSlotsRepository = timeSlotsRepository;
+        this.facilityService = facilityService;
     }
 
     @Transactional
     public void initialiseFacilities() {
-        Facility badminton = new Facility("Badminton Court", "Opens from 10am to 6pm", LocalTime.of(10,0), LocalTime.of(18,0));
-        List<FacilityDate> facilityDates = generateFacilityDates(LocalDate.now());
-        for (FacilityDate currentDate : facilityDates) {
-            List<TimeSlots> timeSlots = generateTimeSlots(badminton.getOpenTime(), badminton.getClosingTime().plusHours(1));
-            currentDate.setFacility(badminton);
-            currentDate.setTimeSlots(timeSlots);
-            for (TimeSlots currentTimeSlot : timeSlots) {
-                currentTimeSlot.setFacilityDate(currentDate);
-                timeSlotsRepository.save(currentTimeSlot);
-            }
-            // timeSlotsRepository.saveAll(timeSlots);
-            facilityDateRepository.save(currentDate);
-        }
-        badminton.setFacilityDates(facilityDates);
-        facilityRepository.save(badminton);
+        Facility badminton = new Facility("Badminton Court", "Opens from 10am to 6pm", LocalTime.of(10,0), LocalTime.of(18,0), 50, "SMU");
+        facilityService.initialiseFacility(badminton);
     }
 
     // New implementation
     public List<TimeSlots> generateTimeSlots(LocalTime openTime, LocalTime closingTime) {
         List<TimeSlots> timeSlots = new ArrayList<TimeSlots>();
-        LocalTime tempOpen = openTime; 
+        LocalTime tempOpen = openTime;
         LocalTime tempEnd = closingTime;
     
         while (tempOpen.isBefore(tempEnd)) {

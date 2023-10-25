@@ -42,6 +42,8 @@ public class Facility {
     private String description;
     private LocalTime openTime;
     private LocalTime closingTime;
+    private int creditCost;
+    private String locationString;
 
     @OneToMany(mappedBy = "facility", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<FacilityDate> facilityDates;
@@ -54,11 +56,13 @@ public class Facility {
         this.description = description;
     }
 
-    public Facility(String facilityType, String description, LocalTime openTime, LocalTime closingTime) {
+    public Facility(String facilityType, String description, LocalTime openTime, LocalTime closingTime, int creditCost, String locationString) {
         this.facilityType = facilityType;
         this.description = description;
         this.openTime = openTime;
         this.closingTime = closingTime;
+        this.creditCost = creditCost;
+        this.locationString = locationString;
     }
 
 
