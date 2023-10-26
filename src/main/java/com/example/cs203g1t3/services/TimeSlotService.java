@@ -6,6 +6,8 @@ import com.example.cs203g1t3.exception.TimeSlotNotFound;
 import com.example.cs203g1t3.models.TimeSlots;
 import com.example.cs203g1t3.repository.TimeSlotsRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class TimeSlotService {
     private TimeSlotsRepository timeSlotsRepository;
@@ -14,10 +16,11 @@ public class TimeSlotService {
         this.timeSlotsRepository = timeSlotsRepository;
     }
 
+
     public void updateToUnavailable(Long timeSlotId){
         TimeSlots timeslot = timeSlotsRepository.findById(timeSlotId).orElse(null);
         if(timeslot == null){
-            throw new TimeSlotNotFound(timeSlotId);
+            throw new TimeSlotNotFound();
         }
         timeslot.setAvailable(false);
         timeSlotsRepository.save(timeslot);

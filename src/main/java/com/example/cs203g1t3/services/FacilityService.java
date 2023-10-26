@@ -12,11 +12,43 @@ import org.springframework.stereotype.Service;
 @Service
 public class FacilityService {
     private FacilityRepository facilities;
-
+    // private FacilityDateService facilityDateService;
     public FacilityService(FacilityRepository facilities) {
         this.facilities = facilities;
     }
 
+    public Long getFacilityDateId(LocalDate date, Long facilityId){
+        Facility facility = getFacility(facilityId);
+        //checking if facility exist
+        if(facility == null){
+            return null;
+        }
+
+        List<FacilityDate> facilityDates = facility.getFacilityDates();
+        for(FacilityDate fd: facilityDates){
+            if(fd.getDate().equals(date)){
+                return fd.getFacilityDateId();
+            }
+        }
+
+        return null;
+    }
+    public List<TimeSlots> getAllTimeSlotFromFacility(LocalDate date,Long facilityId){
+        Facility facility = getFacility(facilityId);
+        //checking if facility exist
+        if(facility == null){
+            return null;
+        }
+
+        List<FacilityDate> facilityDates = facility.getFacilityDates();
+        for(FacilityDate fd: facilityDates){
+            if(fd.getDate().equals(date)){
+                return fd.getTimeSlots();
+            }
+        }
+        
+        return null;
+    }
     public List<TimeSlots> getSpecificTimeSlotsAvailable(LocalDate date, Long facilityId){
         Facility facility = getFacility(facilityId);
 
@@ -81,5 +113,5 @@ public class FacilityService {
         facilities.deleteById(facilityId);
     }
 
-
+    
 }

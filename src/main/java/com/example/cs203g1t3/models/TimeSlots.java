@@ -52,6 +52,16 @@ public class TimeSlots implements Comparable{
         return startTime.compareTo(temp.getStartTime());
     }
 
-    
 
+    //c
+    public boolean equals(TimeSlots other){
+        return other.getTimeSlotsId() == timeSlotsId;
+    }
+
+    @Override
+    public String toString() {
+        return "TimeSlots [timeSlotsId=" + timeSlotsId + ", startTime=" + startTime + ", isAvailable=" + isAvailable
+                +"]";
+    }
+    
 }

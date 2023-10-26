@@ -106,8 +106,6 @@
 //         // }).orElse(null);
 //     }
 
-
-
 //     public boolean isValidBooking(LocalTime startTime, LocalTime endTime, Facility facility) {
 //         if(startTime.isAfter(endTime)){          //checking if startTime is after endTime
 //             return false;
@@ -125,10 +123,8 @@
 //         return true;
 
 //     }
-    
+
 // }
-
-
 
 package com.example.cs203g1t3.services;
 
@@ -137,11 +133,11 @@ import com.example.cs203g1t3.exception.*;
 import com.example.cs203g1t3.models.*;
 import com.example.cs203g1t3.repository.BookingRepository;
 
-
 import java.time.*;
 import java.util.*;
 
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.*;
 
 @Service
 public class BookingService {
@@ -149,70 +145,110 @@ public class BookingService {
     private FacilityService facilityService;
     private UserService userService;
     private TimeSlotService timeSlotService;
-    // @Autowired
-    public BookingService(BookingRepository bookingRepository, FacilityService facilityService,UserService userService,TimeSlotService timeSlotService){
+    private FacilityDateService facilityDateService;
+
+    @Autowired
+    public BookingService(BookingRepository bookingRepository, FacilityService facilityService, UserService userService,
+            TimeSlotService timeSlotService,FacilityDateService facilityDateService) {
         this.bookingRepository = bookingRepository;
         this.facilityService = facilityService;
         this.userService = userService;
         this.timeSlotService = timeSlotService;
+        this.facilityDateService = facilityDateService;
     }
 
+    public boolean addBooking(Booking booking, Facility facilityId) {
 
-    public boolean addBooking(Booking booking, Facility facilityId){
-        
         return true;
     }
 
-    public boolean makeBooking(BookingRequest bookingRequest){
+    public boolean makeBooking(BookingRequest bookingRequest) {
         LocalDate dateBooked = bookingRequest.getFacilityDate();
         Long facilityId = bookingRequest.getFacilityId();
         Facility facility = facilityService.getFacility(facilityId);
-        if(facility == null){
-            //if facility not found return false
-            return false;
-        }
-        //get available timeslots from the facility
-        List<TimeSlots> availableTime = facilityService.getSpecificTimeSlotsAvailable(dateBooked, facilityId);
-        if(availableTime.size() == 0){
-            // if there are no timeslots available, return false
-            return false;
+        if (facility == null) {
+            // if facility not found throw
+            throw new FacilityNotFoundException(facilityId);
         }
 
-        List<TimeSlots> bookingTimeSlot = bookingRequest.getTimeSlots();
-        
+        // get all timeslots from specific date
+        List<TimeSlots> timeSlot = facilityService.getAllTimeSlotFromFacility(dateBooked, facilityId);
+        if (timeSlot == null) {
+            throw new TimeSlotNotFound();
+        }
 
-        //check if timeslots in bookingrequest are all in availabletime
-        for(TimeSlots timeslot: bookingTimeSlot){
-            //if bookingrequest timeslot is not in availabletimeslot
-            System.out.println(timeslot);
-            if(!availableTime.contains(timeslot)){
+
+        for (TimeSlots t : bookingRequest.getTimeSlots()) {
+            // check if it is available
+            boolean isTaken = true;
+            for (TimeSlots facilityTiming : timeSlot) {
+                //if Bookedtimeslot is in facilitytimings, and is available, then break,
+                if (facilityTiming.equals(t)
+                        && facilityTiming.isAvailable()) {
+                    isTaken = false;
+                    timeSlotService.updateToUnavailable(facilityTiming.getTimeSlotsId());
+                    break;
+                }
+            }
+
+            //if timing is taken then throw exception
+            if (isTaken) {
                 throw new BookedException();
             }
+            
+            //set timeslot isAvailable to false
         }
 
-        Long userId = bookingRequest.getUserId();
-        
-        //getting start and end time for the booking request
-        LocalTime bookingStartTime = bookingTimeSlot.get(0).getStartTime();
-        LocalTime bookingEndTime = bookingTimeSlot.get(bookingTimeSlot.size()-1).getStartTime().plusHours(1);
-
-        //Amount of credit deducted = facility credit value * number of timeslots booked
-        int creditDeducted = facility.getCreditValue() * bookingTimeSlot.size();
-        int userCredit = userService.getUser(userId).getCreditScore();
-        
-        //check if user has enough credits
-        if(userCredit < creditDeducted){
-            throw new NotEnoughCreditException();
-        }
-        userService.deductCredit(userId,creditDeducted);
-        Booking booking = new Booking(bookingStartTime, bookingEndTime,bookingRequest.getTimeBookingMade(),creditDeducted);
-        bookingRepository.save(booking);
-
-        //update all timeslots in booking request to unavailable
-        for(TimeSlots timeslot: bookingTimeSlot){
-            timeSlotService.updateToUnavailable(timeslot.getTimeSlotsId());
-        }
         return true;
+        // ---------------------------------old-------------------------------------
+        // get available timeslots from the facility
+        // List<TimeSlots> availableTime =
+        // facilityService.getSpecificTimeSlotsAvailable(dateBooked, facilityId);
+        // if(availableTime.size() == 0){
+        // // if there are no timeslots available, return false
+        // return false;
+        // }
+
+        // List<TimeSlots> bookingTimeSlot = bookingRequest.getTimeSlots();
+
+        // //check if timeslots in bookingrequest are all in availabletime
+        // for(TimeSlots timeslot: bookingTimeSlot){
+        // //if bookingrequest timeslot is not in availabletimeslot
+        // // System.out.println(timeslot);
+        // if(!availableTime.contains(timeslot)){
+        // throw new BookedException();
+        // }
+        // }
+
+        // Long userId = bookingRequest.getUserId();
+
+        // //getting start and end time for the booking request
+        // LocalTime bookingStartTime = bookingTimeSlot.get(0).getStartTime();
+        // LocalTime bookingEndTime =
+        // bookingTimeSlot.get(bookingTimeSlot.size()-1).getStartTime().plusHours(1);
+
+        // //Amount of credit deducted = facility credit value * number of timeslots
+        // booked
+        // int creditDeducted = facility.getCreditValue() * bookingTimeSlot.size();
+        // int userCredit = userService.getUser(userId).getCreditScore();
+
+        // //check if user has enough credits
+        // if(userCredit < creditDeducted){
+        // throw new NotEnoughCreditException();
+        // }
+
+        // userService.deductCredit(userId,creditDeducted);
+        // Booking booking = new Booking(bookingStartTime,
+        // bookingEndTime,bookingRequest.getTimeBookingMade(),creditDeducted);
+        // booking.setFacility(facility);
+        // bookingRepository.save(booking);
+
+        // //update all timeslots in booking request to unavailable
+        // for(TimeSlots timeslot: bookingTimeSlot){
+        // timeSlotService.updateToUnavailable(timeslot.getTimeSlotsId());
+        // }
+
+        // return true;
     }
 
 }

@@ -7,8 +7,8 @@ public class TimeSlotNotFound extends RuntimeException{
 
         private static final long serialVersionUID = 1L;
 
-    public TimeSlotNotFound(Long id){
-        super("Could not find timeslot" + id);
+    public TimeSlotNotFound(){
+        super("Could not find timeslot");
     }
 }
 
