@@ -184,7 +184,7 @@ public class UserService {
 
     public void addCreditScore(Long userId,int creditScoreToAdd){
         User user = userRepository.findById(userId).get();
-        int currentCreditScore = user.getCreditScore();
+        double currentCreditScore = user.getCreditScore();
         currentCreditScore += creditScoreToAdd;
         if(currentCreditScore >= 999){
             currentCreditScore = 999;
