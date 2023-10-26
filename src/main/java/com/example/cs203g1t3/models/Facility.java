@@ -60,6 +60,7 @@ public class Facility {
         this.description = description;
         this.openTime = openTime;
         this.closingTime = closingTime;
+        creditValue = 1;
     }
 
 

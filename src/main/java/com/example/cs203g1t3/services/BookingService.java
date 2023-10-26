@@ -164,7 +164,7 @@ public class BookingService {
         return true;
     }
 
-    
+
     public boolean makeBooking(BookingRequest bookingRequest) {
         LocalDate dateBooked = bookingRequest.getFacilityDate();
         Long facilityId = bookingRequest.getFacilityId();
@@ -180,7 +180,7 @@ public class BookingService {
             throw new TimeSlotNotFound();
         }
         
-        // Timeslots for booking request
+
         List<TimeSlots> bookingTimeSlot = bookingRequest.getTimeSlots();
         for (TimeSlots t : bookingTimeSlot) {
             // check if it is available
@@ -190,7 +190,8 @@ public class BookingService {
                 if (facilityTiming.equals(t)
                         && facilityTiming.isAvailable()) {
                     isTaken = false;
-                    timeSlotService.updateToUnavailable(facilityTiming.getTimeSlotsId());
+                    // timeSlotService.updateToUnavailable(facilityTiming.getTimeSlotsId());
+
                     break;
                 }
             }
@@ -199,8 +200,37 @@ public class BookingService {
                 throw new BookedException();
             }
         }
-        
 
+        //check if user has enough credits
+        User user = userService.getUser(bookingRequest.getUserId());
+        
+        int credits = user.getCreditScore();
+         //Amount of credit deducted = facility credit value * number of timeslots booked
+        int creditDeducted = facility.getCreditValue() * bookingTimeSlot.size();
+        // System.out.println(creditDeducted);
+        if(credits < creditDeducted){
+            throw new NotEnoughCreditException();
+        }
+        Collections.sort(bookingTimeSlot);
+        // System.out.println(bookingTimeSlot);
+        LocalTime bookingStartTime = bookingTimeSlot.get(0).getStartTime();
+        LocalTime bookingEndTime = bookingTimeSlot.get(bookingTimeSlot.size()-1).getStartTime().plusHours(1);
+        // System.out.println(bookingStartTime);
+        // System.out.println(bookingEndTime);
+
+        userService.deductCredit(user.getUserID(), creditDeducted);
+        // System.out.println(userService.getUser(bookingRequest.getUserId()));
+
+        //make booking
+        Booking booking = new Booking(bookingStartTime,bookingEndTime,bookingRequest.getTimeBookingMade(),creditDeducted);
+        booking.setFacility(facility);
+        bookingRepository.save(booking);
+
+        //set timings isavailable to false
+        for(TimeSlots t:bookingTimeSlot){
+            Long id = t.getTimeSlotsId();
+            timeSlotService.updateToUnavailable(id);
+        }
         return true;
         // ---------------------------------old-------------------------------------
         // get available timeslots from the facility

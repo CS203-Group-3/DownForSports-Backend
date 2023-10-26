@@ -3,6 +3,9 @@ package com.example.cs203g1t3.models;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.ManyToOne;
 
 import jakarta.persistence.Column;
@@ -40,6 +43,7 @@ import lombok.*;
         private boolean bookingAttended;
 
         @ManyToOne
+        @JsonIgnore
         @JoinColumn(name = "facility_id")
         private Facility facility;
 

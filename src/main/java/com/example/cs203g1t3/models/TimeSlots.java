@@ -33,6 +33,8 @@ public class TimeSlots implements Comparable{
     @GeneratedValue (strategy =  GenerationType.IDENTITY)
     private Long timeSlotsId;
     private LocalTime startTime;
+
+    @JsonIgnore
     private boolean isAvailable;
 
     @ManyToOne

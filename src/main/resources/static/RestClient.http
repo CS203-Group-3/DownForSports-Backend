@@ -198,19 +198,17 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
 
 {
-    "userId":2,
+    "userId":1,
     "facilityId":1,
     "timeBookingMade":"2023-10-23",
     "facilityDate":"2023-10-23",
     "timeSlots":[{
           "timeSlotsId": 1,
-          "startTime": "10:00:00",
-          "available": true
+          "startTime": "10:00:00"
         },
         {
           "timeSlotsId": 2,
-          "startTime": "11:00:00",
-          "available": true
+          "startTime": "11:00:00"
         }
         
         ]
