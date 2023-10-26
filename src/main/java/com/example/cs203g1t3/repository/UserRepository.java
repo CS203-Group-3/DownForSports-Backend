@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import com.example.cs203g1t3.models.User;
 
 import jakarta.transaction.Transactional;
+import java.util.List;
+
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
@@ -18,6 +20,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
    Optional<User> findByEmail(String email);
    Optional<User> findByEmailAndPassword(String email, String password);
    Optional<User> findByUsernameAndPassword(String username, String password);
+   Optional<User> findByUserID(Long userID);
 
    Boolean existsByUsername(String username);
 

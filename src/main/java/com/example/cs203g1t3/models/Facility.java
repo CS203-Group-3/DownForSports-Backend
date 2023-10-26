@@ -42,11 +42,12 @@ public class Facility {
     private String description;
     private LocalTime openTime;
     private LocalTime closingTime;
+    private int creditValue;
 
-    @OneToMany(mappedBy = "facility", orphanRemoval = true, cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "facility", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<FacilityDate> facilityDates;
 
-    @OneToMany(mappedBy = "facility", cascade = CascadeType.MERGE) // putting orphanRemoval = true gives the error "A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance"
+    @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL) // putting orphanRemoval = true gives the error "A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance"
     private List<Booking> bookings;
 
     public Facility(String facilityType, String description) {
@@ -59,6 +60,7 @@ public class Facility {
         this.description = description;
         this.openTime = openTime;
         this.closingTime = closingTime;
+        creditValue = 1;
     }
 
 

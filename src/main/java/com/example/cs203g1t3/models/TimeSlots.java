@@ -1,7 +1,10 @@
 package com.example.cs203g1t3.models;
+import java.sql.Time;
 import java.time.LocalTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,15 +28,18 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class TimeSlots {
+public class TimeSlots implements Comparable{
     @Id
     @GeneratedValue (strategy =  GenerationType.IDENTITY)
     private Long timeSlotsId;
     private LocalTime startTime;
+
+    @JsonIgnore
     private boolean isAvailable;
 
     @ManyToOne
     @JoinColumn(name = "facilityDate_id")
+    @JsonIgnore
     private FacilityDate facilityDate;
 
     @Autowired
@@ -42,6 +48,22 @@ public class TimeSlots {
         this.isAvailable = isAvailable;
     }
 
-    
+    @Override
+    public int compareTo(Object o) {
+        TimeSlots temp = (TimeSlots)o;
+        return startTime.compareTo(temp.getStartTime());
+    }
 
+
+    //c
+    public boolean equals(TimeSlots other){
+        return other.getTimeSlotsId() == timeSlotsId;
+    }
+
+    @Override
+    public String toString() {
+        return "TimeSlots [timeSlotsId=" + timeSlotsId + ", startTime=" + startTime + ", isAvailable=" + isAvailable
+                +"]";
+    }
+    
 }

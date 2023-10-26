@@ -1,7 +1,11 @@
 package com.example.cs203g1t3.models;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.ManyToOne;
 
 import jakarta.persistence.Column;
@@ -37,9 +41,11 @@ import lombok.*;
         private LocalTime endTime;
 
         private LocalDate dateCreated;
-        
+
+        private boolean bookingAttended;
 
         @ManyToOne
+        @JsonIgnore
         @JoinColumn(name = "facility_id")
         private Facility facility;
 
@@ -47,7 +53,12 @@ import lombok.*;
         private boolean bookingAttendanceChecked;
 
         @Column(name = "creditDeducted")
-        private int creditDeducted;
+        private double creditDeducted;
 
-
+        public Booking(LocalTime startTime,LocalTime endTime,LocalDate dateCreated, double creditDeducted){
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.dateCreated = dateCreated;
+            this.creditDeducted = creditDeducted;
+        }
     }

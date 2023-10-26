@@ -24,46 +24,42 @@ public class FacilityInitialisationService {
     private FacilityRepository facilityRepository;
     private TimeSlotsRepository timeSlotsRepository;
     private FacilityDateRepository facilityDateRepository;
-
+    private TimeSlotService tss;
     @Autowired
-    public FacilityInitialisationService(FacilityRepository facilityRepository, FacilityDateRepository facilityDateRepository, TimeSlotsRepository timeSlotsRepository) {
+    public FacilityInitialisationService(FacilityRepository facilityRepository, FacilityDateRepository facilityDateRepository, TimeSlotsRepository timeSlotsRepository, TimeSlotService tss) {
         this.facilityRepository = facilityRepository;
         this.facilityDateRepository = facilityDateRepository;
         this.timeSlotsRepository = timeSlotsRepository;
-    }
+        this.tss= tss;
 
+    }   
+    @Transactional
     public void initialiseFacilities() {
         Facility badminton = new Facility("Badminton Court", "Opens from 10am to 6pm", LocalTime.of(10,0), LocalTime.of(18,0));
-        facilityRepository.save(badminton);
-        List<TimeSlots> timeSlots = generateTimeSlots(badminton);
-        FacilityDate startDate = new FacilityDate(LocalDate.now(), timeSlots);
-        startDate.setFacility(badminton);
-        // facilityDateRepository.save(startDate); // error 
-        List<FacilityDate> facilityDates = generateFacilityDates(startDate);
+        List<FacilityDate> facilityDates = generateFacilityDates(LocalDate.of(2023, 10,23));
+        for (FacilityDate a : facilityDates) {
+            List<TimeSlots> timeSlots = generateTimeSlots(badminton.getOpenTime(), badminton.getClosingTime().plusHours(1));
+            a.setFacility(badminton);
+            a.setTimeSlots(timeSlots);
+            for (TimeSlots b : timeSlots) {
+                b.setFacilityDate(a);
+                timeSlotsRepository.save(b);
+            //  tss.updateToUnavailable(b.getTimeSlotsId());
+                 timeSlotsRepository.save(b);
+
+            }
+            // timeSlotsRepository.saveAll(timeSlots);
+            facilityDateRepository.save(a);
+        }
         badminton.setFacilityDates(facilityDates);
         facilityRepository.save(badminton);
     }
 
-    // Original implementation
-        // public List<TimeSlots> generateTimeSlots(Facility facility) {
-        //     List<TimeSlots> timeSlots = new ArrayList<TimeSlots>();
-        //     LocalTime tempOpen = facility.getOpenTime();
-        //     LocalTime tempEnd = facility.getClosingTime();
-
-        //     while(tempOpen.isBefore(tempEnd)){
-        //         TimeSlots currentTimeSlot = new TimeSlots(tempOpen, true);
-        //         timeSlotsRepository.save(currentTimeSlot);
-        //         timeSlots.add(currentTimeSlot);
-        //         tempOpen = tempOpen.plusHours(1);
-        //     }        
-        //     return timeSlots;
-        // }
-
     // New implementation
-    public List<TimeSlots> generateTimeSlots(Facility facility) {
+    public List<TimeSlots> generateTimeSlots(LocalTime openTime, LocalTime closingTime) {
         List<TimeSlots> timeSlots = new ArrayList<TimeSlots>();
-        LocalTime tempOpen = facility.getOpenTime(); //error > facility is null
-        LocalTime tempEnd = facility.getClosingTime();
+        LocalTime tempOpen = openTime; 
+        LocalTime tempEnd = closingTime;
     
         while (tempOpen.isBefore(tempEnd)) {
             TimeSlots currentTimeSlot = new TimeSlots(tempOpen, true);
@@ -71,40 +67,17 @@ public class FacilityInitialisationService {
             tempOpen = tempOpen.plusHours(1);
         }
     
-        return timeSlots; // Return the detached TimeSlots entities
+        return timeSlots; 
     }
-    
-    // Original implementation
-    // public List<FacilityDate> generateFacilityDates(FacilityDate startDate) {
-    //     List<FacilityDate> facilityDates = new ArrayList<FacilityDate>();
-    //     LocalDate tempStart = startDate.getDate();
-    //     LocalDate tempEnd = tempStart.plusMonths(1);
-    //     List<TimeSlots> timeSlots = startDate.getTimeSlots();
-
-        
-    //     while(tempStart.isBefore(tempEnd)){
-    //         FacilityDate currentFacilityDate = new FacilityDate(tempStart, timeSlots);
-    //         facilityDateRepository.save(currentFacilityDate);
-    //         facilityDates.add(currentFacilityDate);
-    //         tempStart = tempStart.plusDays(1);
-    //     }        
-
-    //     return facilityDates;
-    // }
 
     // New implementation
-    public List<FacilityDate> generateFacilityDates(FacilityDate startDate) {
+    public List<FacilityDate> generateFacilityDates(LocalDate startDate) {
         List<FacilityDate> facilityDates = new ArrayList<FacilityDate>();
-        LocalDate tempStart = startDate.getDate();
-        LocalDate tempEnd = tempStart.plusMonths(1);
+        LocalDate tempStart = startDate;
+        LocalDate tempEnd = tempStart.plusDays(1);
     
         while (tempStart.isBefore(tempEnd)) {
             FacilityDate currentFacilityDate = new FacilityDate(tempStart, new ArrayList<>());
-            currentFacilityDate.setFacility(startDate.getFacility());
-            List<TimeSlots> timeSlots = generateTimeSlots(startDate.getFacility());
-            currentFacilityDate.setTimeSlots(timeSlots);
-    
-            facilityDateRepository.save(currentFacilityDate);
             facilityDates.add(currentFacilityDate);
             tempStart = tempStart.plusDays(1);
         }
