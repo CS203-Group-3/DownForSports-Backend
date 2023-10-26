@@ -21,8 +21,8 @@ import jakarta.transaction.Transactional;
 import com.example.cs203g1t3.exception.BookingNotFoundException;
 import com.example.cs203g1t3.exception.FacilityNotFoundException;
 import com.example.cs203g1t3.models.Booking;
-import com.example.cs203g1t3.models.BookingRequest;
 import com.example.cs203g1t3.models.Facility;
+import com.example.cs203g1t3.payload.request.BookingRequest;
 
 @CrossOrigin
 @RestController

@@ -131,6 +131,7 @@ package com.example.cs203g1t3.services;
 import com.example.cs203g1t3.exception.*;
 
 import com.example.cs203g1t3.models.*;
+import com.example.cs203g1t3.payload.request.BookingRequest;
 import com.example.cs203g1t3.repository.BookingRepository;
 
 import jakarta.transaction.Transactional;
