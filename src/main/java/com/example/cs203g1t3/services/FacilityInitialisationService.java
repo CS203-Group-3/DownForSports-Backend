@@ -24,18 +24,19 @@ public class FacilityInitialisationService {
     private FacilityRepository facilityRepository;
     private TimeSlotsRepository timeSlotsRepository;
     private FacilityDateRepository facilityDateRepository;
-
+    private TimeSlotService tss;
     @Autowired
-    public FacilityInitialisationService(FacilityRepository facilityRepository, FacilityDateRepository facilityDateRepository, TimeSlotsRepository timeSlotsRepository) {
+    public FacilityInitialisationService(FacilityRepository facilityRepository, FacilityDateRepository facilityDateRepository, TimeSlotsRepository timeSlotsRepository, TimeSlotService tss) {
         this.facilityRepository = facilityRepository;
         this.facilityDateRepository = facilityDateRepository;
         this.timeSlotsRepository = timeSlotsRepository;
-    }
+        this.tss= tss;
 
+    }   
     @Transactional
     public void initialiseFacilities() {
         Facility badminton = new Facility("Badminton Court", "Opens from 10am to 6pm", LocalTime.of(10,0), LocalTime.of(18,0));
-        List<FacilityDate> facilityDates = generateFacilityDates(LocalDate.now());
+        List<FacilityDate> facilityDates = generateFacilityDates(LocalDate.of(2023, 10,23));
         for (FacilityDate a : facilityDates) {
             List<TimeSlots> timeSlots = generateTimeSlots(badminton.getOpenTime(), badminton.getClosingTime().plusHours(1));
             a.setFacility(badminton);
@@ -43,6 +44,9 @@ public class FacilityInitialisationService {
             for (TimeSlots b : timeSlots) {
                 b.setFacilityDate(a);
                 timeSlotsRepository.save(b);
+            //  tss.updateToUnavailable(b.getTimeSlotsId());
+                 timeSlotsRepository.save(b);
+
             }
             // timeSlotsRepository.saveAll(timeSlots);
             facilityDateRepository.save(a);
@@ -70,7 +74,7 @@ public class FacilityInitialisationService {
     public List<FacilityDate> generateFacilityDates(LocalDate startDate) {
         List<FacilityDate> facilityDates = new ArrayList<FacilityDate>();
         LocalDate tempStart = startDate;
-        LocalDate tempEnd = tempStart.plusMonths(1);
+        LocalDate tempEnd = tempStart.plusDays(1);
     
         while (tempStart.isBefore(tempEnd)) {
             FacilityDate currentFacilityDate = new FacilityDate(tempStart, new ArrayList<>());
