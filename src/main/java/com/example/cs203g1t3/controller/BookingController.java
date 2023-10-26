@@ -15,6 +15,9 @@ import com.example.cs203g1t3.repository.BookingRepository;
 import com.example.cs203g1t3.repository.FacilityRepository;
 import com.example.cs203g1t3.services.BookingService;
 import com.example.cs203g1t3.services.FacilityService;
+
+import jakarta.transaction.Transactional;
+
 import com.example.cs203g1t3.exception.BookingNotFoundException;
 import com.example.cs203g1t3.exception.FacilityNotFoundException;
 import com.example.cs203g1t3.models.Booking;
@@ -80,6 +83,7 @@ public class BookingController {
     // }
 
     @PostMapping
+    @Transactional
     public ResponseEntity<Booking> createBooking(@PathVariable Long facilityId, @Valid @RequestBody BookingRequest bookingRequest) {
         Facility facility = facilityService.getFacility(facilityId);
         if (facility == null) {

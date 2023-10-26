@@ -4,6 +4,9 @@ import com.example.cs203g1t3.models.Booking;
 import com.example.cs203g1t3.models.*;
 import com.example.cs203g1t3.models.TimeSlots;
 import com.example.cs203g1t3.repository.FacilityRepository;
+
+import jakarta.transaction.Transactional;
+
 import java.util.*;
 import java.time.*;
 
@@ -33,6 +36,7 @@ public class FacilityService {
 
         return null;
     }
+
     public List<TimeSlots> getAllTimeSlotFromFacility(LocalDate date,Long facilityId){
         Facility facility = getFacility(facilityId);
         //checking if facility exist

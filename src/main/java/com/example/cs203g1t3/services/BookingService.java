@@ -133,6 +133,8 @@ import com.example.cs203g1t3.exception.*;
 import com.example.cs203g1t3.models.*;
 import com.example.cs203g1t3.repository.BookingRepository;
 
+import jakarta.transaction.Transactional;
+
 import java.time.*;
 import java.util.*;
 
@@ -149,7 +151,7 @@ public class BookingService {
 
     @Autowired
     public BookingService(BookingRepository bookingRepository, FacilityService facilityService, UserService userService,
-            TimeSlotService timeSlotService,FacilityDateService facilityDateService) {
+            TimeSlotService timeSlotService, FacilityDateService facilityDateService) {
         this.bookingRepository = bookingRepository;
         this.facilityService = facilityService;
         this.userService = userService;
@@ -162,6 +164,7 @@ public class BookingService {
         return true;
     }
 
+    
     public boolean makeBooking(BookingRequest bookingRequest) {
         LocalDate dateBooked = bookingRequest.getFacilityDate();
         Long facilityId = bookingRequest.getFacilityId();
@@ -176,13 +179,14 @@ public class BookingService {
         if (timeSlot == null) {
             throw new TimeSlotNotFound();
         }
-
-
-        for (TimeSlots t : bookingRequest.getTimeSlots()) {
+        
+        // Timeslots for booking request
+        List<TimeSlots> bookingTimeSlot = bookingRequest.getTimeSlots();
+        for (TimeSlots t : bookingTimeSlot) {
             // check if it is available
             boolean isTaken = true;
             for (TimeSlots facilityTiming : timeSlot) {
-                //if Bookedtimeslot is in facilitytimings, and is available, then break,
+                // if Bookedtimeslot is in facilitytimings, and is available, then break,
                 if (facilityTiming.equals(t)
                         && facilityTiming.isAvailable()) {
                     isTaken = false;
@@ -190,14 +194,12 @@ public class BookingService {
                     break;
                 }
             }
-
-            //if timing is taken then throw exception
+            // if timing is taken then throw exception
             if (isTaken) {
                 throw new BookedException();
             }
-            
-            //set timeslot isAvailable to false
         }
+        
 
         return true;
         // ---------------------------------old-------------------------------------

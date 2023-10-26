@@ -22,7 +22,7 @@ public class FacilityDateService {
     // public boolean addTiming(TimeSlots timeslot){
     //     return true;
     // }
-
+        
     public FacilityDate getFacilityDate(Long facilityDateId){
         return facilityDateRepository.findById(facilityDateId).orElse(null);
     }

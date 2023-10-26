@@ -16,13 +16,11 @@ public class TimeSlotService {
         this.timeSlotsRepository = timeSlotsRepository;
     }
 
-
-    public void updateToUnavailable(Long timeSlotId){
-        TimeSlots timeslot = timeSlotsRepository.findById(timeSlotId).orElse(null);
-        if(timeslot == null){
-            throw new TimeSlotNotFound();
-        }
-        timeslot.setAvailable(false);
-        timeSlotsRepository.save(timeslot);
+    @Transactional
+    public TimeSlots updateToUnavailable(Long timeSlotId){
+        return  timeSlotsRepository.findById(timeSlotId).map(timeslot -> {
+            timeslot.setAvailable(false);
+            return timeSlotsRepository.save(timeslot);
+        }).orElse(null);
     }
 }
