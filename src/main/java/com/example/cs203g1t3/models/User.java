@@ -2,6 +2,8 @@ package com.example.cs203g1t3.models;
 
 import com.example.cs203g1t3.security.Otp.OneTimePassword;
 import com.example.cs203g1t3.security.Otp.OneTimePasswordRepository;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -60,6 +62,7 @@ public class User{
     private OneTimePassword oneTimePassword;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Booking> bookings;
 
 
