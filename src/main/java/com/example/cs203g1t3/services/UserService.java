@@ -62,12 +62,11 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
-    public void changePassword(User user, String newPassword) {
+    public void changePassword(Long userID, String newPassword) {
         // Encode the new password
         String encodedPassword = encoder.encode(newPassword);
 
         // Save the updated user with the new password
-        Long userID = user.getId();
         userRepository.updatePassword(userID, encodedPassword);
     }
 
