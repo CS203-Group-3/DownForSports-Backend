@@ -106,5 +106,11 @@ public class FacilityService {
         return facilityDates;
     }
 
+    // public List<FacilityDate> getFacilityDates(Long id) {
+    //     Optional<Facility> facilityOptional = facilityRepository.findByFacilityId(id);
+
+    //     return facilityOptional.get().getFacilityDates();
+    // }
+
 
 }

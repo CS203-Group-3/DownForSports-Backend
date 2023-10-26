@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.springframework.cglib.core.Local;
 
+import com.example.cs203g1t3.payload.response.FacilityAvailablityResponse;
+import com.example.cs203g1t3.payload.response.FacilityResponse;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -63,6 +66,17 @@ public class Facility {
         this.closingTime = closingTime;
         this.creditCost = creditCost;
         this.locationString = locationString;
+    }
+
+    public FacilityResponse toFacilityResponse() {
+        return new FacilityResponse(
+            this.facilityType,
+            this.description,
+            this.openTime,
+            this.closingTime,
+            this.creditCost,
+            this.locationString
+        );
     }
 
 

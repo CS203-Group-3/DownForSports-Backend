@@ -2,16 +2,23 @@ package com.example.cs203g1t3.controller;
 
 import com.example.cs203g1t3.exception.FacilityNotFoundException;
 import com.example.cs203g1t3.models.Facility;
+import com.example.cs203g1t3.models.FacilityDate;
+import com.example.cs203g1t3.models.TimeSlots;
 import com.example.cs203g1t3.payload.request.FacilityCreationRequest;
+import com.example.cs203g1t3.payload.response.FacilityResponse;
 import com.example.cs203g1t3.payload.response.MessageResponse;
 import com.example.cs203g1t3.services.FacilityService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -67,10 +74,17 @@ public class FacilityController {
     }    
 
     @GetMapping
-    public ResponseEntity<List<Facility>> getAllFacilities() {
-        List<Facility> facilities = facilityService.getAllFacilities();
-        return ResponseEntity.ok(facilities);
-    }
+public ResponseEntity<List<FacilityResponse>> getAllFacilities() {
+    List<Facility> facilities = facilityService.getAllFacilities();
+
+    // Using Java streams to map Facility objects to FacilityResponse objects
+    List<FacilityResponse> facilityResponses = facilities.stream()
+        .map(Facility::toFacilityResponse) 
+        .collect(Collectors.toList());
+
+    return ResponseEntity.ok(facilityResponses);
+}
+
 
     @GetMapping("/{facilityId}")
     public ResponseEntity<?> getFacilityById(@PathVariable Long facilityId) {
@@ -78,8 +92,50 @@ public class FacilityController {
         if (facility == null) {
             return new ResponseEntity<>("Facility not found", HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(facility);
+        FacilityResponse facilityResponse = facility.toFacilityResponse();
+        return ResponseEntity.ok(facilityResponse);
     }
+
+    @GetMapping("/{facilityId}/dates")
+    public ResponseEntity<?> getFacilityDatesById(@PathVariable Long facilityId) {
+        Facility facility = facilityService.getFacility(facilityId);
+        if (facility == null) {
+            return new ResponseEntity<>("Facility not found", HttpStatus.NOT_FOUND);
+        }
+
+        Map<Long, LocalDate> dateMap = facility.getFacilityDates().stream()
+            .collect(Collectors.toMap(FacilityDate::getFacilityDateId, FacilityDate::getDate));
+
+        return ResponseEntity.ok(dateMap);
+    }
+
+
+    @GetMapping("/{facilityId}/dates/{facilityDateId}/timeslots")
+    public ResponseEntity<?> getAvailableTimeSlots(@PathVariable Long facilityId, @PathVariable Long facilityDateId) {
+        Facility facility = facilityService.getFacility(facilityId);
+        if (facility == null) {
+            return new ResponseEntity<>("Facility not found", HttpStatus.NOT_FOUND);
+        }
+
+        FacilityDate facilityDate = facility.getFacilityDates().stream()
+                .filter(date -> date.getFacilityDateId().equals(facilityDateId))
+                .findFirst()
+                .orElse(null);
+
+        if (facilityDate == null) {
+            return new ResponseEntity<>("FacilityDate not found", HttpStatus.NOT_FOUND);
+        }
+
+        Map<Long, LocalTime> timeSlotMap = facilityDate.getTimeSlots().stream()
+                .filter(TimeSlots::isAvailable)
+                .collect(Collectors.toMap(TimeSlots::getTimeSlotsId, TimeSlots::getStartTime));
+
+        return ResponseEntity.ok(timeSlotMap);
+    }
+
+
+
+    
 
     // Include PUT and DELETE methods to update and delete facilities respectively.
 
@@ -104,4 +160,11 @@ public class FacilityController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    // @GetMapping("/{facilityId}")
+    // public ResponseEntity<List<FacilityDate>> getFacilityDates(@PathVariable Long facilityId) {
+
+    //     return ResponseEntity.ok(facilityService.getFacilityDates(facilityId));
+    // }
+
 }

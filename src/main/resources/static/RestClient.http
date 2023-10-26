@@ -189,6 +189,20 @@ Content-Type: application/json
 }
 
 
-### Get faci
+### Get facis
 GET http://localhost:8080/api/facilities
+Content-Type: application/json
+
+
+### Get faci 
+GET http://localhost:8080/api/facilities/2
+Content-Type: application/json
+
+
+### Get faci dates
+GET http://localhost:8080/api/facilities/2/dates
+Content-Type: application/json
+
+### Get available timeslots of a date 
+GET http://localhost:8080/api/facilities/2/dates/56/timeslots
 Content-Type: application/json
