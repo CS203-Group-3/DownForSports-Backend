@@ -194,7 +194,7 @@ GET http://localhost:8080/api/facilities
 Content-Type: application/json
 
 
-### Get faci 
+### Get faci
 GET http://localhost:8080/api/facilities/2
 Content-Type: application/json
 

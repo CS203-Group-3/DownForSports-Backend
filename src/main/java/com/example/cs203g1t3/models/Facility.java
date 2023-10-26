@@ -70,6 +70,7 @@ public class Facility {
 
     public FacilityResponse toFacilityResponse() {
         return new FacilityResponse(
+            this.facilityId,
             this.facilityType,
             this.description,
             this.openTime,

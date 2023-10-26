@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FacilityResponse {
 
+    private long facilityId;
     private String facilityType;
     private String description;
 
