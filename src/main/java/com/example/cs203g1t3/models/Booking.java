@@ -42,8 +42,6 @@ import lombok.*;
 
         private LocalDate dateCreated;
 
-
-        private int creditDeducted;
         private boolean bookingAttended;
 
         @ManyToOne
@@ -55,9 +53,9 @@ import lombok.*;
         private boolean bookingAttendanceChecked;
 
         @Column(name = "creditDeducted")
-        private int creditDeducted;
+        private double creditDeducted;
 
-        public Booking(LocalTime startTime,LocalTime endTime,LocalDate dateCreated, int creditDeducted){
+        public Booking(LocalTime startTime,LocalTime endTime,LocalDate dateCreated, double creditDeducted){
             this.startTime = startTime;
             this.endTime = endTime;
             this.dateCreated = dateCreated;
