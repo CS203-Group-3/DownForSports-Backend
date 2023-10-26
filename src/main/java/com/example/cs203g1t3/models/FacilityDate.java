@@ -20,6 +20,8 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -37,9 +39,10 @@ public class FacilityDate {
 
     @ManyToOne
     @JoinColumn(name = "facility_id")
+    @JsonIgnore
     private Facility facility;
     
-    @OneToMany(mappedBy = "facilityDate", orphanRemoval = true, cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "facilityDate", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<TimeSlots> timeSlots;
     private LocalDate date;
 

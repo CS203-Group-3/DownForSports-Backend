@@ -5,6 +5,7 @@ import com.example.cs203g1t3.models.User;
 import com.example.cs203g1t3.payload.request.SignupRequest;
 import com.example.cs203g1t3.payload.response.MessageResponse;
 import com.example.cs203g1t3.DTO.LoginResponse;
+import com.example.cs203g1t3.exception.NotEnoughCreditException;
 import com.example.cs203g1t3.repository.UserRepository;
 import com.example.cs203g1t3.security.jwt.JwtUtils;
 
@@ -66,18 +67,18 @@ public class UserService {
         String encodedPassword = encoder.encode(newPassword);
 
         // Save the updated user with the new password
-        userRepository.updatePassword(user.getUserID(), encodedPassword);
+        Long userID = user.getId();
+        userRepository.updatePassword(userID, encodedPassword);
     }
 
-    public boolean checkPassword(User user, String password) {
-        // Encode the password
-        String encodedPassword = encoder.encode(password);
-        // Retrieve the id
-        String username = user.getUsername();
+    public boolean checkPassword(Long userID, String password) {
+
         // Check if the id and password matches that of the database
-        Optional<User> userOptional = userRepository.findByUsernameAndPassword(username, encodedPassword);
+        Optional<User> userOptional = userRepository.findByUserID(userID);
+
+        String currentHash = userOptional.get().getPassword();
         // Return whether it exist
-        return userOptional.isPresent();
+        return encoder.matches(password, currentHash);
     }
 
     public ResponseEntity<?> registerAccount(SignupRequest signUpRequest, Role role) {
@@ -184,13 +185,28 @@ public class UserService {
 
     public void addCreditScore(Long userId,int creditScoreToAdd){
         User user = userRepository.findById(userId).get();
-        int currentCreditScore = user.getCreditScore();
+        double currentCreditScore = user.getCreditScore();
         currentCreditScore += creditScoreToAdd;
         if(currentCreditScore >= 999){
             currentCreditScore = 999;
         }
         user.setCreditScore(currentCreditScore);
     }
+
+        public void deductCredit(Long userId, double creditDeducted){
+        User user = userRepository.findById(userId).orElse(null);
+        if(user == null){
+            return;
+        }
+
+        double currentCreditScore = user.getCreditScore();
+        if(currentCreditScore < creditDeducted){
+            throw new NotEnoughCreditException();
+        }
+
+        user.setCreditScore(currentCreditScore-creditDeducted);
+        userRepository.save(user);
+        }
 }
 
 

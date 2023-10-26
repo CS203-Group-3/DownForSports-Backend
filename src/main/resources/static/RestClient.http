@@ -123,9 +123,93 @@ Content-Type: application/json
 ### Add facility
 POST http://localhost:8080/api/facilities
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJTODIxNzA3OUQiLCJpYXQiOjE2OTY4Mzg5NDMsImV4cCI6MTY5NjkyNTM0M30.W8TxmQpl-DaMRJI7O7nv5KTMIcAK0BDVMZSl4F1pcrQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
 
 {
     "facilityType": "FacilityOne",
     "description": "Default Description"
+}
+
+### view facility
+GET http://localhost:8080/api/facilities/1
+Content-Type: application/json
+
+
+### Register admin
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "T0127510G",
+    "email": "aqqzzq@gmail.com",
+    "password": "Pass1234!",
+    "role": ["user"]
+}
+
+
+### Change Password
+POST http://localhost:8080/api/user/2
+Content-Type: application/json
+
+{
+    "currentPassword": "Pasggs1234!",
+    "newPassword": "B@llsD33p69"
+}
+
+### Change Password
+POST http://localhost:8080/api/user/2
+Content-Type: application/json
+
+{
+    "currentPassword": "Pass1234!",
+    "newPassword": "B@llsD33p69"
+}
+
+
+### Login successful
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+    "username": "T0127510G",
+    "password": "B@llsD33p69"
+}
+
+
+
+### make normal user
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "T0127510G",
+    "email": "jevontanjinghong@gmail.com",
+    "password": "Testing@123"
+}
+
+
+### view facility
+GET http://localhost:8080/api/facilities/1
+Content-Type: application/json
+
+### make booking
+POST http://localhost:8080/api/facilities/1/bookings
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+
+{
+    "userId":1,
+    "facilityId":1,
+    "timeBookingMade":"2023-10-23",
+    "facilityDate":"2023-10-23",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "10:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "11:00:00"
+        }
+        
+        ]
 }
