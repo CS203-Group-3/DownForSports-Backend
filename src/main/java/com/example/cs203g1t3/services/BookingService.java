@@ -144,6 +144,7 @@
         //make booking
         Booking booking = new Booking(bookingStartTime,bookingEndTime,bookingRequest.getTimeBookingMade(),creditDeducted);
         booking.setFacility(facility);
+        booking.setDateBooked(dateBooked);
         booking.setUser(user);
         bookingRepository.save(booking);
 

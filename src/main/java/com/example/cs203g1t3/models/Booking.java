@@ -42,7 +42,8 @@ import lombok.*;
         private LocalTime endTime;
 
         private LocalDate dateCreated;
-
+        private LocalDate dateBooked;
+        
         // private List<TimeSlots> timeSlots;
         private boolean bookingAttended;
 
