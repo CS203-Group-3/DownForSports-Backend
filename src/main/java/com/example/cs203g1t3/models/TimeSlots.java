@@ -65,7 +65,12 @@ public class TimeSlots implements Comparable{
         return "TimeSlots [timeSlotsId=" + timeSlotsId + ", startTime=" + startTime + ", isAvailable=" + isAvailable
                 +"]";
     }
-
-
-    
+    // The endTime is non-inclusive
+    public boolean isBetweenTiming(LocalTime start,LocalTime end){
+        if(!startTime.equals(start)){
+            return startTime.isAfter(start) && startTime.isBefore(end);
+        } else {
+            return true;
+        }
+    }
 }

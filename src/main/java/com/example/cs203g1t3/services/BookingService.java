@@ -43,23 +43,24 @@
      public void cancelBooking(CancelBookingRequest cancelBookingRequest) {
          Long bookingId = cancelBookingRequest.getBookingId();
          Booking booking;
-         try{
+         try {
              booking = bookingRepository.findById(bookingId).get();
-         } catch (NoSuchElementException e){
+         } catch (NoSuchElementException e) {
              throw new BookingNotFoundException("Booking is not found! Unable to cancel!");
          }
-         if(booking.getBookingAttendanceChecked()){
+         if (booking.getBookingAttendanceChecked()) {
              throw new BookingAttendanceIsDoneException("Booking has already been attended!");
          }
          LocalDate dateBooked = booking.getDateBooked();
          Long facilityId = booking.getFacility().getFacilityId();
-         List<TimeSlots> timeSlotsList= facilityService.getAllTimeSlotFromFacility(dateBooked,facilityId);
-         List<TimeSlots> bookingTimeSlots;
-         LocalTime lastTimeSlotEndTiming =
-         for(TimeSlots i:timeSlotsList){
-             if(i){
+         List<TimeSlots> timeSlotsList = facilityService.getAllTimeSlotFromFacility(dateBooked, facilityId);
+         for (TimeSlots i : timeSlotsList) {
+             if (i.isBetweenTiming(booking.getStartTime(),booking.getEndTime())) {
+                 timeSlotService.updateToAvailable(i.getTimeSlotsId());
+
+             }
+             bookingRepository.deleteById(bookingId);
          }
-         bookingRepository.deleteById(bookingId);
      }
 
      public void confirmBookingAttendance(Long bookingId,int attendanceStatus){
