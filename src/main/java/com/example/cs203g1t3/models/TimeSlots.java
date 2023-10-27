@@ -65,5 +65,7 @@ public class TimeSlots implements Comparable{
         return "TimeSlots [timeSlotsId=" + timeSlotsId + ", startTime=" + startTime + ", isAvailable=" + isAvailable
                 +"]";
     }
+
+
     
 }

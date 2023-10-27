@@ -5,10 +5,13 @@ import java.util.Set;
 
 import javax.validation.Valid;
 
+import com.example.cs203g1t3.payload.request.CancelBookingRequest;
+import com.example.cs203g1t3.payload.request.ConfirmBookingAttendanceRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.example.cs203g1t3.repository.BookingRepository;
@@ -26,14 +29,14 @@ import com.example.cs203g1t3.payload.request.BookingRequest;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api/facilities/{facilityId}/bookings")
+@RequestMapping("/api/bookings")
 public class BookingController {
     @Autowired
     private FacilityService facilityService;
     @Autowired
     private BookingService bookingService;
 
-    
+
     // @GetMapping("/{bookingId}")
     // public ResponseEntity<Booking> getBookingById(@PathVariable Long facilityId, @PathVariable Long bookingId) {
     //     if (facilityService.getFacility(facilityId) == null) {
@@ -57,7 +60,7 @@ public class BookingController {
     //     }
     //     return ResponseEntity.ok(booking);
     // }
-    
+
     // @DeleteMapping("/{bookingId}")
     // public ResponseEntity<?> deleteBooking(@PathVariable Long facilityId, @PathVariable Long bookingId) {
     //     if (facilityService.getFacility(facilityId) == null) {
@@ -70,7 +73,7 @@ public class BookingController {
     //     }
     //     return new ResponseEntity<>(HttpStatus.OK);
     // }
-    
+
 //-------------------------- Change all implementations below this line ---------------------------------------    
 
     // @GetMapping
@@ -82,16 +85,33 @@ public class BookingController {
     //     return ResponseEntity.ok(facility.getTimeSlots());
     // }
 
-    @PostMapping
+    @PostMapping("/makebooking")
     @Transactional
-    public ResponseEntity<Booking> createBooking(@PathVariable Long facilityId, @Valid @RequestBody BookingRequest bookingRequest) {
+    public ResponseEntity<Booking> createBooking(@Valid @RequestBody BookingRequest bookingRequest) {
+        Long facilityId = bookingRequest.getFacilityId();
         Facility facility = facilityService.getFacility(facilityId);
         if (facility == null) {
             throw new FacilityNotFoundException(facilityId);
         }
-        
+
         bookingService.makeBooking(bookingRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    @PostMapping("/confirmbookingattendance")
+    @Transactional
+//    @PreAuthorize("hasRole('ROLE_BOOKINGMANAGER')")
+    public ResponseEntity<Booking> confirmBookingAttendance(@RequestBody ConfirmBookingAttendanceRequest confirmBookingAttendanceRequest) {
+        Long bookingId = confirmBookingAttendanceRequest.getBookingId();
+        int attendanceStatus = confirmBookingAttendanceRequest.getAttendanceStatus();
+        bookingService.confirmBookingAttendance(bookingId, attendanceStatus);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/cancelbooking")
+    public ResponseEntity<?> cancelBooking(@RequestBody CancelBookingRequest cancelBookingRequest){
+        bookingService.cancelBooking(cancelBookingRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
+

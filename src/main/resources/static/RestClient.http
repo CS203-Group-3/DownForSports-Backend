@@ -193,12 +193,12 @@ GET http://localhost:8080/api/facilities/1
 Content-Type: application/json
 
 ### make booking
-POST http://localhost:8080/api/facilities/1/bookings
+POST http://localhost:8080/api/bookings/makebooking
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
 
 {
-    "userId":1,
+    "userId":2,
     "facilityId":1,
     "timeBookingMade":"2023-10-23",
     "facilityDate":"2023-10-23",
@@ -212,4 +212,23 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0N
         }
         
         ]
+}
+
+### Confirm booking attendance booking
+POST http://localhost:8080/api/bookings/confirmbookingattendance
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+
+{
+  "bookingId":1,
+  "attendanceStatus": 1
+}
+
+### Cancel booking
+POST http://localhost:8080/api/bookings/confirmbookingattendance
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+
+{
+  "bookingId":1
 }

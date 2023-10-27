@@ -64,4 +64,8 @@ import lombok.*;
             this.dateCreated = dateCreated;
             this.creditDeducted = creditDeducted;
         }
+
+        public boolean getBookingAttendanceChecked(){
+            return bookingAttendanceChecked;
+        }
     }

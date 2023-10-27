@@ -40,8 +40,25 @@
          return bookingRepository.findAll();
      }
 
-     public void deleteBooking(CancelBookingRequest cancelBookingRequest) {
+     public void cancelBooking(CancelBookingRequest cancelBookingRequest) {
          Long bookingId = cancelBookingRequest.getBookingId();
+         Booking booking;
+         try{
+             booking = bookingRepository.findById(bookingId).get();
+         } catch (NoSuchElementException e){
+             throw new BookingNotFoundException("Booking is not found! Unable to cancel!");
+         }
+         if(booking.getBookingAttendanceChecked()){
+             throw new BookingAttendanceIsDoneException("Booking has already been attended!");
+         }
+         LocalDate dateBooked = booking.getDateBooked();
+         Long facilityId = booking.getFacility().getFacilityId();
+         List<TimeSlots> timeSlotsList= facilityService.getAllTimeSlotFromFacility(dateBooked,facilityId);
+         List<TimeSlots> bookingTimeSlots;
+         LocalTime lastTimeSlotEndTiming =
+         for(TimeSlots i:timeSlotsList){
+             if(i){
+         }
          bookingRepository.deleteById(bookingId);
      }
 
@@ -50,34 +67,37 @@
              throw new InvalidAttendanceStatusException("Invalid Attendance Status Code");
          }
          Booking booking = bookingRepository.findById(bookingId).get();
-         if(booking.isBookingAttendanceChecked()){
+         if(booking.getBookingAttendanceChecked()){
              throw new BookingAttendanceIsDoneException("Booking Attendance Is Already Updated!");
          }
          User user = booking.getUser();
          double currentCreditScore = user.getCreditScore();
+
         switch(attendanceStatus){
             case 1:
-                user.setCreditScore(currentCreditScore* attendancePresentMultiplier);
+                user.setCreditScore(currentCreditScore + booking.getCreditDeducted() * attendancePresentMultiplier);
+                booking.setBookingAttended(true);
                 break;
             case -1:
                 user.setCreditScore(currentCreditScore+booking.getCreditDeducted());
+                booking.setBookingAttended(false);
                 break;
         }
         booking.setBookingAttendanceChecked(true);
      }
 
 
-     public List<LocalTime> listBookingTimeslot(Booking booking){
-         List<LocalTime> list = new ArrayList<>();
-         LocalTime startTime = booking.getStartTime();
-         LocalTime endTime = booking.getEndTime();
-
-         while(startTime.isBefore(endTime)){
-             list.add(startTime);
-             startTime = startTime.plusMinutes(30);
-         }
-         return list;
-     }
+//     public List<LocalTime> listBookingTimeslot(Booking booking){
+//         List<LocalTime> list = new ArrayList<>();
+//         LocalTime startTime = booking.getStartTime();
+//         LocalTime endTime = booking.getEndTime();
+//
+//         while(startTime.isBefore(endTime)){
+//             list.add(startTime);
+//             startTime = startTime.plusMinutes(30);
+//         }
+//         return list;
+//     }
 
          public boolean makeBooking(BookingRequest bookingRequest) {
         LocalDate dateBooked = bookingRequest.getFacilityDate();

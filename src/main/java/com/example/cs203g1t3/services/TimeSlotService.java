@@ -23,4 +23,12 @@ public class TimeSlotService {
             return timeSlotsRepository.save(timeslot);
         }).orElse(null);
     }
+
+    @Transactional
+    public TimeSlots updateToAvailable(Long timeSlotId){
+        return  timeSlotsRepository.findById(timeSlotId).map(timeslot -> {
+            timeslot.setAvailable(true);
+            return timeSlotsRepository.save(timeslot);
+        }).orElse(null);
+    }
 }

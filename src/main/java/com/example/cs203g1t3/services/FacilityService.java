@@ -1,5 +1,6 @@
 package com.example.cs203g1t3.services;
 
+import com.example.cs203g1t3.exception.FacilityNotFoundException;
 import com.example.cs203g1t3.models.Booking;
 import com.example.cs203g1t3.models.*;
 import com.example.cs203g1t3.models.TimeSlots;
@@ -84,6 +85,15 @@ public class FacilityService {
             }
         }
         return availableTimeSlotsList;
+    }
+
+    public void makeTimeSlotsAvailable(List<TimeSlots> timeSlotsList,Long facilityId,LocalDate bookedDate){
+        Facility facility = getFacility(facilityId);
+        //checking if facility exist
+        if(facility == null){
+            throw new FacilityNotFoundException(facilityId);
+        }
+
     }
 
     public List<Facility> listFacilities() {
