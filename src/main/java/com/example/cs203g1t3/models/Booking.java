@@ -1,5 +1,6 @@
 package com.example.cs203g1t3.models;
 
+import java.util.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import jakarta.persistence.ManyToOne;
@@ -32,6 +33,8 @@ import lombok.*;
         @Column(columnDefinition = "TIME")
         private LocalTime endTime;
 
+        //private List<TimeSlots> timeSlots;
+        
         private LocalDate dateCreated;
         
 
