@@ -1,51 +1,98 @@
-// package com.example.cs203g1t3.services;
+ package com.example.cs203g1t3.services;
 
-// import com.example.cs203g1t3.exception.*;
-// import com.example.cs203g1t3.models.Booking;
-// import com.example.cs203g1t3.models.Facility;
-// import com.example.cs203g1t3.repository.BookingRepository;
-// import com.example.cs203g1t3.repository.FacilityRepository;
+ import com.example.cs203g1t3.exception.BookingAttendanceIsDoneException;
+ import com.example.cs203g1t3.exception.InvalidAttendanceStatusException;
+ import com.example.cs203g1t3.exception.*;
+ import com.example.cs203g1t3.models.*;
+ import com.example.cs203g1t3.payload.request.*;
+ import com.example.cs203g1t3.repository.BookingRepository;
 
-// import java.time.LocalTime;
-// import java.util.*;
+ import java.time.*;
+ import java.util.*;
 
-// import org.springframework.stereotype.Service;
+ import org.springframework.beans.factory.annotation.Autowired;
+ import org.springframework.stereotype.Service;
 
-// @Service
-// public class BookingService {
-//     private BookingRepository bookings;
-//     private FacilityRepository facilities;
+ @Service
+ public class BookingService {
+     @Autowired
+     private BookingRepository bookingRepository;
+     @Autowired
+     private FacilityService facilityService;
+     @Autowired
+     private UserService userService;
+    @Autowired
+    private TimeSlotService timeSlotService;
 
-//     public BookingService(BookingRepository bookings, FacilityRepository facilities) {
-//         this.bookings =  bookings;
-//         this.facilities = facilities;
-//     }
+     private final double attendancePresentMultiplier = 1.1;
 
-//     public List<Booking> listBookings() {
-//         return bookings.findAll();
-//     }
+     public BookingService(BookingRepository bookingRepository, FacilityService facilityService, UserService userService) {
+         this.bookingRepository = bookingRepository;
+         this.facilityService = facilityService;
+         this.userService = userService;
+     }
 
-//     public Booking getBooking(Long bookingId) {
-//         return bookings.findById(bookingId).orElse(null);
-//     }
+     public Booking getBooking(Long bookingId) {
+         return bookingRepository.findById(bookingId).orElse(null);
+     }
 
-//     public List<Booking> getAllBookings() {
-//         return bookings.findAll();
-//     }
+     public List<Booking> getAllBookings() {
+         return bookingRepository.findAll();
+     }
 
-//     public Booking createBooking(Booking booking) {
-//         return bookings.save(booking);
-//     }
+     public void cancelBooking(CancelBookingRequest cancelBookingRequest) {
+         Long bookingId = cancelBookingRequest.getBookingId();
+         Booking booking;
+         try {
+             booking = bookingRepository.findById(bookingId).get();
+         } catch (NoSuchElementException e) {
+             throw new BookingNotFoundException("Booking is not found! Unable to cancel!");
+         }
+         if (booking.getBookingAttendanceChecked()) {
+             throw new BookingAttendanceIsDoneException("Booking has already been attended!");
+         }
+         LocalDate dateBooked = booking.getDateBooked();
+         Long facilityId = booking.getFacility().getFacilityId();
+         List<TimeSlots> timeSlotsList = facilityService.getAllTimeSlotFromFacility(dateBooked, facilityId);
+         for (TimeSlots i : timeSlotsList) {
+             if (i.isBetweenTiming(booking.getStartTime(),booking.getEndTime())) {
+                 timeSlotService.updateToAvailable(i.getTimeSlotsId());
 
-//     public void deleteBooking(Long bookingId) {
-//         bookings.deleteById(bookingId);
-//     }
+             }
+             bookingRepository.deleteById(bookingId);
+         }
+     }
+
+     public void confirmBookingAttendance(Long bookingId,int attendanceStatus){
+         if(attendanceStatus != 1 && attendanceStatus != 0 && attendanceStatus != -1){
+             throw new InvalidAttendanceStatusException("Invalid Attendance Status Code");
+         }
+         Booking booking = bookingRepository.findById(bookingId).get();
+         if(booking.getBookingAttendanceChecked()){
+             throw new BookingAttendanceIsDoneException("Booking Attendance Is Already Updated!");
+         }
+         User user = booking.getUser();
+         double currentCreditScore = user.getCreditScore();
+
+        switch(attendanceStatus){
+            case 1:
+                user.setCreditScore(currentCreditScore + booking.getCreditDeducted() * attendancePresentMultiplier);
+                booking.setBookingAttended(true);
+                break;
+            case -1:
+                user.setCreditScore(currentCreditScore+booking.getCreditDeducted());
+                booking.setBookingAttended(false);
+                break;
+        }
+        booking.setBookingAttendanceChecked(true);
+     }
+
 
 //     public List<LocalTime> listBookingTimeslot(Booking booking){
 //         List<LocalTime> list = new ArrayList<>();
 //         LocalTime startTime = booking.getStartTime();
 //         LocalTime endTime = booking.getEndTime();
-
+//
 //         while(startTime.isBefore(endTime)){
 //             list.add(startTime);
 //             startTime = startTime.plusMinutes(30);
@@ -53,68 +100,138 @@
 //         return list;
 //     }
 
-//     //-------------------------- Change all implementations below this line ---------------------------------------
+    public boolean makeBooking(BookingRequest bookingRequest) {
+        LocalDate dateBooked = bookingRequest.getFacilityDate();
+        Long facilityId = bookingRequest.getFacilityId();
+        Facility facility = facilityService.getFacility(facilityId);
+        // if (facility == null) {
+        //     // if facility not found throw
+        //     throw new FacilityNotFoundException(facilityId);
+        // }
+
+        // get all timeslots from specific date
+        List<TimeSlots> timeSlot = facilityService.getAllTimeSlotFromFacility(dateBooked, facilityId);
+        if (timeSlot == null) {
+            throw new TimeSlotNotFound();
+        }
+        
+
+        List<TimeSlots> bookingTimeSlot = bookingRequest.getTimeSlots();
+        for (TimeSlots t : bookingTimeSlot) {
+            // check if it is available
+            boolean isTaken = true;
+            for (TimeSlots facilityTiming : timeSlot) {
+                // if Bookedtimeslot is in facilitytimings, and is available, then break,
+                if (facilityTiming.equals(t)
+                        && facilityTiming.isAvailable()) {
+                    isTaken = false;
+
+                    break;
+                }
+            }
+            // if timing is taken then throw exception
+            if (isTaken) {
+                throw new BookedException();
+            }
+        }
+
+        //check if user has enough credits
+        User user = userService.getUser(bookingRequest.getUserId());
+        
+        double credits = user.getCreditScore();
+         //Amount of credit deducted = facility credit value * number of timeslots booked
+        double creditDeducted = facility.getCreditCost() * bookingTimeSlot.size();
+        System.out.println(creditDeducted);
+        System.out.println(facility.getCreditCost());
+        // System.out.println(credits);
+        if(credits < creditDeducted){
+            throw new NotEnoughCreditException();
+        }
+        Collections.sort(bookingTimeSlot);
+        // System.out.println(bookingTimeSlot);
+        LocalTime bookingStartTime = bookingTimeSlot.get(0).getStartTime();
+        LocalTime bookingEndTime = bookingTimeSlot.get(bookingTimeSlot.size()-1).getStartTime().plusHours(1);
+        // System.out.println(bookingStartTime);
+        // System.out.println(bookingEndTime);
+
+        userService.deductCredit(user.getUserID(), creditDeducted);
+        // System.out.println(userService.getUser(bookingRequest.getUserId()));
+
+        //make booking
+        Booking booking = new Booking(bookingStartTime,bookingEndTime,bookingRequest.getTimeBookingMade(),creditDeducted);
+        booking.setFacility(facility);
+        booking.setDateBooked(dateBooked);
+        booking.setUser(user);
+        bookingRepository.save(booking);
+
+        //set timings isavailable to false
+        for(TimeSlots t:bookingTimeSlot){
+            Long id = t.getTimeSlotsId();
+            timeSlotService.updateToUnavailable(id);
+        }
+        return true;
+    }
+
+     //-------------------------- Change all implementations below this line ---------------------------------------
 
 //     public Booking updateBooking(Long facilityId,Long bookingId, Booking newBooking) {
 //         //idea of this method
-//         //get old booking -> remove bookings from current booking list
+//         //get old booking -> remove bookingRepository from current booking list
 //         //
-
-//         Booking booking = bookings.findById(bookingId).orElse(null);
+//
+//         Booking booking = bookingRepository.findById(bookingId).orElse(null);
 //         //scuffed code
 //         if(booking == null){      //if booking not found
 //             throw new BookingNotFoundException(bookingId);
 //         }
-
+//
 //         List<Booking> allBookings = getAllBookings();
 //         allBookings.remove(booking);                //remove current booking from the list
-
+//
 //         List<LocalTime> timingTaken = new ArrayList<>();   //list of all timings that is taken
-
+//
 //         for(Booking tempBooking: allBookings){
 //             List<LocalTime> tempList = listBookingTimings(tempBooking);
 //             timingTaken.addAll(tempList);
 //         }
-
+//
 //         List<LocalTime> newBookingTiming = listBookingTimings(newBooking);
-
+//
 //         //   !Collections.disjoint(list1, list2) returns true if there is overlap
 //         if(!Collections.disjoint(timingTaken, newBookingTiming)){
 //             return null;
 //         }
-
+//
 //         Facility facility = facilities.findById(facilityId).orElse(null);
-
+//
 //         List<LocalTime> facilityTimes = facility.getTimeSlots();
 //         facilityTimes.addAll(listBookingTimings(booking));
 //         facilityTimes.removeAll(newBookingTiming);
 //         Collections.sort(facilityTimes);
-
+//
 //         facility.setTimeSlots(facilityTimes);
 //         facilities.save(facility);
-
+//
 //         booking.setStartTime(newBooking.getStartTime());
 //         booking.setEndTime(newBooking.getEndTime());
-//         bookings.save(booking);
+//         bookingRepository.save(booking);
 //         return booking;
-
+//
 //         //old impl
-//         // return bookings.findById(bookingId).map(booking -> {
+//         // return bookingRepository.findById(bookingId).map(booking -> {
 //         //     booking.setStartTime(newBooking.getStartTime());
 //         //     booking.setEndTime(newBooking.getEndTime());
-//         //     return bookings.save(booking);
+//         //     return bookingRepository.save(booking);
 //         // }).orElse(null);
 //     }
-
-
 
 //     public boolean isValidBooking(LocalTime startTime, LocalTime endTime, Facility facility) {
 //         if(startTime.isAfter(endTime)){          //checking if startTime is after endTime
 //             return false;
 //         }
 //         List<LocalTime> allAvailableTimings = facility.getTimeSlots();
-
-//         //check if each 30 minute slot starting from start time is 
+//
+//         //check if each 30 minute slot starting from start time is
 //         //available in the time available time slot in facility until the end time
 //         while(startTime.isBefore(endTime)){
 //             if(!allAvailableTimings.contains(startTime)){
@@ -123,7 +240,7 @@
 //             startTime = startTime.plusMinutes(30);
 //         }
 //         return true;
-
+//
 //     }
     
-// }
+ }

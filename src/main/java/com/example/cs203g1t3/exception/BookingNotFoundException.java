@@ -11,6 +11,8 @@ public class BookingNotFoundException extends RuntimeException {
     public BookingNotFoundException(Long id) {
         super("Could not find facility " + id);
     }
-    
 
+    public BookingNotFoundException(String message){
+        super(message);
+    }
 }

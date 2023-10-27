@@ -25,7 +25,7 @@ public class FacilityInitialisationService {
     private FacilityRepository facilityRepository;
     private TimeSlotsRepository timeSlotsRepository;
     private FacilityDateRepository facilityDateRepository;
-
+    private TimeSlotService tss;
     @Autowired
     public FacilityInitialisationService(FacilityRepository facilityRepository, FacilityDateRepository facilityDateRepository, TimeSlotsRepository timeSlotsRepository, FacilityService facilityService) {
         this.facilityRepository = facilityRepository;
@@ -59,7 +59,7 @@ public class FacilityInitialisationService {
     public List<FacilityDate> generateFacilityDates(LocalDate startDate) {
         List<FacilityDate> facilityDates = new ArrayList<FacilityDate>();
         LocalDate tempStart = startDate;
-        LocalDate tempEnd = tempStart.plusMonths(1);
+        LocalDate tempEnd = tempStart.plusDays(1);
     
         while (tempStart.isBefore(tempEnd)) {
             FacilityDate currentFacilityDate = new FacilityDate(tempStart, new ArrayList<>());

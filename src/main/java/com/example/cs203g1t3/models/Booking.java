@@ -1,7 +1,12 @@
 package com.example.cs203g1t3.models;
 
+import java.util.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.ManyToOne;
 
 import jakarta.persistence.Column;
@@ -27,18 +32,40 @@ import lombok.*;
         @GeneratedValue (strategy =  GenerationType.IDENTITY)
         private Long bookingId;
 
+        @ManyToOne
+        @JoinColumn(name="userId")
+        private User user;
+
         @Column(columnDefinition = "TIME")
         private LocalTime startTime;
         @Column(columnDefinition = "TIME")
         private LocalTime endTime;
 
         private LocalDate dateCreated;
+        private LocalDate dateBooked;
         
+        // private List<TimeSlots> timeSlots;
+        private boolean bookingAttended;
 
         @ManyToOne
+        @JsonIgnore
         @JoinColumn(name = "facility_id")
         private Facility facility;
 
+        @Column(name = "bookingAttendanceChecked")
+        private boolean bookingAttendanceChecked;
 
+        @Column(name = "creditDeducted")
+        private double creditDeducted;
 
+        public Booking(LocalTime startTime,LocalTime endTime,LocalDate dateCreated, double creditDeducted){
+            this.startTime = startTime;
+            this.endTime = endTime;
+            this.dateCreated = dateCreated;
+            this.creditDeducted = creditDeducted;
+        }
+
+        public boolean getBookingAttendanceChecked(){
+            return bookingAttendanceChecked;
+        }
     }

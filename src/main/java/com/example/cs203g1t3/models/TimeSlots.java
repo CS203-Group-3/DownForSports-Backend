@@ -33,6 +33,8 @@ public class TimeSlots implements Comparable{
     @GeneratedValue (strategy =  GenerationType.IDENTITY)
     private Long timeSlotsId;
     private LocalTime startTime;
+
+    @JsonIgnore
     private boolean isAvailable;
 
     @ManyToOne
@@ -52,6 +54,23 @@ public class TimeSlots implements Comparable{
         return startTime.compareTo(temp.getStartTime());
     }
 
-    
 
+    //c
+    public boolean equals(TimeSlots other){
+        return other.getTimeSlotsId() == timeSlotsId;
+    }
+
+    @Override
+    public String toString() {
+        return "TimeSlots [timeSlotsId=" + timeSlotsId + ", startTime=" + startTime + ", isAvailable=" + isAvailable
+                +"]";
+    }
+    // The endTime is non-inclusive
+    public boolean isBetweenTiming(LocalTime start,LocalTime end){
+        if(!startTime.equals(start)){
+            return startTime.isAfter(start) && startTime.isBefore(end);
+        } else {
+            return true;
+        }
+    }
 }

@@ -130,7 +130,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0N
     "description": "Default Description"
 }
 
-###
+### view facility
 GET http://localhost:8080/api/facilities/1
 Content-Type: application/json
 
@@ -175,6 +175,64 @@ Content-Type: application/json
     "password": "B@llsD33p69"
 }
 
+
+
+### make normal user
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "T0127510G",
+    "email": "jevontanjinghong@gmail.com",
+    "password": "Testing@123"
+}
+
+
+### view facility
+GET http://localhost:8080/api/facilities/1
+Content-Type: application/json
+
+### make booking
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+
+{
+    "userId":2,
+    "facilityId":1,
+    "timeBookingMade":"2023-10-23",
+    "facilityDate":"2023-10-23",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "10:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "11:00:00"
+        }
+        
+        ]
+}
+
+### Confirm booking attendance booking
+POST http://localhost:8080/api/bookings/confirmbookingattendance
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+
+{
+  "bookingId":1,
+  "attendanceStatus": 1
+}
+
+### Cancel booking
+POST http://localhost:8080/api/bookings/cancelbooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+
+{
+  "bookingId":1
+}
+
 ### Create facility 
 POST http://localhost:8080/api/facilities
 Content-Type: application/json
@@ -206,3 +264,60 @@ Content-Type: application/json
 ### Get available timeslots of a date 
 GET http://localhost:8080/api/facilities/2/dates/56/timeslots
 Content-Type: application/json
+
+
+### make normal user
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+    "username": "T0127510G",
+    "email": "jevontanjinghong@gmail.com",
+    "password": "Testing@123"
+}
+
+
+### view facility
+GET http://localhost:8080/api/facilities/1
+Content-Type: application/json
+
+### make booking
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+
+{
+    "userId":1,
+    "facilityId":1,
+    "timeBookingMade":"2023-10-23",
+    "facilityDate":"2023-10-27",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "10:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "11:00:00"
+        }
+        
+        ]
+}
+
+### Confirm booking attendance booking
+POST http://localhost:8080/api/bookings/confirmbookingattendance
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+
+{
+  "bookingId":1,
+  "attendanceStatus": 1
+}
+
+### Cancel booking
+POST http://localhost:8080/api/bookings/cancelbooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+
+{
+  "bookingId":1
+}

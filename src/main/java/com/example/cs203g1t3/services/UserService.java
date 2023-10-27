@@ -5,6 +5,7 @@ import com.example.cs203g1t3.models.User;
 import com.example.cs203g1t3.payload.request.SignupRequest;
 import com.example.cs203g1t3.payload.response.MessageResponse;
 import com.example.cs203g1t3.DTO.LoginResponse;
+import com.example.cs203g1t3.exception.NotEnoughCreditException;
 import com.example.cs203g1t3.repository.UserRepository;
 import com.example.cs203g1t3.security.jwt.JwtUtils;
 
@@ -35,7 +36,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     private BCryptPasswordEncoder encoder;
-    
+
     @Autowired
     public UserService(UserRepository userRepository, BCryptPasswordEncoder encoder) {
         this.userRepository = userRepository;
@@ -45,6 +46,7 @@ public class UserService {
     public List<User> getUsers() {
         return userRepository.findAll();
     }
+
     @PreAuthorize("hasRole('ROLE_USER')")
     public User getUser(Long userId) {
         // You can use your UserRepository or any data access method to fetch the user by userId
@@ -60,54 +62,10 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
-//    public void generateOneTimePassword(User user)
-//            throws UnsupportedEncodingException, MessagingException {
-//        String OTP = RandomStringUtils.randomAlphabetic(6);
-//        String encodedOTP = encoder.encode(OTP);
-//
-//        user.setOneTimePassword(encodedOTP);
-//        user.setOtpRequestedTime(new Date());
-//
-//        userRepository.save(user);
-//
-//        sendOTPEmail(user, OTP);
-//    }
-//
-//    public void sendOTPEmail(User user, String OTP)
-//            throws UnsupportedEncodingException, MessagingException, jakarta.mail.MessagingException {
-//        MimeMessage message = mailSender.createMimeMessage();
-//        MimeMessageHelper helper = new MimeMessageHelper(message);
-//
-//        helper.setFrom("contact@shopme.com", "Shopme Support");
-//        helper.setTo(user.getEmail());
-//
-//        String subject = "Here's your One Time Password (OTP) - Expire in 5 minutes!";
-//
-//        String content = "<p>Hello " + user.getUsername() + "</p>"
-//                + "<p>For security reason, you're required to use the following "
-//                + "One Time Password to login:</p>"
-//                + "<p><b>" + OTP + "</b></p>"
-//                + "<br>"
-//                + "<p>Note: this OTP is set to expire in 5 minutes.</p>";
-//
-//        helper.setSubject(subject);
-//
-//        helper.setText(content, true);
-//
-//        mailSender.send(message);
-//    }
-//
-//    public void clearOTP(User user) {
-//        user.setOneTimePassword(null);
-//        user.setOtpRequestedTime(null);
-//        userRepository.save(user);
-//    }
-
-
     public void changePassword(Long userID, String newPassword) {
         // Encode the new password
         String encodedPassword = encoder.encode(newPassword);
-        
+
         // Save the updated user with the new password
         userRepository.updatePassword(userID, encodedPassword);
     }
@@ -150,7 +108,7 @@ public class UserService {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    public boolean isValidEmail(String email){
+    public boolean isValidEmail(String email) {
         Pattern pattern = Pattern.compile("^(.+)@(gmail\\.com|yahoo\\.com)$");
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
@@ -224,4 +182,30 @@ public class UserService {
         return nric.charAt(8) == checksumLetters[checksum % 11];
     }
 
+    public void addCreditScore(Long userId,int creditScoreToAdd){
+        User user = userRepository.findById(userId).get();
+        double currentCreditScore = user.getCreditScore();
+        currentCreditScore += creditScoreToAdd;
+        if(currentCreditScore >= 999){
+            currentCreditScore = 999;
+        }
+        user.setCreditScore(currentCreditScore);
+    }
+
+        public void deductCredit(Long userId, double creditDeducted){
+        User user = userRepository.findById(userId).orElse(null);
+        if(user == null){
+            return;
+        }
+
+        double currentCreditScore = user.getCreditScore();
+        if(currentCreditScore < creditDeducted){
+            throw new NotEnoughCreditException();
+        }
+
+        user.setCreditScore(currentCreditScore-creditDeducted);
+        userRepository.save(user);
+        }
 }
+
+

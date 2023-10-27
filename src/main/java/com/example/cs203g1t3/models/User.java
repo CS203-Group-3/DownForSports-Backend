@@ -2,6 +2,8 @@ package com.example.cs203g1t3.models;
 
 import com.example.cs203g1t3.security.Otp.OneTimePassword;
 import com.example.cs203g1t3.security.Otp.OneTimePasswordRepository;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -51,7 +53,7 @@ public class User{
 //     private LocalDateTime lastActive;
 
 //    //Variables to be used in the service later on
-    private int creditScore;
+    private double creditScore;
 //    private int noOfBookingsLeft;
 //    private boolean isMember;
 
@@ -59,11 +61,16 @@ public class User{
     @OneToOne(mappedBy="user",cascade=CascadeType.ALL)
     private OneTimePassword oneTimePassword;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Booking> bookings;
+
 
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
+        creditScore = 100;
     }
 
     public Long getId() {
