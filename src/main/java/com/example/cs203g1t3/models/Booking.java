@@ -1,5 +1,6 @@
 package com.example.cs203g1t3.models;
 
+import java.util.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -35,9 +36,10 @@ import lombok.*;
         private LocalTime startTime;
         @Column(columnDefinition = "TIME")
         private LocalTime endTime;
-
         private LocalDate dateCreated;
 
+
+        // private List<TimeSlots> timeSlots;
 
         private int creditDeducted;
         private boolean bookingAttended;
@@ -54,4 +56,6 @@ import lombok.*;
             this.dateCreated = dateCreated;
             this.creditDeducted = creditDeducted;
         }
+
+
     }
