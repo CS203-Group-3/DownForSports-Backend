@@ -1,5 +1,6 @@
 package com.example.cs203g1t3.models;
 
+import java.util.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -42,6 +43,7 @@ import lombok.*;
 
         private LocalDate dateCreated;
 
+        // private List<TimeSlots> timeSlots;
         private boolean bookingAttended;
 
         @ManyToOne
