@@ -31,6 +31,6 @@ public class BookingRequest {
     private LocalDate timeBookingMade;
 
     private LocalDate FacilityDate;
-    private List<TimeSlots> TimeSlots;
+    private List<LocalTime> TimeSlots;
     
 }

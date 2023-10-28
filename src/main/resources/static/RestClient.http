@@ -245,17 +245,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0N
     "userId":1,
     "facilityId":1,
     "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-27",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-        
-        ]
+    "facilityDate":"2023-10-29",
+    "timeSlots":[
+          "10:00:00",
+          "11:00:00"]
 }
 
 ### Confirm booking attendance booking

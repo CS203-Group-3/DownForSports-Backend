@@ -70,7 +70,7 @@ public class User{
         this.username = username;
         this.email = email;
         this.password = password;
-        creditScore = 100;
+        creditScore = 600;
     }
 
     public Long getId() {
