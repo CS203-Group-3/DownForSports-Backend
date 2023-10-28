@@ -5,6 +5,8 @@
  import com.example.cs203g1t3.exception.*;
  import com.example.cs203g1t3.models.*;
  import com.example.cs203g1t3.payload.request.*;
+ import com.example.cs203g1t3.payload.response.ViewPastBookingsResponse;
+ import com.example.cs203g1t3.payload.response.ViewUpcomingBookingsResponse;
  import com.example.cs203g1t3.repository.BookingRepository;
 
  import java.time.*;
@@ -87,19 +89,6 @@
         booking.setBookingAttendanceChecked(true);
      }
 
-
-//     public List<LocalTime> listBookingTimeslot(Booking booking){
-//         List<LocalTime> list = new ArrayList<>();
-//         LocalTime startTime = booking.getStartTime();
-//         LocalTime endTime = booking.getEndTime();
-//
-//         while(startTime.isBefore(endTime)){
-//             list.add(startTime);
-//             startTime = startTime.plusMinutes(30);
-//         }
-//         return list;
-//     }
-
     public boolean makeBooking(BookingRequest bookingRequest) {
         LocalDate dateBooked = bookingRequest.getFacilityDate();
         Long facilityId = bookingRequest.getFacilityId();
@@ -158,7 +147,7 @@
         // System.out.println(userService.getUser(bookingRequest.getUserId()));
 
         //make booking
-        Booking booking = new Booking(bookingStartTime,bookingEndTime,bookingRequest.getTimeBookingMade(),creditDeducted);
+        Booking booking = new Booking(bookingStartTime,bookingEndTime,LocalDateTime.now(),creditDeducted);
         booking.setFacility(facility);
         booking.setDateBooked(dateBooked);
         booking.setUser(user);
@@ -172,75 +161,50 @@
         return true;
     }
 
-     //-------------------------- Change all implementations below this line ---------------------------------------
+    public List<ViewUpcomingBookingsResponse> getUpcomingBookings(Long userId){
+        List<Booking> usersBookings = bookingRepository.findBookingsByUserId(userId);
+        List<ViewUpcomingBookingsResponse> result = new ArrayList<>();
+        LocalDate todayDate = LocalDate.now();
+        LocalTime timeNow = LocalTime.now();
+        for(Booking i : usersBookings){
+            if(i.getDateBooked().equals(todayDate)){
+                if(timeNow.isAfter(i.getStartTime())){
+                    continue;
+                }
+                if(timeNow.equals(i.getStartTime())){
+                    continue;
+                }
+            } else if(i.getDateBooked().isBefore(todayDate)){
+                continue;
+            }
+            Facility facility = i.getFacility();
+            result.add(new ViewUpcomingBookingsResponse(facility.getFacilityType(),facility.getDescription(),
+                    i.getStartTime().toString(),i.getEndTime().toString(),i.getDateBooked().toString(),
+                    facility.getLocationString()));
+        }
+        return result;
+    }
 
-//     public Booking updateBooking(Long facilityId,Long bookingId, Booking newBooking) {
-//         //idea of this method
-//         //get old booking -> remove bookingRepository from current booking list
-//         //
-//
-//         Booking booking = bookingRepository.findById(bookingId).orElse(null);
-//         //scuffed code
-//         if(booking == null){      //if booking not found
-//             throw new BookingNotFoundException(bookingId);
-//         }
-//
-//         List<Booking> allBookings = getAllBookings();
-//         allBookings.remove(booking);                //remove current booking from the list
-//
-//         List<LocalTime> timingTaken = new ArrayList<>();   //list of all timings that is taken
-//
-//         for(Booking tempBooking: allBookings){
-//             List<LocalTime> tempList = listBookingTimings(tempBooking);
-//             timingTaken.addAll(tempList);
-//         }
-//
-//         List<LocalTime> newBookingTiming = listBookingTimings(newBooking);
-//
-//         //   !Collections.disjoint(list1, list2) returns true if there is overlap
-//         if(!Collections.disjoint(timingTaken, newBookingTiming)){
-//             return null;
-//         }
-//
-//         Facility facility = facilities.findById(facilityId).orElse(null);
-//
-//         List<LocalTime> facilityTimes = facility.getTimeSlots();
-//         facilityTimes.addAll(listBookingTimings(booking));
-//         facilityTimes.removeAll(newBookingTiming);
-//         Collections.sort(facilityTimes);
-//
-//         facility.setTimeSlots(facilityTimes);
-//         facilities.save(facility);
-//
-//         booking.setStartTime(newBooking.getStartTime());
-//         booking.setEndTime(newBooking.getEndTime());
-//         bookingRepository.save(booking);
-//         return booking;
-//
-//         //old impl
-//         // return bookingRepository.findById(bookingId).map(booking -> {
-//         //     booking.setStartTime(newBooking.getStartTime());
-//         //     booking.setEndTime(newBooking.getEndTime());
-//         //     return bookingRepository.save(booking);
-//         // }).orElse(null);
-//     }
+    public List<ViewPastBookingsResponse> getPastBookings(Long userId){
+        List<Booking> upcomingBookings = bookingRepository.findBookingsByUserId(userId);
+        List<ViewPastBookingsResponse> result = new ArrayList<>();
+        LocalDate todaysDate = LocalDate.now();
+        LocalTime timeNow = LocalTime.now();
+        for(Booking i : upcomingBookings){
+            if(i.getDateBooked().equals(todaysDate)){
+                if(timeNow.isBefore(i.getStartTime())){
+                    continue;
+                }
+            } else if(i.getDateBooked().isAfter(todaysDate)){
+                continue;
+            }
+            Facility facility = i.getFacility();
+            result.add(new ViewPastBookingsResponse(facility.getFacilityType(),facility.getDescription(),
+                    i.getStartTime().toString(),i.getEndTime().toString(),i.getDateBooked().toString(),
+                    facility.getLocationString()));
+        }
+        return result;
+    }
 
-//     public boolean isValidBooking(LocalTime startTime, LocalTime endTime, Facility facility) {
-//         if(startTime.isAfter(endTime)){          //checking if startTime is after endTime
-//             return false;
-//         }
-//         List<LocalTime> allAvailableTimings = facility.getTimeSlots();
-//
-//         //check if each 30 minute slot starting from start time is
-//         //available in the time available time slot in facility until the end time
-//         while(startTime.isBefore(endTime)){
-//             if(!allAvailableTimings.contains(startTime)){
-//                 return false;
-//             }
-//             startTime = startTime.plusMinutes(30);
-//         }
-//         return true;
-//
-//     }
     
  }

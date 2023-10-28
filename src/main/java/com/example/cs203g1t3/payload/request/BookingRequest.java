@@ -28,7 +28,6 @@ import lombok.*;
 public class BookingRequest {
     private Long userId;
     private Long facilityId;
-    private LocalDate timeBookingMade;
 
     private LocalDate FacilityDate;
     private List<TimeSlots> TimeSlots;

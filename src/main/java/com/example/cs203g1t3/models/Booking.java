@@ -41,7 +41,7 @@ import lombok.*;
         @Column(columnDefinition = "TIME")
         private LocalTime endTime;
 
-        private LocalDate dateCreated;
+        private LocalDateTime dateCreated;
         private LocalDate dateBooked;
         
         // private List<TimeSlots> timeSlots;
@@ -58,7 +58,7 @@ import lombok.*;
         @Column(name = "creditDeducted")
         private double creditDeducted;
 
-        public Booking(LocalTime startTime,LocalTime endTime,LocalDate dateCreated, double creditDeducted){
+        public Booking(LocalTime startTime,LocalTime endTime,LocalDateTime dateCreated, double creditDeducted){
             this.startTime = startTime;
             this.endTime = endTime;
             this.dateCreated = dateCreated;
@@ -68,4 +68,5 @@ import lombok.*;
         public boolean getBookingAttendanceChecked(){
             return bookingAttendanceChecked;
         }
+
     }

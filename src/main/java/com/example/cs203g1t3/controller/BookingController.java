@@ -1,27 +1,24 @@
 package com.example.cs203g1t3.controller;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.validation.Valid;
 
 import com.example.cs203g1t3.payload.request.CancelBookingRequest;
 import com.example.cs203g1t3.payload.request.ConfirmBookingAttendanceRequest;
+import com.example.cs203g1t3.payload.request.ViewBookingsRequest;
+import com.example.cs203g1t3.payload.response.ViewPastBookingsResponse;
+import com.example.cs203g1t3.payload.response.ViewUpcomingBookingsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.cs203g1t3.repository.BookingRepository;
-import com.example.cs203g1t3.repository.FacilityRepository;
 import com.example.cs203g1t3.services.BookingService;
 import com.example.cs203g1t3.services.FacilityService;
 
 import jakarta.transaction.Transactional;
 
-import com.example.cs203g1t3.exception.BookingNotFoundException;
 import com.example.cs203g1t3.exception.FacilityNotFoundException;
 import com.example.cs203g1t3.models.Booking;
 import com.example.cs203g1t3.models.Facility;
@@ -112,6 +109,16 @@ public class BookingController {
     public ResponseEntity<?> cancelBooking(@RequestBody CancelBookingRequest cancelBookingRequest){
         bookingService.cancelBooking(cancelBookingRequest);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/viewupcomingbookings")
+    public List<ViewUpcomingBookingsResponse> getUpcomingBookings(@RequestBody ViewBookingsRequest viewBookingsRequest){
+        return bookingService.getUpcomingBookings(viewBookingsRequest.getUserId());
+    }
+
+    @GetMapping("/viewpastbookings")
+    public List<ViewPastBookingsResponse> getPastBookings(@RequestBody ViewBookingsRequest viewBookingsRequest){
+        return bookingService.getPastBookings(viewBookingsRequest.getUserId());
     }
 }
 

@@ -1,5 +1,7 @@
 package com.example.cs203g1t3.services;
 
+import com.example.cs203g1t3.models.Facility;
+import com.example.cs203g1t3.payload.response.ViewUpcomingBookingsResponse;
 import org.springframework.stereotype.Service;
 
 import com.example.cs203g1t3.exception.TimeSlotNotFound;
@@ -7,6 +9,11 @@ import com.example.cs203g1t3.models.TimeSlots;
 import com.example.cs203g1t3.repository.TimeSlotsRepository;
 
 import jakarta.transaction.Transactional;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class TimeSlotService {
@@ -32,4 +39,30 @@ public class TimeSlotService {
         }).orElse(null);
     }
 
+   public List<TimeSlots> filterUpcomingTimeSlotsForDay(List<TimeSlots> input){
+        LocalTime timeNow = LocalTime.now();
+        List<TimeSlots> result = new ArrayList<>();
+        for(TimeSlots i : input){
+            if(timeNow.isAfter(i.getStartTime())){
+                continue;
+            }
+            if(timeNow.equals(i.getStartTime())){
+                continue;
+            }
+            result.add(i);
+        }
+        return result;
+   }
+
+   public List<TimeSlots> filterPastTimeSlotsForDay(List<TimeSlots> input){
+        LocalTime timeNow = LocalTime.now();
+        List<TimeSlots> result = new ArrayList<>();
+        for(TimeSlots i : input){
+            if(timeNow.isBefore(i.getStartTime())){
+                continue;
+            }
+            result.add(i);
+        }
+        return result;
+   }
 }

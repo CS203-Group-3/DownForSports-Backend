@@ -1,3 +1,903 @@
+GET http://localhost:8080/api/bookings/viewupcomingbookings
+Content-Type: application/json
+Authorization:
+Content-Length: 16
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId":2
+}
+
+<> 2023-10-28T122137.200.json
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 265
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":2,
+    "facilityId":1,
+    "facilityDate":"2023-10-28",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "13:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "14:00:00"
+        }
+
+        ]
+}
+
+###
+
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+Content-Length: 105
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "username": "T0127510G",
+    "email": "jevontanjinghong@gmail.com",
+    "password": "Testing@123"
+}
+
+<> 2023-10-28T122131.200.json
+
+###
+
+GET http://localhost:8080/api/bookings/viewupcomingbookings
+Content-Type: application/json
+Authorization:
+Content-Length: 16
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId":2
+}
+
+<> 2023-10-28T121946.500.json
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 265
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":2,
+    "facilityId":1,
+    "facilityDate":"2023-10-28",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "13:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "14:00:00"
+        }
+
+        ]
+}
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 209
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":2,
+    "facilityId":1,
+    "facilityDate":"2023-10-28",
+    "timeSlots":[{
+          "startTime": "13:00:00"
+        },
+        {
+          "startTime": "14:00:00"
+        }
+
+        ]
+}
+
+<> 2023-10-28T121754.500.json
+
+###
+
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+Content-Length: 105
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "username": "T0127510G",
+    "email": "jevontanjinghong@gmail.com",
+    "password": "Testing@123"
+}
+
+<> 2023-10-28T121744.200.json
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 209
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId":2,
+  "facilityId":1,
+  "facilityDate":"2023-10-30",
+  "timeSlots":[{
+    "timeSlotsId": 1,
+    "startTime": "10:00:00"
+  },
+    {
+      "timeSlotsId": 2,
+      "startTime": "11:00:00"
+    }
+
+  ]
+}
+
+<> 2023-10-28T121625.500.json
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 265
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":2,
+    "facilityId":1,
+    "facilityDate":"2023-10-28",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "13:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "14:00:00"
+        }
+
+        ]
+}
+
+###
+
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+Content-Length: 105
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "username": "T0127510G",
+    "email": "jevontanjinghong@gmail.com",
+    "password": "Testing@123"
+}
+
+<> 2023-10-28T121559.200.json
+
+###
+
+GET http://localhost:8080/api/bookings/viewupcomingbookings
+Content-Type: application/json
+Authorization:
+Content-Length: 16
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId":2
+}
+
+<> 2023-10-28T121204.500.json
+
+###
+
+GET http://localhost:8080/api/bookings/viewupcomingbookings
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 16
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId":2
+}
+
+<> 2023-10-28T121138.500.json
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 265
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":2,
+    "facilityId":1,
+    "facilityDate":"2023-10-28",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "13:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "14:00:00"
+        }
+
+        ]
+}
+
+###
+
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+Content-Length: 105
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "username": "T0127510G",
+    "email": "jevontanjinghong@gmail.com",
+    "password": "Testing@123"
+}
+
+<> 2023-10-28T121049.200.json
+
+###
+
+GET http://localhost:8080/api/facilities/1
+Content-Type: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-10-28T121043.200.json
+
+###
+
+GET http://localhost:8080/api/facilities/1
+Content-Type: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-10-28T121041.200.json
+
+###
+
+GET http://localhost:8080/api/bookings/viewupcomingbookings
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 16
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId":2
+}
+
+<> 2023-10-27T181239.200.json
+
+###
+
+POST http://localhost:8080/api/bookings/viewupcomingbookings
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 16
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId":2
+}
+
+<> 2023-10-27T181202.405.json
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 209
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId":2,
+  "facilityId":1,
+  "facilityDate":"2023-10-30",
+  "timeSlots":[{
+    "timeSlotsId": 1,
+    "startTime": "10:00:00"
+  },
+    {
+      "timeSlotsId": 2,
+      "startTime": "11:00:00"
+    }
+
+  ]
+}
+
+<> 2023-10-27T181149.500.json
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 209
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "userId":2,
+  "facilityId":1,
+  "facilityDate":"2023-10-30",
+  "timeSlots":[{
+    "timeSlotsId": 1,
+    "startTime": "10:00:00"
+  },
+    {
+      "timeSlotsId": 2,
+      "startTime": "11:00:00"
+    }
+
+  ]
+}
+
+<> 2023-10-27T181128.500.json
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 265
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":2,
+    "facilityId":1,
+    "facilityDate":"2023-10-27",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "18:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "20:00:00"
+        }
+
+        ]
+}
+
+###
+
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+Content-Length: 105
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "username": "T0127510G",
+    "email": "jevontanjinghong@gmail.com",
+    "password": "Testing@123"
+}
+
+<> 2023-10-27T181106.200.json
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 263
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":2,
+    "facilityId":1,
+    "facilityDate":"2023-10-27",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "18:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": ":00:00"
+        }
+
+        ]
+}
+
+<> 2023-10-27T181005.400.json
+
+###
+
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+Content-Length: 105
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "username": "T0127510G",
+    "email": "jevontanjinghong@gmail.com",
+    "password": "Testing@123"
+}
+
+<> 2023-10-27T181003.200.json
+
+###
+
+POST http://localhost:8080/api/bookings/confirmbookingattendance
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 44
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "bookingId":1,
+  "attendanceStatus": 1
+}
+
+<> 2023-10-27T153748.500.json
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 301
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":1,
+    "facilityId":1,
+    "timeBookingMade":"2023-10-23",
+    "facilityDate":"2023-10-27",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "10:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "11:00:00"
+        }
+
+        ]
+}
+
+###
+
+POST http://localhost:8080/api/bookings/cancelbooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "bookingId":1
+}
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 301
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":1,
+    "facilityId":1,
+    "timeBookingMade":"2023-10-23",
+    "facilityDate":"2023-10-27",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "10:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "11:00:00"
+        }
+
+        ]
+}
+
+###
+
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+Content-Length: 105
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "username": "T0127510G",
+    "email": "jevontanjinghong@gmail.com",
+    "password": "Testing@123"
+}
+
+<> 2023-10-27T153644.200.json
+
+###
+
+POST http://localhost:8080/api/bookings/cancelbooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "bookingId":1
+}
+
+<> 2023-10-27T153632.500.json
+
+###
+
+POST http://localhost:8080/api/bookings/confirmbookingattendance
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 44
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "bookingId":1,
+  "attendanceStatus": 1
+}
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 301
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":1,
+    "facilityId":1,
+    "timeBookingMade":"2023-10-23",
+    "facilityDate":"2023-10-27",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "10:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "11:00:00"
+        }
+
+        ]
+}
+
+###
+
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+Content-Length: 105
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "username": "T0127510G",
+    "email": "jevontanjinghong@gmail.com",
+    "password": "Testing@123"
+}
+
+<> 2023-10-27T153607.200.json
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 301
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":1,
+    "facilityId":1,
+    "timeBookingMade":"2023-10-23",
+    "facilityDate":"2023-10-27",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "10:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "11:00:00"
+        }
+
+        ]
+}
+
+<> 2023-10-27T153411.500.json
+
+###
+
+POST http://localhost:8080/api/bookings/cancelbooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 19
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+  "bookingId":1
+}
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 301
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":1,
+    "facilityId":1,
+    "timeBookingMade":"2023-10-23",
+    "facilityDate":"2023-10-27",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "10:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "11:00:00"
+        }
+
+        ]
+}
+
+###
+
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+Content-Length: 105
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "username": "T0127510G",
+    "email": "jevontanjinghong@gmail.com",
+    "password": "Testing@123"
+}
+
+<> 2023-10-27T153249.200.json
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 301
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":2,
+    "facilityId":1,
+    "timeBookingMade":"2023-10-23",
+    "facilityDate":"2023-10-24",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "10:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "11:00:00"
+        }
+
+        ]
+}
+
+<> 2023-10-27T140535.500.json
+
+###
+
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+Content-Length: 105
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "username": "T0127510G",
+    "email": "jevontanjinghong@gmail.com",
+    "password": "Testing@123"
+}
+
+<> 2023-10-27T140525.200.json
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 301
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":2,
+    "facilityId":1,
+    "timeBookingMade":"2023-10-23",
+    "facilityDate":"2023-10-24",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "10:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "11:00:00"
+        }
+
+        ]
+}
+
+<> 2023-10-27T133614.500.json
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 301
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":2,
+    "facilityId":1,
+    "timeBookingMade":"2023-10-23",
+    "facilityDate":"2023-10-23",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "10:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "11:00:00"
+        }
+
+        ]
+}
+
+<> 2023-10-27T133549.500.json
+
+###
+
+POST http://localhost:8080/api/bookings/makebooking
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Content-Length: 301
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "userId":2,
+    "facilityId":1,
+    "timeBookingMade":"2023-10-23",
+    "facilityDate":"2023-10-23",
+    "timeSlots":[{
+          "timeSlotsId": 1,
+          "startTime": "10:00:00"
+        },
+        {
+          "timeSlotsId": 2,
+          "startTime": "11:00:00"
+        }
+
+        ]
+}
+
+<> 2023-10-27T133538.500.json
+
+###
+
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+Content-Length: 105
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+{
+    "username": "T0127510G",
+    "email": "jevontanjinghong@gmail.com",
+    "password": "Testing@123"
+}
+
+<> 2023-10-27T133534.200.json
+
+###
+
 POST http://localhost:8080/api/bookings/cancelbooking
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
@@ -127,886 +1027,6 @@ Accept-Encoding: br,deflate,gzip,x-gzip
 }
 
 <> 2023-10-27T112828.500.json
-
-###
-
-POST http://localhost:8080/api/bookings/confirmbookingattendance
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 19
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "bookingId":1
-}
-
-###
-
-POST http://localhost:8080/api/bookings/makebooking
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":2,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-###
-
-POST http://localhost:8080/api/auth/register
-Content-Type: application/json
-Content-Length: 105
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "username": "T0127510G",
-    "email": "jevontanjinghong@gmail.com",
-    "password": "Testing@123"
-}
-
-<> 2023-10-27T112754.200.json
-
-###
-
-POST http://localhost:8080/api/bookings/confirmbookingattendance
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 19
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "bookingId":1
-}
-
-###
-
-POST http://localhost:8080/api/bookings/makebooking
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":2,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-###
-
-POST http://localhost:8080/api/auth/register
-Content-Type: application/json
-Content-Length: 105
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "username": "T0127510G",
-    "email": "jevontanjinghong@gmail.com",
-    "password": "Testing@123"
-}
-
-<> 2023-10-27T112637.200.json
-
-###
-
-POST http://localhost:8080/api/bookings/confirmbookingattendance
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 19
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "bookingId":1
-}
-
-###
-
-POST http://localhost:8080/api/bookings/makebooking
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":2,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-###
-
-POST http://localhost:8080/api/auth/register
-Content-Type: application/json
-Content-Length: 105
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "username": "T0127510G",
-    "email": "jevontanjinghong@gmail.com",
-    "password": "Testing@123"
-}
-
-<> 2023-10-27T112202.400.json
-
-###
-
-POST http://localhost:8080/api/auth/register
-Content-Type: application/json
-Content-Length: 105
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "username": "T0127510G",
-    "email": "jevontanjinghong@gmail.com",
-    "password": "Testing@123"
-}
-
-<> 2023-10-27T112157.200.json
-
-###
-
-POST http://localhost:8080/api/bookings/makebooking
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":2,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-<> 2023-10-27T024503.500.json
-
-###
-
-POST http://localhost:8080/api/bookings/confirmbookingattendance
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 19
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "bookingId":1
-}
-
-###
-
-POST http://localhost:8080/api/bookings/makebooking
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":2,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-###
-
-POST http://localhost:8080/api/auth/register
-Content-Type: application/json
-Content-Length: 105
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "username": "T0127510G",
-    "email": "jevontanjinghong@gmail.com",
-    "password": "Testing@123"
-}
-
-<> 2023-10-27T024445.200.json
-
-###
-
-POST http://localhost:8080/api/bookings/confirmbookingattendance
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 19
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "bookingId":1
-}
-
-<> 2023-10-27T024434.500.json
-
-###
-
-POST http://localhost:8080/api/bookings/confirmbookingattendance
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 44
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "bookingId":1,
-  "attendanceStatus": 1
-}
-
-###
-
-POST http://localhost:8080/api/bookings/makebooking
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":2,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-###
-
-POST http://localhost:8080/api/auth/register
-Content-Type: application/json
-Content-Length: 105
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "username": "T0127510G",
-    "email": "jevontanjinghong@gmail.com",
-    "password": "Testing@123"
-}
-
-<> 2023-10-27T024326.200.json
-
-###
-
-POST http://localhost:8080/api/bookings/confirmbookingattendance
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 44
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "bookingId":1,
-  "attendanceStatus": 1
-}
-
-###
-
-POST http://localhost:8080/api/bookings/makebooking
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":2,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-###
-
-POST http://localhost:8080/api/auth/register
-Content-Type: application/json
-Content-Length: 105
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "username": "T0127510G",
-    "email": "jevontanjinghong@gmail.com",
-    "password": "Testing@123"
-}
-
-<> 2023-10-27T021600.200.json
-
-###
-
-POST http://localhost:8080/api/bookings/confirmbookingattendance
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 44
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "bookingId":1,
-  "attendanceStatus": 1
-}
-
-<> 2023-10-27T021434.500.json
-
-###
-
-POST http://localhost:8080/api/bookings/confirmbookingattendance
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 44
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "bookingId":1,
-  "attendanceStatus": 1
-}
-
-###
-
-POST http://localhost:8080/api/bookings/makebooking
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":2,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-###
-
-POST http://localhost:8080/api/auth/register
-Content-Type: application/json
-Content-Length: 105
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "username": "T0127510G",
-    "email": "jevontanjinghong@gmail.com",
-    "password": "Testing@123"
-}
-
-<> 2023-10-27T021324.200.json
-
-###
-
-POST http://localhost:8080/api/bookings/confirmbookingattendance
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 44
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "bookingId":1,
-  "attendanceStatus": 1
-}
-
-###
-
-POST http://localhost:8080/api/bookings/makebooking
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":1,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-###
-
-POST http://localhost:8080/api/auth/register
-Content-Type: application/json
-Content-Length: 105
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "username": "T0127510G",
-    "email": "jevontanjinghong@gmail.com",
-    "password": "Testing@123"
-}
-
-<> 2023-10-27T021152.200.json
-
-###
-
-POST http://localhost:8080/api/bookings/confirmbookingattendance
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 44
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-  "bookingId":1,
-  "attendanceStatus": 1
-}
-
-###
-
-POST http://localhost:8080/api/bookings/makebooking
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":1,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-<> 2023-10-27T021041.500.json
-
-###
-
-POST http://localhost:8080/api/bookings/makebooking
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":1,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-###
-
-POST http://localhost:8080/api/auth/register
-Content-Type: application/json
-Content-Length: 105
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "username": "T0127510G",
-    "email": "jevontanjinghong@gmail.com",
-    "password": "Testing@123"
-}
-
-<> 2023-10-27T020836.200.json
-
-###
-
-POST http://localhost:8080/api/facilities/1/bookings
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":1,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-###
-
-POST http://localhost:8080/api/auth/register
-Content-Type: application/json
-Content-Length: 105
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "username": "T0127510G",
-    "email": "jevontanjinghong@gmail.com",
-    "password": "Testing@123"
-}
-
-<> 2023-10-27T003158.200.json
-
-###
-
-POST http://localhost:8080/api/facilities/1/bookings
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":1,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-###
-
-POST http://localhost:8080/api/facilities/1/bookings
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":1,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-<> 2023-10-26T231117.500.json
-
-###
-
-POST http://localhost:8080/api/facilities/1/bookings
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":2,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-<> 2023-10-26T231110.500.json
-
-###
-
-POST http://localhost:8080/api/facilities/1/bookings
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 301
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":1,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-
-        ]
-}
-
-###
-
-GET http://localhost:8080/api/facilities/1
-Content-Type: application/json
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-<> 2023-10-26T231051.200.json
-
-###
-
-POST http://localhost:8080/api/auth/register
-Content-Type: application/json
-Content-Length: 105
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "username": "T0127510G",
-    "email": "jevontanjinghong@gmail.com",
-    "password": "Testing@123"
-}
-
-<> 2023-10-26T231047.400.json
-
-###
-
-POST http://localhost:8080/api/auth/register
-Content-Type: application/json
-Content-Length: 105
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "username": "T0127510G",
-    "email": "jevontanjinghong@gmail.com",
-    "password": "Testing@123"
-}
-
-<> 2023-10-26T231040.200.json
-
-###
-
-POST http://localhost:8080/api/facilities/1/bookings
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-Content-Length: 292
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "userId":2,
-    "facilityId":1,
-    "timeBookingMade":"2023-10-23",
-    "facilityDate":"2023-10-23",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "10:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "11:00:00"
-        }
-        ]
-}
-
-<> 2023-10-26T185327.500.json
-
-###
-
-POST http://localhost:8080/api/auth/register
-Content-Type: application/json
-Content-Length: 105
-Connection: Keep-Alive
-User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.8.1)
-Accept-Encoding: br,deflate,gzip,x-gzip
-
-{
-    "username": "T0127510G",
-    "email": "jevontanjinghong@gmail.com",
-    "password": "Testing@123"
-}
-
-<> 2023-10-26T185305.200.json
 
 ###
 
