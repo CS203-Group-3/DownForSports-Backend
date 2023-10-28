@@ -242,19 +242,13 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
 
 {
-    "userId":2,
+    "userId":1,
     "facilityId":1,
-    "facilityDate":"2023-10-28",
-    "timeSlots":[{
-          "timeSlotsId": 1,
-          "startTime": "13:00:00"
-        },
-        {
-          "timeSlotsId": 2,
-          "startTime": "14:00:00"
-        }
-        
-        ]
+    "timeBookingMade":"2023-10-23",
+    "facilityDate":"2023-10-29",
+    "timeSlots":[
+          "10:00:00",
+          "11:00:00"]
 }
 
 ### Confirm booking attendance booking
@@ -274,34 +268,4 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0N
 
 {
   "bookingId":1
-}
-
-### Show upcoming bookings
-GET http://localhost:8080/api/bookings/viewupcomingbookings
-Content-Type: application/json
-Authorization:
-
-{
-  "userId":2
-}
-
-### make booking 2
-POST http://localhost:8080/api/bookings/makebooking
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-
-{
-  "userId":2,
-  "facilityId":1,
-  "facilityDate":"2023-10-30",
-  "timeSlots":[{
-    "timeSlotsId": 1,
-    "startTime": "10:00:00"
-  },
-    {
-      "timeSlotsId": 2,
-      "startTime": "11:00:00"
-    }
-
-  ]
 }

@@ -30,6 +30,6 @@ public class BookingRequest {
     private Long facilityId;
 
     private LocalDate FacilityDate;
-    private List<TimeSlots> TimeSlots;
+    private List<LocalTime> TimeSlots;
     
 }
