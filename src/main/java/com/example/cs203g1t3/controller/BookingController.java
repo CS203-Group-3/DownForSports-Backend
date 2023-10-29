@@ -111,14 +111,25 @@ public class BookingController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // @GetMapping("/viewupcomingbookings")
+    // public List<ViewUpcomingBookingsResponse> getUpcomingBookings(@RequestBody ViewBookingsRequest viewBookingsRequest){
+    //     return bookingService.getUpcomingBookings(viewBookingsRequest.getUserId());
+    // }
     @GetMapping("/viewupcomingbookings")
-    public List<ViewUpcomingBookingsResponse> getUpcomingBookings(@RequestBody ViewBookingsRequest viewBookingsRequest){
-        return bookingService.getUpcomingBookings(viewBookingsRequest.getUserId());
+    public List<ViewUpcomingBookingsResponse> getUpcomingBookings(@RequestParam Long userId) {
+        return bookingService.getUpcomingBookings(userId);
     }
 
+
+    // @GetMapping("/viewpastbookings")
+    // public List<ViewPastBookingsResponse> getPastBookings(@RequestBody ViewBookingsRequest viewBookingsRequest){
+    //     return bookingService.getPastBookings(viewBookingsRequest.getUserId());
+    // }
     @GetMapping("/viewpastbookings")
-    public List<ViewPastBookingsResponse> getPastBookings(@RequestBody ViewBookingsRequest viewBookingsRequest){
-        return bookingService.getPastBookings(viewBookingsRequest.getUserId());
+    public List<ViewPastBookingsResponse> getPastBookings(@RequestParam Long userId) {
+        return bookingService.getPastBookings(userId);
     }
+
+
 }
 

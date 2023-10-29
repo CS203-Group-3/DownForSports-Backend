@@ -239,7 +239,7 @@ Content-Type: application/json
 ### make booking
 POST http://localhost:8080/api/bookings/makebooking
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODQ3NjE2NCwiZXhwIjoxNjk4NTYyNTY0fQ.ZA_t-OtboA5YqTpH9ibzsArnuLPDku0HxEpphWXHgA0
 
 {
     "userId":1,
@@ -254,8 +254,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0N
 ### make booking 2
 POST http://localhost:8080/api/bookings/makebooking
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0NzU1NywiZXhwIjoxNjk4MTMzOTU3fQ._yOIMTPRMJXf8ploZJtK2cvbB8pR-QNDXxJbTL34jes
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODQ3OTM5NywiZXhwIjoxNjk4NTY1Nzk3fQ.3us5DgqgigmGtAF4l-Cq84LUduZt88DQ2Qc2D_arelU
 {
   "userId":1,
   "facilityId":1,
@@ -289,7 +288,6 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0N
 ### Show upcoming bookings
 GET http://localhost:8080/api/bookings/viewupcomingbookings
 Content-Type: application/json
-Authorization:
 
 {
   "userId":1
