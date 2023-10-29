@@ -9,19 +9,19 @@ import com.example.cs203g1t3.payload.request.ConfirmBookingAttendanceRequest;
 import com.example.cs203g1t3.payload.request.ViewBookingsRequest;
 import com.example.cs203g1t3.payload.response.ViewPastBookingsResponse;
 import com.example.cs203g1t3.payload.response.ViewUpcomingBookingsResponse;
+import com.example.cs203g1t3.service.BookingService;
+import com.example.cs203g1t3.service.FacilityService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.cs203g1t3.services.BookingService;
-import com.example.cs203g1t3.services.FacilityService;
-
 import jakarta.transaction.Transactional;
 
 import com.example.cs203g1t3.exception.FacilityNotFoundException;
 import com.example.cs203g1t3.models.Booking;
-import com.example.cs203g1t3.models.Facility;
+import com.example.cs203g1t3.models.FacilityClasses.Facility;
 import com.example.cs203g1t3.payload.request.BookingRequest;
 
 @CrossOrigin

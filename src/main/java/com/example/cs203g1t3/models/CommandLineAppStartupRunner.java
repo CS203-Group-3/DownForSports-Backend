@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 
 import com.example.cs203g1t3.repository.RoleRepository;
 import com.example.cs203g1t3.repository.UserRepository;
-// import com.example.cs203g1t3.services.FacilityInitialisationService;
-import com.example.cs203g1t3.services.FacilityInitialisationService;
+import com.example.cs203g1t3.servicesImpl.FacilityInitialisationService;
 
 import java.util.*;
 

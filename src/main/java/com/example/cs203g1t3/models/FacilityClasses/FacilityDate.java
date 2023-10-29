@@ -1,4 +1,4 @@
-package com.example.cs203g1t3.models;
+package com.example.cs203g1t3.models.FacilityClasses;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import jakarta.persistence.Entity;
@@ -19,8 +19,6 @@ import jakarta.persistence.CascadeType;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-// import com.example.cs203g1t3.payload.response.FacilityAvailablityResponse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 

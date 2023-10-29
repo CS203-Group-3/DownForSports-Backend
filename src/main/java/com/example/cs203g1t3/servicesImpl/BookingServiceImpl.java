@@ -1,48 +1,54 @@
- package com.example.cs203g1t3.services;
+ package com.example.cs203g1t3.servicesImpl;
 
  import com.example.cs203g1t3.exception.BookingAttendanceIsDoneException;
  import com.example.cs203g1t3.exception.InvalidAttendanceStatusException;
  import com.example.cs203g1t3.exception.*;
  import com.example.cs203g1t3.models.*;
- import com.example.cs203g1t3.payload.request.*;
+import com.example.cs203g1t3.models.FacilityClasses.Facility;
+import com.example.cs203g1t3.models.FacilityClasses.TimeSlots;
+import com.example.cs203g1t3.payload.request.*;
  import com.example.cs203g1t3.payload.response.ViewPastBookingsResponse;
  import com.example.cs203g1t3.payload.response.ViewUpcomingBookingsResponse;
  import com.example.cs203g1t3.repository.BookingRepository;
+import com.example.cs203g1t3.service.BookingService;
+import com.example.cs203g1t3.service.FacilityService;
+import com.example.cs203g1t3.servicesImpl.TimeSlotService;
+import com.example.cs203g1t3.servicesImpl.UserServiceImpl;
 
- import java.time.*;
- import java.util.*;
+import java.time.*;
+import java.util.*;
 
- import org.springframework.beans.factory.annotation.Autowired;
- import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
- @Service
- public class BookingService {
-     @Autowired
-     private BookingRepository bookingRepository;
-     @Autowired
-     private FacilityService facilityService;
-     @Autowired
-     private UserService userService;
+@Service
+public class BookingServiceImpl implements BookingService{
+    @Autowired
+    private BookingRepository bookingRepository;
+    @Autowired
+    private FacilityService facilityService;
+    @Autowired
+    private UserServiceImpl userService;
     @Autowired
     private TimeSlotService timeSlotService;
 
     private final double attendancePresentMultiplier = 1.1;
 
-     public BookingService(BookingRepository bookingRepository, FacilityService facilityService, UserService userService) {
+    public BookingServiceImpl(BookingRepository bookingRepository, FacilityService facilityService, UserServiceImpl userService) {
          this.bookingRepository = bookingRepository;
          this.facilityService = facilityService;
          this.userService = userService;
-     }
+    }
 
-     public Booking getBooking(Long bookingId) {
+    public Booking getBooking(Long bookingId) {
          return bookingRepository.findById(bookingId).orElse(null);
-     }
+    }
 
-     public List<Booking> getAllBookings() {
+    public List<Booking> getAllBookings() {
          return bookingRepository.findAll();
-     }
+    }
 
-     public void cancelBooking(CancelBookingRequest cancelBookingRequest) {
+    public void cancelBooking(CancelBookingRequest cancelBookingRequest) {
          Long bookingId = cancelBookingRequest.getBookingId();
          Booking booking;
          try {
@@ -63,9 +69,9 @@
              }
              bookingRepository.deleteById(bookingId);
          }
-     }
+    }
 
-     public void confirmBookingAttendance(Long bookingId,int attendanceStatus){
+    public void confirmBookingAttendance(Long bookingId,int attendanceStatus){
          if(attendanceStatus != 1 && attendanceStatus != 0 && attendanceStatus != -1){
              throw new InvalidAttendanceStatusException("Invalid Attendance Status Code");
          }
@@ -87,7 +93,7 @@
                 break;
         }
         booking.setBookingAttendanceChecked(true);
-     }
+    }
 
     public boolean makeBooking(BookingRequest bookingRequest) {
         LocalDate dateBooked = bookingRequest.getFacilityDate();

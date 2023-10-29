@@ -1,4 +1,4 @@
-package com.example.cs203g1t3.services;
+package com.example.cs203g1t3.servicesImpl;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -9,12 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
-import com.example.cs203g1t3.models.Facility;
-import com.example.cs203g1t3.models.FacilityDate;
-import com.example.cs203g1t3.models.TimeSlots;
+import com.example.cs203g1t3.models.FacilityClasses.Facility;
+import com.example.cs203g1t3.models.FacilityClasses.FacilityDate;
+import com.example.cs203g1t3.models.FacilityClasses.TimeSlots;
 import com.example.cs203g1t3.repository.FacilityDateRepository;
 import com.example.cs203g1t3.repository.FacilityRepository;
 import com.example.cs203g1t3.repository.TimeSlotsRepository;
+import com.example.cs203g1t3.service.FacilityService;
 
 import jakarta.transaction.Transactional;
 

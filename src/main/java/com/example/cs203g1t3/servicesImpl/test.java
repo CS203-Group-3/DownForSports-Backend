@@ -1,9 +1,10 @@
-package com.example.cs203g1t3.services;
+package com.example.cs203g1t3.servicesImpl;
 
 import java.time.LocalTime;
 import java.util.*;
 
 import com.example.cs203g1t3.models.*;
+import com.example.cs203g1t3.models.FacilityClasses.TimeSlots;
 
 public class test {
     public static void main(String[] args) {
