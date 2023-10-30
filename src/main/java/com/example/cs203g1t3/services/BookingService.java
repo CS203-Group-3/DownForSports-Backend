@@ -5,8 +5,7 @@
  import com.example.cs203g1t3.exception.*;
  import com.example.cs203g1t3.models.*;
  import com.example.cs203g1t3.payload.request.*;
- import com.example.cs203g1t3.payload.response.ViewPastBookingsResponse;
- import com.example.cs203g1t3.payload.response.ViewUpcomingBookingsResponse;
+ import com.example.cs203g1t3.payload.response.ViewBookingsResponse;
  import com.example.cs203g1t3.repository.BookingRepository;
 
  import java.time.*;
@@ -165,9 +164,9 @@
         return true;
     }
 
-    public List<ViewUpcomingBookingsResponse> getUpcomingBookings(Long userId){
+    public List<ViewBookingsResponse> getUpcomingBookings(Long userId){
         List<Booking> usersBookings = bookingRepository.findBookingsByUserId(userId);
-        List<ViewUpcomingBookingsResponse> result = new ArrayList<>();
+        List<ViewBookingsResponse> result = new ArrayList<>();
         LocalDate todayDate = LocalDate.now();
         LocalTime timeNow = LocalTime.now();
         for(Booking i : usersBookings){
@@ -182,16 +181,16 @@
                 continue;
             }
             Facility facility = i.getFacility();
-            result.add(new ViewUpcomingBookingsResponse(facility.getFacilityType(),facility.getDescription(),
+            result.add(new ViewBookingsResponse(i.getBookingId(),facility.getFacilityType(),facility.getDescription(),
                     i.getStartTime().toString(),i.getEndTime().toString(),i.getDateBooked().toString(),
                     facility.getLocationString()));
         }
         return result;
     }
 
-    public List<ViewPastBookingsResponse> getPastBookings(Long userId){
+    public List<ViewBookingsResponse> getPastBookings(Long userId){
         List<Booking> upcomingBookings = bookingRepository.findBookingsByUserId(userId);
-        List<ViewPastBookingsResponse> result = new ArrayList<>();
+        List<ViewBookingsResponse> result = new ArrayList<>();
         LocalDate todaysDate = LocalDate.now();
         LocalTime timeNow = LocalTime.now();
         for(Booking i : upcomingBookings){
@@ -203,7 +202,7 @@
                 continue;
             }
             Facility facility = i.getFacility();
-            result.add(new ViewPastBookingsResponse(facility.getFacilityType(),facility.getDescription(),
+            result.add(new ViewBookingsResponse(i.getBookingId(),facility.getFacilityType(),facility.getDescription(),
                     i.getStartTime().toString(),i.getEndTime().toString(),i.getDateBooked().toString(),
                     facility.getLocationString()));
         }
