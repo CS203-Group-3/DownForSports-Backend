@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class BookedException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
-    public BookedException() {
-        super("Booking timeslots are taken");
+    public BookedException(String message) {
+        super(message);
     }
     
 
