@@ -6,7 +6,9 @@ import javax.validation.Valid;
 
 import com.example.cs203g1t3.payload.request.CancelBookingRequest;
 import com.example.cs203g1t3.payload.request.ConfirmBookingAttendanceRequest;
-import com.example.cs203g1t3.payload.response.ViewBookingsResponse;
+import com.example.cs203g1t3.payload.request.ViewBookingsRequest;
+import com.example.cs203g1t3.payload.response.ViewPastBookingsResponse;
+import com.example.cs203g1t3.payload.response.ViewUpcomingBookingsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -109,13 +111,22 @@ public class BookingController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // @GetMapping("/viewupcomingbookings")
+    // public List<ViewUpcomingBookingsResponse> getUpcomingBookings(@RequestBody ViewBookingsRequest viewBookingsRequest){
+    //     return bookingService.getUpcomingBookings(viewBookingsRequest.getUserId());
+    // }
     @GetMapping("/viewupcomingbookings")
-    public List<ViewBookingsResponse> getUpcomingBookings(@RequestParam Long userId) {
+    public List<ViewUpcomingBookingsResponse> getUpcomingBookings(@RequestParam Long userId) {
         return bookingService.getUpcomingBookings(userId);
     }
 
+
+    // @GetMapping("/viewpastbookings")
+    // public List<ViewPastBookingsResponse> getPastBookings(@RequestBody ViewBookingsRequest viewBookingsRequest){
+    //     return bookingService.getPastBookings(viewBookingsRequest.getUserId());
+    // }
     @GetMapping("/viewpastbookings")
-    public List<ViewBookingsResponse> getPastBookings(@RequestParam Long userId) {
+    public List<ViewPastBookingsResponse> getPastBookings(@RequestParam Long userId) {
         return bookingService.getPastBookings(userId);
     }
 
