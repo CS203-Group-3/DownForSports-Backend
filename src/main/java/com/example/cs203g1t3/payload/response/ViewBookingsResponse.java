@@ -9,7 +9,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ViewPastBookingsResponse {
+public class ViewBookingsResponse {
+    private Long bookingId;
     private String facility;
     private String description;
     private String startTime;
