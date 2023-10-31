@@ -1,4 +1,4 @@
-package com.example.cs203g1t3.models;
+package com.example.cs203g1t3.models.FacilityClasses;
 import java.sql.Time;
 import java.time.LocalTime;
 

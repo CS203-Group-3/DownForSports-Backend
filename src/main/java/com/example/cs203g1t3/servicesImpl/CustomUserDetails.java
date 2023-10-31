@@ -1,4 +1,4 @@
-package com.example.cs203g1t3.services;
+package com.example.cs203g1t3.servicesImpl;
 
 import com.example.cs203g1t3.models.User;
 import com.example.cs203g1t3.security.Otp.OneTimePassword;

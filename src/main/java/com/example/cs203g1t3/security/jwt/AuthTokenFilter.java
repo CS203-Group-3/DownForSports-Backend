@@ -1,6 +1,5 @@
 package com.example.cs203g1t3.security.jwt;
 
-import com.example.cs203g1t3.services.CustomUserDetailService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,6 +14,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.example.cs203g1t3.servicesImpl.CustomUserDetailService;
 
 import java.io.IOException;
 

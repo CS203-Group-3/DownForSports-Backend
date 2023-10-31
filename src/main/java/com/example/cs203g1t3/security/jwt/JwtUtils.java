@@ -1,8 +1,9 @@
 package com.example.cs203g1t3.security.jwt;
 
 import com.example.cs203g1t3.models.User;
-import com.example.cs203g1t3.services.CustomUserDetailService;
-import com.example.cs203g1t3.services.CustomUserDetails;
+import com.example.cs203g1t3.servicesImpl.CustomUserDetailService;
+import com.example.cs203g1t3.servicesImpl.CustomUserDetails;
+
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

@@ -1,13 +1,13 @@
 package com.example.cs203g1t3.controller;
 
 import com.example.cs203g1t3.exception.FacilityNotFoundException;
-import com.example.cs203g1t3.models.Facility;
-import com.example.cs203g1t3.models.FacilityDate;
-import com.example.cs203g1t3.models.TimeSlots;
+import com.example.cs203g1t3.models.FacilityClasses.Facility;
+import com.example.cs203g1t3.models.FacilityClasses.FacilityDate;
+import com.example.cs203g1t3.models.FacilityClasses.TimeSlots;
 import com.example.cs203g1t3.payload.request.FacilityCreationRequest;
 import com.example.cs203g1t3.payload.response.FacilityResponse;
 import com.example.cs203g1t3.payload.response.MessageResponse;
-import com.example.cs203g1t3.services.FacilityService;
+import com.example.cs203g1t3.service.FacilityService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

@@ -1,11 +1,10 @@
-package com.example.cs203g1t3.services;
+package com.example.cs203g1t3.servicesImpl;
 
 import com.example.cs203g1t3.models.ERole;
 import com.example.cs203g1t3.models.Role;
 import com.example.cs203g1t3.models.User;
 import com.example.cs203g1t3.payload.request.SignupRequest;
 import com.example.cs203g1t3.payload.response.MessageResponse;
-import com.example.cs203g1t3.DTO.LoginResponse;
 import com.example.cs203g1t3.exception.NotEnoughCreditException;
 import com.example.cs203g1t3.repository.UserRepository;
 import com.example.cs203g1t3.security.jwt.JwtUtils;
@@ -22,6 +21,7 @@ import org.springframework.messaging.MessagingException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import com.example.cs203g1t3.service.UserService;
 
 
 import java.io.UnsupportedEncodingException;
@@ -35,18 +35,19 @@ import java.util.regex.Pattern;
 
 @Service
 @Transactional
-public class UserService {
+public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
 
     private BCryptPasswordEncoder encoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder encoder) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.encoder = encoder;
     }
 
+    @Override
     public List<User> getUsers() {
         return userRepository.findAll();
     }
