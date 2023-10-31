@@ -24,12 +24,15 @@
     @Autowired
     private TimeSlotService timeSlotService;
 
+    private NotificationServiceImpl notificationService;
+
     private final double attendancePresentMultiplier = 1.1;
 
-     public BookingService(BookingRepository bookingRepository, FacilityService facilityService, UserService userService) {
+     public BookingService(BookingRepository bookingRepository, FacilityService facilityService, UserService userService,NotificationServiceImpl notificationService) {
          this.bookingRepository = bookingRepository;
          this.facilityService = facilityService;
          this.userService = userService;
+         this.notificationService = notificationService;
      }
 
      public Booking getBooking(Long bookingId) {
@@ -100,7 +103,7 @@
         if (timeSlot == null) {
             throw new TimeSlotNotFound();
         }
-        
+        notificationService.sendBookingConfirmationNotificationEmail(user.getUserID(),booking);
         List<LocalTime> bookingTimeSlot = bookingRequest.getTimeSlots();
         //if timeslot booked is not available, throw exception
         if(!checkAvailability(bookingTimeSlot, timeSlot)){

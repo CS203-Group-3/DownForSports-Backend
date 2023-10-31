@@ -182,8 +182,8 @@ POST http://localhost:8080/api/auth/register
 Content-Type: application/json
 
 {
-    "username": "T0127510G",
-    "email": "jevontanjinghong@gmail.com",
+    "username": "S8217079D",
+    "email": "junjie.liew2001@gmail.com",
     "password": "Testing@123"
 }
 
@@ -242,7 +242,7 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODQ3NjE2NCwiZXhwIjoxNjk4NTYyNTY0fQ.ZA_t-OtboA5YqTpH9ibzsArnuLPDku0HxEpphWXHgA0
 
 {
-    "userId":1,
+    "userId":3,
     "facilityId":1,
     "facilityDate":"2023-10-31",
     "timeSlots":[

@@ -69,4 +69,6 @@ import lombok.*;
             return bookingAttendanceChecked;
         }
 
+//        public String getBooking
+
     }
