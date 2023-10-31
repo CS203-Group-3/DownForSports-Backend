@@ -52,12 +52,12 @@ public class BookingServiceImpl implements BookingService{
          return bookingRepository.findById(bookingId).orElse(null);
     }
 
-    public List<BookingResponse> getAllBookingNotAttended() {
+    public List<BookingResponse> getAllBookingNotChecked() {
         List<Booking> bookings = bookingRepository.findAll();
 
         List<BookingResponse> bookingResponses = bookings.stream()
                 .map(Booking::toBookingResponse)
-                .filter(c -> !c.getBookingAttended())
+                .filter(c -> !c.getBookingAttendanceChecked())
                 .collect(Collectors.toList());
 
         return bookingResponses;

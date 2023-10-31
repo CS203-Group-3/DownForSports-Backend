@@ -38,7 +38,7 @@ public class BookingController {
     @PreAuthorize("hasRole('BOOKING_MANAGER')")
     @GetMapping("/")
     public List<BookingResponse> getAllBookingForBookingManager() {
-        return bookingService.getAllBookingNotAttended();
+        return bookingService.getAllBookingNotChecked();
     }
 
     @PostMapping("/makebooking")

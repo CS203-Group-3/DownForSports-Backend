@@ -13,7 +13,7 @@ import com.example.cs203g1t3.payload.response.ViewUpcomingBookingsResponse;
 public interface BookingService {
 
     // Returns all bookings
-    List<BookingResponse> getAllBookingNotAttended();
+    List<BookingResponse> getAllBookingNotChecked();
 
     // Returns booking of that bookingId
     Booking getBooking(Long bookingId); 

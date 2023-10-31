@@ -73,13 +73,14 @@ import lombok.*;
 
         public BookingResponse toBookingResponse() {
             return new BookingResponse(
+                this.bookingId,
                 this.facility.getFacilityType(),
                 this.facility.getDescription(),
                 this.startTime.toString(),
                 this.endTime.toString(),
                 this.dateBooked.toString(),
                 this.facility.getLocationString(),
-                this.bookingAttended
+                this.bookingAttendanceChecked
             );
         }
 

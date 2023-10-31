@@ -9,11 +9,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class BookingResponse {
+    private long bookingId;
     private String facility;
     private String description;
     private String startTime;
     private String endTime;
     private String date;
     private String location;
-    private Boolean bookingAttended;
+    private Boolean bookingAttendanceChecked;
 }
