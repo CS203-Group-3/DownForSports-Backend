@@ -33,54 +33,10 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
-
-    // @GetMapping("/{bookingId}")
-    // public ResponseEntity<Booking> getBookingById(@PathVariable Long facilityId, @PathVariable Long bookingId) {
-    //     if (facilityService.getFacility(facilityId) == null) {
-    //         throw new FacilityNotFoundException(facilityId);
-    //     }
-    //     Booking booking = bookingService.getBooking(bookingId);
-    //     if (booking == null) {
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-    //     return ResponseEntity.ok(booking);
-    // }
-
-    // @PutMapping("/{bookingId}")
-    // public ResponseEntity<Booking> updateBooking(@PathVariable Long facilityId, @PathVariable Long bookingId, @RequestBody Booking updatedBooking) {
-    //     if (facilityService.getFacility(facilityId) == null) {
-    //         throw new FacilityNotFoundException(facilityId);
-    //     }
-    //     Booking booking = bookingService.updateBooking(facilityId,bookingId, updatedBooking);
-    //     if (booking == null) {
-    //         throw new BookingNotFoundException(bookingId);
-    //     }
-    //     return ResponseEntity.ok(booking);
-    // }
-
-    // @DeleteMapping("/{bookingId}")
-    // public ResponseEntity<?> deleteBooking(@PathVariable Long facilityId, @PathVariable Long bookingId) {
-    //     if (facilityService.getFacility(facilityId) == null) {
-    //         throw new FacilityNotFoundException(facilityId);
-    //     }
-    //     try {   
-    //         bookingService.deleteBooking(bookingId);
-    //     } catch(EmptyResultDataAccessException e) {
-    //         throw new BookingNotFoundException(bookingId);
-    //     }
-    //     return new ResponseEntity<>(HttpStatus.OK);
-    // }
-
-//-------------------------- Change all implementations below this line ---------------------------------------    
-
-    // @GetMapping
-    // public ResponseEntity<?> getAvailableTimeSlotsOfFacility(@PathVariable Long facilityId) {
-    //     Facility facility = facilityService.getFacility(facilityId);
-    //     if (facility == null) {
-    //         throw new FacilityNotFoundException(facilityId);
-    //     }
-    //     return ResponseEntity.ok(facility.getTimeSlots());
-    // }
+    @GetMapping("/")
+    public ResponseEntity<List<Booking>> getAllBooking() {
+        return ResponseEntity.ok(bookingService.getAllBookings());
+    }
 
     @PostMapping("/makebooking")
     @Transactional
