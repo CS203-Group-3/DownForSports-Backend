@@ -1,13 +1,14 @@
-package com.example.cs203g1t3.services;
+package com.example.cs203g1t3.servicesImpl;
 
 import com.example.cs203g1t3.exception.FacilityNotFoundException;
 import com.example.cs203g1t3.models.Booking;
-import com.example.cs203g1t3.models.Facility;
-import com.example.cs203g1t3.models.FacilityDate;
-import com.example.cs203g1t3.models.TimeSlots;
+import com.example.cs203g1t3.models.FacilityClasses.Facility;
+import com.example.cs203g1t3.models.FacilityClasses.FacilityDate;
+import com.example.cs203g1t3.models.FacilityClasses.TimeSlots;
 import com.example.cs203g1t3.repository.FacilityDateRepository;
 import com.example.cs203g1t3.repository.FacilityRepository;
 import com.example.cs203g1t3.repository.TimeSlotsRepository;
+import com.example.cs203g1t3.service.FacilityService;
 
 import jakarta.transaction.Transactional;
 
@@ -20,13 +21,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FacilityService {
+public class FacilityServiceImpl implements FacilityService {
     private FacilityRepository facilityRepository;
     private TimeSlotsRepository timeSlotsRepository;
     private FacilityDateRepository facilityDateRepository;
 
     @Autowired
-    public FacilityService(FacilityRepository facilityRepository, FacilityDateRepository facilityDateRepository, TimeSlotsRepository timeSlotsRepository) {
+    public FacilityServiceImpl(FacilityRepository facilityRepository, FacilityDateRepository facilityDateRepository, TimeSlotsRepository timeSlotsRepository) {
         this.facilityRepository = facilityRepository;
         this.facilityDateRepository = facilityDateRepository;
         this.timeSlotsRepository = timeSlotsRepository;
@@ -139,7 +140,7 @@ public class FacilityService {
 
         List<FacilityDate> facilityDates = generateFacilityDates(LocalDate.now());
         for (FacilityDate currentDate : facilityDates) {
-            List<TimeSlots> timeSlots = generateTimeSlots(facility.getOpenTime(), facility.getClosingTime().plusHours(1));
+            List<TimeSlots> timeSlots = generateTimeSlots(facility.getOpenTime(), facility.getClosingTime());
             currentDate.setFacility(facility);
             currentDate.setTimeSlots(timeSlots);
             for (TimeSlots currentTimeSlot : timeSlots) {

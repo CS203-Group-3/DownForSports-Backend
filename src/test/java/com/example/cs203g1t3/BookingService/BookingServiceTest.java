@@ -10,8 +10,10 @@ import com.example.cs203g1t3.repository.TimeSlotsRepository;
 
 import jakarta.inject.Inject;
 
-import com.example.cs203g1t3.services.*;
-import com.example.cs203g1t3.models.Facility;
+import com.example.cs203g1t3.service.*;
+import com.example.cs203g1t3.servicesImpl.BookingServiceImpl;
+import com.example.cs203g1t3.servicesImpl.FacilityServiceImpl;
+import com.example.cs203g1t3.models.FacilityClasses.Facility;
 import com.example.cs203g1t3.models.User;
 import com.example.cs203g1t3.payload.request.BookingRequest;
 import com.example.cs203g1t3.repository.UserRepository;
@@ -24,9 +26,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class BookingServiceTest {
     @Autowired
-    private BookingService bookingService;
+    private BookingServiceImpl bookingService;
     @InjectMocks
-    private FacilityService facilityService;
+    private FacilityServiceImpl facilityService;
     @Mock
     private TimeSlotsRepository timeSlotsRepository;
     @Mock
