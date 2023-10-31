@@ -103,7 +103,7 @@
         if (timeSlot == null) {
             throw new TimeSlotNotFound();
         }
-        notificationService.sendBookingConfirmationNotificationEmail(user.getUserID(),booking);
+
         List<LocalTime> bookingTimeSlot = bookingRequest.getTimeSlots();
         //if timeslot booked is not available, throw exception
         if(!checkAvailability(bookingTimeSlot, timeSlot)){
@@ -142,6 +142,7 @@
                 }
             }
         }
+        notificationService.sendBookingConfirmationNotificationEmail(user.getUserID(),booking);
         return true;
     }
 
