@@ -5,17 +5,18 @@ import java.util.List;
 import com.example.cs203g1t3.models.Booking;
 import com.example.cs203g1t3.payload.request.BookingRequest;
 import com.example.cs203g1t3.payload.request.CancelBookingRequest;
+import com.example.cs203g1t3.payload.response.BookingResponse;
 import com.example.cs203g1t3.payload.response.ViewPastBookingsResponse;
 import com.example.cs203g1t3.payload.response.ViewUpcomingBookingsResponse;
 
 
 public interface BookingService {
 
+    // Returns all bookings
+    List<BookingResponse> getAllBookingNotAttended();
+
     // Returns booking of that bookingId
     Booking getBooking(Long bookingId); 
-
-    // Returns list of all bookings
-    List<Booking> getAllBookings(); 
 
     // Cancels a booking
     void cancelBooking(CancelBookingRequest cancelBookingRequest);
@@ -27,10 +28,10 @@ public interface BookingService {
     boolean makeBooking(BookingRequest bookingRequest);
 
     // Returns bookings that date has yet to pass today
-    List<ViewUpcomingBookingsResponse> getUpcomingBookings(Long userId);
+    List<BookingResponse> getUpcomingBookings(Long userId);
 
     // Returns bookings that date has pass today
-    List<ViewPastBookingsResponse> getPastBookings(Long userId);
+    List<BookingResponse> getPastBookings(Long userId);
 
 }
 

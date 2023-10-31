@@ -5,7 +5,8 @@
 import com.example.cs203g1t3.models.FacilityClasses.Facility;
 import com.example.cs203g1t3.models.FacilityClasses.TimeSlots;
 import com.example.cs203g1t3.payload.request.*;
- import com.example.cs203g1t3.payload.response.ViewPastBookingsResponse;
+import com.example.cs203g1t3.payload.response.BookingResponse;
+import com.example.cs203g1t3.payload.response.ViewPastBookingsResponse;
  import com.example.cs203g1t3.payload.response.ViewUpcomingBookingsResponse;
  import com.example.cs203g1t3.repository.BookingRepository;
 import com.example.cs203g1t3.service.BookingService;
@@ -16,6 +17,7 @@ import jakarta.transaction.Transactional;
 
 import java.time.*;
  import java.util.*;
+import java.util.stream.Collectors;
 import java.time.*;
 import java.util.*;
 
@@ -50,9 +52,15 @@ public class BookingServiceImpl implements BookingService{
          return bookingRepository.findById(bookingId).orElse(null);
     }
 
-    @Override
-    public List<Booking> getAllBookings() {
-         return bookingRepository.findAll();
+    public List<BookingResponse> getAllBookingNotAttended() {
+        List<Booking> bookings = bookingRepository.findAll();
+
+        List<BookingResponse> bookingResponses = bookings.stream()
+                .map(Booking::toBookingResponse)
+                .filter(c -> !c.getBookingAttended())
+                .collect(Collectors.toList());
+
+        return bookingResponses;
     }
 
     @Override
@@ -194,9 +202,9 @@ public class BookingServiceImpl implements BookingService{
     }
 
     @Override
-    public List<ViewUpcomingBookingsResponse> getUpcomingBookings(Long userId){
+    public List<BookingResponse> getUpcomingBookings(Long userId){
         List<Booking> usersBookings = bookingRepository.findBookingsByUserId(userId);
-        List<ViewUpcomingBookingsResponse> result = new ArrayList<>();
+        List<BookingResponse> result = new ArrayList<>();
         LocalDate todayDate = LocalDate.now();
         LocalTime timeNow = LocalTime.now();
         for(Booking i : usersBookings){
@@ -210,18 +218,15 @@ public class BookingServiceImpl implements BookingService{
             } else if(i.getDateBooked().isBefore(todayDate)){
                 continue;
             }
-            Facility facility = i.getFacility();
-            result.add(new ViewUpcomingBookingsResponse(facility.getFacilityType(),facility.getDescription(),
-                    i.getStartTime().toString(),i.getEndTime().toString(),i.getDateBooked().toString(),
-                    facility.getLocationString()));
+            result.add(i.toBookingResponse());
         }
         return result;
     }
 
     @Override
-    public List<ViewPastBookingsResponse> getPastBookings(Long userId){
+    public List<BookingResponse> getPastBookings(Long userId){
         List<Booking> upcomingBookings = bookingRepository.findBookingsByUserId(userId);
-        List<ViewPastBookingsResponse> result = new ArrayList<>();
+        List<BookingResponse> result = new ArrayList<>();
         LocalDate todaysDate = LocalDate.now();
         LocalTime timeNow = LocalTime.now();
         for(Booking i : upcomingBookings){
@@ -232,10 +237,7 @@ public class BookingServiceImpl implements BookingService{
             } else if(i.getDateBooked().isAfter(todaysDate)){
                 continue;
             }
-            Facility facility = i.getFacility();
-            result.add(new ViewPastBookingsResponse(facility.getFacilityType(),facility.getDescription(),
-                    i.getStartTime().toString(),i.getEndTime().toString(),i.getDateBooked().toString(),
-                    facility.getLocationString()));
+            result.add(i.toBookingResponse());
         }
         return result;
     }

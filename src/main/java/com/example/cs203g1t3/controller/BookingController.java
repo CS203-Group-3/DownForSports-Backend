@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import com.example.cs203g1t3.payload.request.CancelBookingRequest;
 import com.example.cs203g1t3.payload.request.ConfirmBookingAttendanceRequest;
 import com.example.cs203g1t3.payload.request.ViewBookingsRequest;
+import com.example.cs203g1t3.payload.response.BookingResponse;
 import com.example.cs203g1t3.payload.response.ViewPastBookingsResponse;
 import com.example.cs203g1t3.payload.response.ViewUpcomingBookingsResponse;
 import com.example.cs203g1t3.service.BookingService;
@@ -15,6 +16,7 @@ import com.example.cs203g1t3.service.FacilityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.transaction.Transactional;
@@ -33,9 +35,10 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
+    @PreAuthorize("hasRole('BOOKING_MANAGER')")
     @GetMapping("/")
-    public ResponseEntity<List<Booking>> getAllBooking() {
-        return ResponseEntity.ok(bookingService.getAllBookings());
+    public List<BookingResponse> getAllBookingForBookingManager() {
+        return bookingService.getAllBookingNotAttended();
     }
 
     @PostMapping("/makebooking")
@@ -72,7 +75,7 @@ public class BookingController {
     //     return bookingService.getUpcomingBookings(viewBookingsRequest.getUserId());
     // }
     @GetMapping("/viewupcomingbookings")
-    public List<ViewUpcomingBookingsResponse> getUpcomingBookings(@RequestParam Long userId) {
+    public List<BookingResponse> getUpcomingBookings(@RequestParam Long userId) {
         return bookingService.getUpcomingBookings(userId);
     }
 
@@ -82,7 +85,7 @@ public class BookingController {
     //     return bookingService.getPastBookings(viewBookingsRequest.getUserId());
     // }
     @GetMapping("/viewpastbookings")
-    public List<ViewPastBookingsResponse> getPastBookings(@RequestParam Long userId) {
+    public List<BookingResponse> getPastBookings(@RequestParam Long userId) {
         return bookingService.getPastBookings(userId);
     }
 
