@@ -17,8 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class RefreshTokenService {
 
-    @Value("${DownForSports.app.refreshTokenDurationMs}")
-    private Long refreshTokenDurationMs;
+    private final Long refreshTokenDurationMs = 86400000L;
 
     @Autowired
     private RefreshTokenRepository refreshTokenRepository;

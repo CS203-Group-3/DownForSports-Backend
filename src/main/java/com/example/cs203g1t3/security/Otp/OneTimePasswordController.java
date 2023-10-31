@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/otp")
+@RequestMapping("/api/otp/")
 public class OneTimePasswordController {
 
     private final OneTimePasswordService oneTimePasswordService;
@@ -22,7 +22,7 @@ public class OneTimePasswordController {
         oneTimePasswordService.generateOneTimePassword(userId);
     }
 
-    @PostMapping("/validateOtp")
+        @PostMapping("/validateOtp")
     private Boolean validateOtp(@RequestBody OneTimePasswordResponse oneTimePasswordResponse){
         Long userId = oneTimePasswordResponse.getUserId();
         int otpInt = oneTimePasswordResponse.getOneTimePasswordCode();
@@ -32,5 +32,6 @@ public class OneTimePasswordController {
         } catch (RuntimeException e){
             throw new InvalidOtpException("OTP is not valid!");
         }
+
     }
 }
