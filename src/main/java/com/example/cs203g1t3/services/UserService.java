@@ -41,10 +41,13 @@ public class UserService {
 
     private BCryptPasswordEncoder encoder;
 
+    private RefreshTokenService refreshTokenService;
+
     @Autowired
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder encoder) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder encoder,RefreshTokenService refreshTokenService) {
         this.userRepository = userRepository;
         this.encoder = encoder;
+        this.refreshTokenService = refreshTokenService;
     }
 
     public List<User> getUsers() {
@@ -66,6 +69,9 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
+    public void logUserOut(Long userId){
+        refreshTokenService.deleteByUserId(userId);
+    }
     public void changePassword(Long userID, String newPassword) {
         // Encode the new password
         String encodedPassword = encoder.encode(newPassword);

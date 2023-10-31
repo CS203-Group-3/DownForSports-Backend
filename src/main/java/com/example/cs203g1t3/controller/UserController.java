@@ -54,5 +54,12 @@ public class UserController {
 
         return ResponseEntity.ok("Password changed successfully");
     }
+
+    @DeleteMapping("/logout/{userId}")
+    public ResponseEntity<?> logout(@PathVariable Long userId){
+        userService.logUserOut(userId);
+        User user = userService.getUser(userId);
+        return ResponseEntity.ok(user);
+    }
 }
 
