@@ -42,10 +42,11 @@ public class BookingServiceTest {
         timings.add(LocalTime.of(9,0,0));
         BookingRequest bookingRequest = new BookingRequest(1L,1L,LocalDate.of(2023,11,1), timings);
 
-        Facility facility = new Facility("TEST","TEST DESCRIPTION",LocalTime.of(8,0,0),LocalTime.of(11,0,0),1,"Test Location" );
+        //Initialise facility with opening time 8am, closing time 11am
+        Facility facility = new Facility("TEST NAME","TEST DESCRIPTION",LocalTime.of(8,0,0),LocalTime.of(11,0,0),1,"Test Location" );
         facilityService.initialiseFacility(facility);
 
-
-    }
+        
+    }   
 
 }

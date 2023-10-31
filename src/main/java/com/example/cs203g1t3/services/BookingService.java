@@ -7,7 +7,9 @@
  import com.example.cs203g1t3.payload.response.ViewUpcomingBookingsResponse;
  import com.example.cs203g1t3.repository.BookingRepository;
 
- import java.time.*;
+import jakarta.transaction.Transactional;
+
+import java.time.*;
  import java.util.*;
 
  import org.springframework.beans.factory.annotation.Autowired;
@@ -90,6 +92,7 @@
         booking.setBookingAttendanceChecked(true);
      }
 
+    @Transactional
     public boolean makeBooking(BookingRequest bookingRequest) {
         LocalDate dateBooked = bookingRequest.getFacilityDate();
         Long facilityId = bookingRequest.getFacilityId();
