@@ -6,10 +6,10 @@ import com.example.cs203g1t3.services.CustomUserDetails;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.Value;
 import org.hibernate.boot.jaxb.cfg.spi.JaxbCfgHibernateConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.security.core.Authentication;
 import java.security.Key;
@@ -20,22 +20,12 @@ import java.util.regex.Pattern;
 @Component
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
-//    @Value("${facilityBooking.app.jwtSecret}")
-    private final String jwtSecret = "2D4A614E645267556B58703273357638792F423F4428472B4B6250655368566D";
 
-    private final long jwtExpirationMs = 86400000L;
+    @Value("${DownForSports.app.jwtSecret}")
+    private String jwtSecret;
 
-//    public String generateJwtToken(Authentication authentication) {
-//
-//        CustomUserDetails userPrincipal = (CustomUserDetails) authentication.getPrincipal();
-//
-//        return Jwts.builder()
-//                .setSubject((userPrincipal.getUsername()))
-//                .setIssuedAt(new Date())
-//                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-//                .signWith(key(), SignatureAlgorithm.HS256)
-//                .compact();
-//    }
+    @Value("DownForSports.app.jwtExpirationMs")
+    private long jwtExpirationMs;
 
     public String generateJwtToken(CustomUserDetails userPrincipal) {
         return generateTokenFromUsername(userPrincipal.getUsername());
@@ -51,10 +41,6 @@ public class JwtUtils {
                 .signWith(key(),SignatureAlgorithm.HS256)
                 .compact();
     }
-
-//    public String getUserNameFromJwtToken(String token) {
-//        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();
-//    }
 
     public String getUserNameFromJwtToken(String token) {
         return Jwts.parserBuilder().setSigningKey(key()).build()
@@ -77,8 +63,4 @@ public class JwtUtils {
 
         return false;
     }
-
-    
-
-
 }

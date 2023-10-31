@@ -8,6 +8,7 @@ import com.example.cs203g1t3.security.Email.EmailServiceImpl;
 import com.example.cs203g1t3.security.Otp.OneTimePassword;
 import com.example.cs203g1t3.security.Otp.OneTimePasswordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +22,7 @@ import java.util.function.Supplier;
 @Service
 public class OneTimePasswordService {
 
-    private final Long expiryInterval = 1L * 60 * 1000;
+    @Value("${DownForSports.app.OtpExpiryInterval}") private Long expiryInterval;
 
     private final OneTimePasswordRepository oneTimePasswordRepository;
 
