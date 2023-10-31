@@ -9,7 +9,10 @@ import com.example.cs203g1t3.models.*;
 import com.example.cs203g1t3.repository.FacilityDateRepository;
 import com.example.cs203g1t3.repository.TimeSlotsRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class FacilityDateService {
     FacilityDateRepository facilityDateRepository;
     TimeSlotService timeSlotService;

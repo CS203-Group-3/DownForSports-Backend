@@ -20,6 +20,7 @@ import jakarta.transaction.Transactional;
 
 
 @Service
+@Transactional
 public class FacilityInitialisationService {
     private FacilityService facilityService;
     private FacilityRepository facilityRepository;

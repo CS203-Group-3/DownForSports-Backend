@@ -10,6 +10,8 @@ import com.example.cs203g1t3.repository.UserRepository;
 import com.example.cs203g1t3.security.jwt.JwtUtils;
 
 import jakarta.mail.internet.MimeMessage;
+import jakarta.transaction.Transactional;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +33,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
+@Transactional
 public class UserService {
 
     private final UserRepository userRepository;

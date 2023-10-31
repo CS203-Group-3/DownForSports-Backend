@@ -16,6 +16,7 @@ import java.time.*;
  import org.springframework.stereotype.Service;
 
  @Service
+ @Transactional
  public class BookingService {
      @Autowired
      private BookingRepository bookingRepository;
@@ -92,7 +93,6 @@ import java.time.*;
         booking.setBookingAttendanceChecked(true);
      }
 
-    @Transactional
     public boolean makeBooking(BookingRequest bookingRequest) {
         LocalDate dateBooked = bookingRequest.getFacilityDate();
         Long facilityId = bookingRequest.getFacilityId();
