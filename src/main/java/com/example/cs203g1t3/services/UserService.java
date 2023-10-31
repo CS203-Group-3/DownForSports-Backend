@@ -1,5 +1,6 @@
 package com.example.cs203g1t3.services;
 
+import com.example.cs203g1t3.models.ERole;
 import com.example.cs203g1t3.models.Role;
 import com.example.cs203g1t3.models.User;
 import com.example.cs203g1t3.payload.request.SignupRequest;
@@ -84,7 +85,8 @@ public class UserService {
     }
 
     public ResponseEntity<?> registerAccount(SignupRequest signUpRequest, Role role) {
-        if (!isValidNric(signUpRequest.getUsername())) {
+
+        if (!isValidNric(signUpRequest.getUsername()) && !(role.getERole() == ERole.ROLE_BOOKINGMANAGER) ) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Please enter valid username!"));
         }
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -159,30 +161,43 @@ public class UserService {
         return true;
     }
 
-    public boolean isValidNric(String nric) {
-        // Check if the NRIC is in the correct format
-        Pattern pattern = Pattern.compile("^[STFG]\\d{7}[A-Z]$");
-        Matcher matcher = pattern.matcher(nric);
-
-        if (!matcher.matches()) {
+    // Check if NRIC is valid
+    public static boolean isValidNric(String inputString) {
+        String nricToTest = inputString.toUpperCase();
+    
+        // first letter must start with S, T, F or G. Last letter must be A - Z
+        if (!Pattern.compile("^[STFG]\\d{7}[A-Z]$").matcher(nricToTest).matches()) {
             return false;
+        } else {
+            char[] icArray = new char[9];
+            char[] st = "JZIHGFEDCBA".toCharArray();
+            char[] fg = "XWUTRQPNMLK".toCharArray();
+    
+            for (int i = 0; i < 9; i++) {
+                icArray[i] = nricToTest.charAt(i);
+            }
+    
+            // calculate weight of positions 1 to 7
+            int weight = (Integer.parseInt(String.valueOf(icArray[1]), 10)) * 2 + 
+                    (Integer.parseInt(String.valueOf(icArray[2]), 10)) * 7 +
+                    (Integer.parseInt(String.valueOf(icArray[3]), 10)) * 6 +
+                    (Integer.parseInt(String.valueOf(icArray[4]), 10)) * 5 +
+                    (Integer.parseInt(String.valueOf(icArray[5]), 10)) * 4 +
+                    (Integer.parseInt(String.valueOf(icArray[6]), 10)) * 3 +
+                    (Integer.parseInt(String.valueOf(icArray[7]), 10)) * 2;
+    
+            int offset = icArray[0] == 'T' || icArray[0] == 'G' ? 4 : 0;
+    
+            int lastCharPosition = (offset + weight) % 11;
+    
+            if (icArray[0] == 'S' || icArray[0] == 'T') {
+                return icArray[8] == st[lastCharPosition];
+            } else if (icArray[0] == 'F' || icArray[0] == 'G') {
+                return icArray[8] == fg[lastCharPosition];
+            } else {
+                return false; // this line should never reached due to regex above
+            }
         }
-
-        // Extract the first character (S/T/F/G)
-        char firstChar = nric.charAt(0);
-
-        // Extract the numeric part of the NRIC
-        int numericPart = Integer.parseInt(nric.substring(1, 8));
-
-        // Define the checksum letters for the first character
-        char[] checksumLetters = "JZIHGFEDCBA".toCharArray();
-
-        // Calculate the checksum based on the first character
-        int checksum = (firstChar == 'T' || firstChar == 'G') ? 4 : 0;
-        checksum += (numericPart % 10) * 2;
-
-        // Check if the NRIC is valid by comparing the calculated checksum with the actual checksum letter
-        return nric.charAt(8) == checksumLetters[checksum % 11];
     }
 
     public void addCreditScore(Long userId,int creditScoreToAdd){

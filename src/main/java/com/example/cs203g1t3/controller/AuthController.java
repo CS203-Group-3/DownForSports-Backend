@@ -115,7 +115,7 @@ public class AuthController {
     }
 
     @PostMapping("/registerBM")
-    //@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> createBookingManagerAcc(@Valid @RequestBody SignupRequest signUpRequest) {
         Role userRole = roleRepository.findByName(ERole.ROLE_BOOKINGMANAGER).get();
         return userService.registerAccount(signUpRequest, userRole);
