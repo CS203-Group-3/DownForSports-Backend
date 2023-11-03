@@ -117,6 +117,10 @@ public class BookingServiceImpl implements BookingService{
         LocalDate dateBooked = bookingRequest.getFacilityDate();
         Long facilityId = bookingRequest.getFacilityId();
         Facility facility = facilityService.getFacility(facilityId);
+        //check if timeslot is past
+        if(!isAvailable(bookingRequest.getTimeSlots(), bookingRequest.getFacilityDate())){
+            throw new BookedException("TimeSlots are not availabe");
+        }
         //check if timeslots are consecutive
         if(!isConsecutiveTimeSlots(bookingRequest.getTimeSlots())){
             throw new BookedException("TimeSlots are not consecutive");
@@ -168,7 +172,18 @@ public class BookingServiceImpl implements BookingService{
         notificationService.sendBookingConfirmationNotificationEmail(user.getUserID(),booking);
         return true;
     }
-
+    public boolean isAvailable(List<LocalTime> bookingTime, LocalDate dateBooked){
+        for(LocalTime time: bookingTime){
+            if(dateBooked.isBefore(LocalDate.now())){
+                return false;
+            }else if(dateBooked.isEqual(LocalDate.now())){
+                return (time.getHour() == LocalTime.now().getHour()) 
+                      ||(time.isAfter(LocalTime.now()));
+            }
+            // else if()
+        }
+        return true;
+    }
     public boolean checkAvailability(List<LocalTime>bookingTime, List<TimeSlots> facilityTimings){
         for (LocalTime t : bookingTime) {
             // check if it is available
@@ -220,6 +235,7 @@ public class BookingServiceImpl implements BookingService{
             }
             result.add(i.toBookingResponse());
         }
+        System.out.println(result);
         return result;
     }
 
