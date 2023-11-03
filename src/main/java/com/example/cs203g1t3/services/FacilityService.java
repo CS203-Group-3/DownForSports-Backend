@@ -22,6 +22,8 @@ import org.springframework.stereotype.Service;
 @Service
 @Transactional
 public class FacilityService {
+
+    private BookingService bookingService;
     private FacilityRepository facilityRepository;
     private TimeSlotsRepository timeSlotsRepository;
     private FacilityDateRepository facilityDateRepository;
@@ -69,6 +71,7 @@ public class FacilityService {
 
 
     public List<Facility> listFacilities() {
+
         return facilityRepository.findAll();
     }
 

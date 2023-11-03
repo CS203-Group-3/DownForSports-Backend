@@ -69,6 +69,6 @@ import lombok.*;
             return bookingAttendanceChecked;
         }
 
-//        public String getBooking
+        public Long getFacilityId(){return facility.getFacilityId();}
 
     }

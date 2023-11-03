@@ -93,6 +93,7 @@ import java.time.*;
         booking.setBookingAttendanceChecked(true);
      }
 
+     @Transactional
     public boolean makeBooking(BookingRequest bookingRequest) {
         LocalDate dateBooked = bookingRequest.getFacilityDate();
         Long facilityId = bookingRequest.getFacilityId();
@@ -222,6 +223,10 @@ import java.time.*;
                     facility.getLocationString()));
         }
         return result;
+    }
+
+    public List<Booking> getBookingsFromFacilityId(Long facilityId){
+         return bookingRepository.findBookingByFacilityId(facilityId);
     }
 
 }

@@ -23,10 +23,13 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 public class BookingServiceTest {
-    @Autowired
+    @InjectMocks
     private BookingService bookingService;
     @InjectMocks
     private FacilityService facilityService;
+
+    @InjectMocks
+    private TimeSlotService timeSlotService;
     @Mock
     private TimeSlotsRepository timeSlotsRepository;
     @Mock
