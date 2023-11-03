@@ -292,3 +292,14 @@ Content-Type: application/json
 ###
 GET http://localhost:8080/api/bookings/
 Content-Type: application/json
+
+
+###
+POST http://localhost:8080/api/bookings/creditrequest
+Content-Type: application/json
+
+{
+    "amount" : 300,
+    "details" : "i want credit back",
+    "bookingId" : 1
+}

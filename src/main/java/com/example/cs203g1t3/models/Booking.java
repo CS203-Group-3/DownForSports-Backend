@@ -10,7 +10,9 @@ import com.example.cs203g1t3.payload.response.BookingResponse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.ManyToOne;
-
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -59,6 +61,9 @@ import lombok.*;
 
         @Column(name = "creditDeducted")
         private double creditDeducted;
+
+        @OneToOne(mappedBy="booking", cascade = CascadeType.ALL) 
+        private CreditRequest creditRequest;
 
         public Booking(LocalTime startTime,LocalTime endTime,LocalDateTime dateCreated, double creditDeducted){
             this.startTime = startTime;

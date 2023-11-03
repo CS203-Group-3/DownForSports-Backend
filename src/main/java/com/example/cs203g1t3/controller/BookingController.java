@@ -6,11 +6,14 @@ import javax.validation.Valid;
 
 import com.example.cs203g1t3.payload.request.CancelBookingRequest;
 import com.example.cs203g1t3.payload.request.ConfirmBookingAttendanceRequest;
+import com.example.cs203g1t3.payload.request.CreditRequestform;
 import com.example.cs203g1t3.payload.request.ViewBookingsRequest;
 import com.example.cs203g1t3.payload.response.BookingResponse;
+import com.example.cs203g1t3.payload.response.MessageResponse;
 import com.example.cs203g1t3.payload.response.ViewPastBookingsResponse;
 import com.example.cs203g1t3.payload.response.ViewUpcomingBookingsResponse;
 import com.example.cs203g1t3.service.BookingService;
+import com.example.cs203g1t3.service.CreditRequestService;
 import com.example.cs203g1t3.service.FacilityService;
 
 import java.util.Collections;
@@ -37,6 +40,8 @@ public class BookingController {
     private FacilityService facilityService;
     @Autowired
     private BookingService bookingService;
+    @Autowired
+    private CreditRequestService creditRequestService;
 
     @GetMapping("/")
     public List<BookingResponse> getAllBookingForBookingManager() {
@@ -97,5 +102,14 @@ public class BookingController {
     }
 
 
+    @PostMapping("/creditrequest")
+    public ResponseEntity<?> createCreditReponse(@RequestBody CreditRequestform form) {
+        try {
+            creditRequestService.makeCreditRequest(form); 
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Request amount cannot be more then cost!"));
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
 
