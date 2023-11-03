@@ -9,6 +9,7 @@ import com.example.cs203g1t3.exception.NotEnoughCreditException;
 import com.example.cs203g1t3.repository.UserRepository;
 import com.example.cs203g1t3.security.jwt.JwtUtils;
 import com.example.cs203g1t3.service.UserService;
+import com.example.cs203g1t3.exception.InvalidUserException;
 
 import jakarta.mail.internet.MimeMessage;
 import jakarta.transaction.Transactional;
@@ -91,22 +92,22 @@ public class UserServiceImpl implements UserService{
         return encoder.matches(password, currentHash);
     }
 
-    public ResponseEntity<?> registerAccount(SignupRequest signUpRequest, Role role) {
+    public User registerAccount(SignupRequest signUpRequest, Role role) {
 
         if (!isValidNric(signUpRequest.getUsername()) && !(role.getERole() == ERole.ROLE_BOOKINGMANAGER) ) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Please enter valid username!"));
+            throw new InvalidUserException("Error: Please enter valid username!");
         }
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
+            throw new InvalidUserException("Error: Username is already taken!");
         }
         if (!isValidEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Please enter a valid email!"));
+            throw new InvalidUserException("Error: Please enter a valid email!");
         }
         if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
+            throw new InvalidUserException("Error: Email is already in use!");
         }
         if (!isValidPassword(signUpRequest.getPassword())) {
-            return ResponseEntity.badRequest().body(new MessageResponse("Error: Please enter a valid password!"));
+            throw new InvalidUserException("Error: Please enter a valid password!");
         }
         User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
@@ -117,7 +118,7 @@ public class UserServiceImpl implements UserService{
         user.setRoles(roles);
         userRepository.save(user);
 
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return user;
     }
 
     public boolean isValidEmail(String email) {

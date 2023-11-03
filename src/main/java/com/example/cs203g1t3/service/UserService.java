@@ -42,7 +42,7 @@ public interface UserService {
 
     boolean checkPassword(Long userID, String password);
 
-    ResponseEntity<?> registerAccount(SignupRequest signUpRequest, Role role);
+    User registerAccount(SignupRequest signUpRequest, Role role);
 
     void addCreditScore(Long userId,double creditScoreToAdd);
 

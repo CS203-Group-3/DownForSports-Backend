@@ -1,5 +1,6 @@
 package com.example.cs203g1t3.controller;
 
+import com.example.cs203g1t3.exception.InvalidUserException;
 import com.example.cs203g1t3.exception.TokenRefreshException;
 import com.example.cs203g1t3.models.ERole;
 import com.example.cs203g1t3.models.RefreshToken;
@@ -13,6 +14,7 @@ import com.example.cs203g1t3.payload.response.MessageResponse;
 import com.example.cs203g1t3.payload.response.TokenRefreshResponse;
 import com.example.cs203g1t3.repository.RoleRepository;
 import com.example.cs203g1t3.repository.UserRepository;
+import com.example.cs203g1t3.security.Otp.OneTimePasswordService;
 import com.example.cs203g1t3.security.jwt.JwtUtils;
 import com.example.cs203g1t3.service.UserService;
 import com.example.cs203g1t3.servicesImpl.CustomUserDetails;
@@ -60,6 +62,9 @@ public class AuthController {
     @Autowired
     private RefreshTokenService refreshTokenService;
 
+    @Autowired
+    private OneTimePasswordService oneTimePasswordService;
+
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -104,7 +109,13 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         Role userRole = roleRepository.findByName(ERole.ROLE_USER).get();
-        return userService.registerAccount(signUpRequest, userRole);
+        try {
+            User user = userService.registerAccount(signUpRequest, userRole);
+            oneTimePasswordService.generateOneTimePassword(user.getUserID());
+        } catch (InvalidUserException e) {
+            return ResponseEntity.badRequest().body(e);
+        }
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
     @PostMapping("/logout")
@@ -119,7 +130,11 @@ public class AuthController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> createBookingManagerAcc(@Valid @RequestBody SignupRequest signUpRequest) {
         Role userRole = roleRepository.findByName(ERole.ROLE_BOOKINGMANAGER).get();
-        return userService.registerAccount(signUpRequest, userRole);
+        try {userService.registerAccount(signUpRequest, userRole);}
+        catch (InvalidUserException e) {
+            return ResponseEntity.badRequest().body(e);
+        }
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
     
 }
