@@ -39,12 +39,15 @@ public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
 
+    private final RefreshTokenService refreshTokenService;
+
     private BCryptPasswordEncoder encoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder encoder) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder encoder,RefreshTokenService refreshTokenService) {
         this.userRepository = userRepository;
         this.encoder = encoder;
+        this.refreshTokenService = refreshTokenService;
     }
 
     public List<User> getUsers() {
@@ -72,6 +75,10 @@ public class UserServiceImpl implements UserService{
 
         // Save the updated user with the new password
         userRepository.updatePassword(userID, encodedPassword);
+    }
+
+    public void logUserOut(Long userId){
+        refreshTokenService.deleteByUserId(userId);
     }
 
     public boolean checkPassword(Long userID, String password) {
