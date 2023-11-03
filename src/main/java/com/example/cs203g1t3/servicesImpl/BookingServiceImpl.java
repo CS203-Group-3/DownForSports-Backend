@@ -85,6 +85,28 @@ public class BookingServiceImpl implements BookingService{
              }
              bookingRepository.deleteById(bookingId);
          }
+
+
+         User user = booking.getUser();
+         if(user == null){
+            throw new IllegalStateException("User does not exists");
+         }
+         //refund user
+         //>6days 100%
+         //5days 80%
+         //3-4days 50%
+         //1-2days 0%
+         double creditsDeducted = booking.getCreditDeducted();
+         LocalDate dateNow = LocalDate.now();
+         int noOfMonths = (Period.between(dateBooked, dateNow)).getMonths();
+         int noOfDays = noOfMonths * 30 + (Period.between(dateBooked, dateNow)).getDays();
+         if(noOfDays >=6){
+            userService.addCreditScore(user.getUserID(), creditsDeducted);
+         }else if(noOfDays >=5){
+            userService.addCreditScore(user.getUserID(), creditsDeducted*0.8);
+         }else if(noOfDays>=3){
+            userService.addCreditScore(user.getUserID(), creditsDeducted*0.5);
+         }
     }
 
     @Override

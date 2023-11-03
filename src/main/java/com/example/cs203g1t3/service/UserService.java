@@ -44,7 +44,7 @@ public interface UserService {
 
     ResponseEntity<?> registerAccount(SignupRequest signUpRequest, Role role);
 
-    void addCreditScore(Long userId,int creditScoreToAdd);
+    void addCreditScore(Long userId,double creditScoreToAdd);
 
     void deductCredit(Long userId, double creditDeducted);
 

@@ -207,7 +207,7 @@ public class UserServiceImpl implements UserService{
         }
     }
 
-    public void addCreditScore(Long userId,int creditScoreToAdd){
+    public void addCreditScore(Long userId, double creditScoreToAdd){
         User user = userRepository.findById(userId).get();
         double currentCreditScore = user.getCreditScore();
         currentCreditScore += creditScoreToAdd;
@@ -227,7 +227,7 @@ public class UserServiceImpl implements UserService{
         if(currentCreditScore < creditDeducted){
             throw new NotEnoughCreditException();
         }
-
+        
         user.setCreditScore(currentCreditScore-creditDeducted);
         userRepository.save(user);
         }
