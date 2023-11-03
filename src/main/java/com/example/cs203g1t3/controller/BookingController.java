@@ -28,6 +28,7 @@ import jakarta.transaction.Transactional;
 
 import com.example.cs203g1t3.exception.FacilityNotFoundException;
 import com.example.cs203g1t3.models.Booking;
+import com.example.cs203g1t3.models.CreditRequest;
 import com.example.cs203g1t3.models.FacilityClasses.Facility;
 import com.example.cs203g1t3.payload.comparators.BookingResponseComparator;
 import com.example.cs203g1t3.payload.request.BookingRequest;
@@ -103,13 +104,18 @@ public class BookingController {
 
 
     @PostMapping("/creditrequest")
-    public ResponseEntity<?> createCreditReponse(@RequestBody CreditRequestform form) {
+    public ResponseEntity<?> createCreditRequest(@RequestBody CreditRequestform form) {
         try {
             creditRequestService.makeCreditRequest(form); 
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Request amount cannot be more then cost!"));
         }
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("creditrequest")
+    public ResponseEntity<List<CreditRequest>> getCreditReqeust() {
+        return ResponseEntity.ok(creditRequestService.getAllCreditRequest());
     }
 }
 

@@ -32,7 +32,7 @@ public class CreditRequestServiceImpl implements CreditRequestService {
 
     public void makeCreditRequest(CreditRequestform form) {
         Booking booking = bookingRepository.findByBookingId(form.getBookingId());
-        if (form.getAmount() > booking.getCreditDeducted()) {
+        if (form.getAmount() > booking.getCreditDeducted() || booking.isBookingAttended()) {
             throw new InvalidCreditRequestException();
         }
         creditRequestRepository.save(new CreditRequest(booking, form.getAmount(), form.getDetails()));
