@@ -1,11 +1,11 @@
-package com.example.cs203g1t3.services;
+package com.example.cs203g1t3.servicesImpl;
 
 import com.example.cs203g1t3.models.Booking;
 import com.example.cs203g1t3.models.User;
 import com.example.cs203g1t3.security.Email.EmailDetails;
 import com.example.cs203g1t3.security.Email.EmailService;
 import com.example.cs203g1t3.security.Email.EmailServiceImpl;
-
+import com.example.cs203g1t3.service.UserService;
 import jakarta.transaction.Transactional;
 
 import org.springframework.stereotype.Service;

@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+import com.example.cs203g1t3.models.FacilityClasses.Facility;
+import com.example.cs203g1t3.payload.response.BookingResponse;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.ManyToOne;
@@ -67,6 +69,19 @@ import lombok.*;
 
         public boolean getBookingAttendanceChecked(){
             return bookingAttendanceChecked;
+        }
+
+        public BookingResponse toBookingResponse() {
+            return new BookingResponse(
+                this.bookingId,
+                this.facility.getFacilityType(),
+                this.facility.getDescription(),
+                this.startTime.toString(),
+                this.endTime.toString(),
+                this.dateBooked.toString(),
+                this.facility.getLocationString(),
+                this.bookingAttendanceChecked
+            );
         }
 
 //        public String getBooking

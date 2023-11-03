@@ -2,7 +2,7 @@ package com.example.cs203g1t3.controller;
 
 import com.example.cs203g1t3.models.User;
 import com.example.cs203g1t3.security.Otp.OneTimePasswordService;
-import com.example.cs203g1t3.services.UserService;
+import com.example.cs203g1t3.servicesImpl.UserServiceImpl;
 import com.example.cs203g1t3.payload.request.ChangePasswordRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/user")
 public class UserController {
 
-    public UserService userService;
+    public UserServiceImpl userService;
 
     private OneTimePasswordService oneTimePasswordService;
 
 //    private BCryptPasswordEncoder encoder;
 
     @Autowired
-    public UserController(UserService us,OneTimePasswordService oneTimePasswordService) {
+    public UserController(UserServiceImpl us,OneTimePasswordService oneTimePasswordService) {
         this.userService = us;
         this.oneTimePasswordService = oneTimePasswordService;
     }

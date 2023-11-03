@@ -3,7 +3,7 @@ package com.example.cs203g1t3.payload.request;
 
 import java.util.*;
 
-import com.example.cs203g1t3.models.TimeSlots;
+import com.example.cs203g1t3.models.FacilityClasses.TimeSlots;
 
 import java.time.*;
 import jakarta.persistence.ManyToOne;

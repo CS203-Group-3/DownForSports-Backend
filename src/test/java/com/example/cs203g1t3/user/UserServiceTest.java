@@ -2,7 +2,8 @@ package com.example.cs203g1t3.user;
 
 import com.example.cs203g1t3.models.User;
 import com.example.cs203g1t3.repository.UserRepository;
-import com.example.cs203g1t3.services.UserService;
+import com.example.cs203g1t3.servicesImpl.UserServiceImpl;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,7 +16,7 @@ public class UserServiceTest {
     private UserRepository userRepository;
 
     @InjectMocks
-    private UserService userService;
+    private UserServiceImpl userService;
 
     private
 
