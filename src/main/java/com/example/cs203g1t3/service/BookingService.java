@@ -19,13 +19,13 @@ public interface BookingService {
     Booking getBooking(Long bookingId); 
 
     // Cancels a booking
-    void cancelBooking(CancelBookingRequest cancelBookingRequest);
+    boolean cancelBooking(CancelBookingRequest cancelBookingRequest);
 
     // For booking managers to confirm if a booking is attended
     void confirmBookingAttendance(Long bookingId,int attendanceStatus);
 
     // Making a booking
-    boolean makeBooking(BookingRequest bookingRequest);
+    Booking makeBooking(BookingRequest bookingRequest);
 
     // Returns bookings that date has yet to pass today
     List<BookingResponse> getUpcomingBookings(Long userId);
