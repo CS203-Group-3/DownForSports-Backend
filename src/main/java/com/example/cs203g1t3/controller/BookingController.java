@@ -13,6 +13,8 @@ import com.example.cs203g1t3.payload.response.ViewUpcomingBookingsResponse;
 import com.example.cs203g1t3.service.BookingService;
 import com.example.cs203g1t3.service.FacilityService;
 
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ import jakarta.transaction.Transactional;
 import com.example.cs203g1t3.exception.FacilityNotFoundException;
 import com.example.cs203g1t3.models.Booking;
 import com.example.cs203g1t3.models.FacilityClasses.Facility;
+import com.example.cs203g1t3.payload.comparators.BookingResponseComparator;
 import com.example.cs203g1t3.payload.request.BookingRequest;
 
 @CrossOrigin
@@ -35,11 +38,14 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
-    @PreAuthorize("hasRole('BOOKING_MANAGER')")
-    @GetMapping("/")
     public List<BookingResponse> getAllBookingForBookingManager() {
-        return bookingService.getAllBookingNotChecked();
+        List<BookingResponse> bookingResponses = bookingService.getAllBookingNotChecked();
+    
+        Collections.sort(bookingResponses, new BookingResponseComparator());
+
+        return bookingResponses;
     }
+    
 
     @PostMapping("/makebooking")
     @Transactional
