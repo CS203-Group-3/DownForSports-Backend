@@ -47,6 +47,8 @@ public interface UserService {
     void addCreditScore(Long userId,int creditScoreToAdd);
 
     void deductCredit(Long userId, double creditDeducted);
+
+    void logUserOut(Long userId);
 }
 
 
