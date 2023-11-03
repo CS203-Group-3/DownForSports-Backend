@@ -99,14 +99,13 @@ public class FacilityServiceImpl implements FacilityService {
         return availableTimeSlotsList;
     }
 
-    public void makeTimeSlotsAvailable(List<TimeSlots> timeSlotsList,Long facilityId,LocalDate bookedDate){
-        Facility facility = getFacility(facilityId);
-        //checking if facility exist
-        if(facility == null){
-            throw new FacilityNotFoundException(facilityId);
-        }
-
-    }
+    // public void makeTimeSlotsAvailable(List<TimeSlots> timeSlotsList,Long facilityId,LocalDate bookedDate){
+    //     Facility facility = getFacility(facilityId);
+    //     //checking if facility exist
+    //     if(facility == null){
+    //         throw new FacilityNotFoundException(facilityId);
+    //     }
+    // }
 
     public List<Facility> listFacilities() {
         return facilityRepository.findAll();
@@ -137,7 +136,6 @@ public class FacilityServiceImpl implements FacilityService {
 
     @Transactional
     public void initialiseFacility(Facility facility) {
-
         List<FacilityDate> facilityDates = generateFacilityDates(LocalDate.now());
         for (FacilityDate currentDate : facilityDates) {
             List<TimeSlots> timeSlots = generateTimeSlots(facility.getOpenTime(), facility.getClosingTime());

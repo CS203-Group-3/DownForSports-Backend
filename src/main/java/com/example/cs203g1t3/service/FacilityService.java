@@ -27,7 +27,7 @@ public interface FacilityService {
 
     List<TimeSlots> getSpecificTimeSlotsAvailable(LocalDate date, Long facilityId);
 
-    void makeTimeSlotsAvailable(List<TimeSlots> timeSlotsList,Long facilityId,LocalDate bookedDate);
+    // void makeTimeSlotsAvailable(List<TimeSlots> timeSlotsList,Long facilityId,LocalDate bookedDate);
 
     List<Facility> listFacilities();
 
