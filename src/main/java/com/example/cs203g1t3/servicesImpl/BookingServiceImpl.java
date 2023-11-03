@@ -64,7 +64,7 @@ public class BookingServiceImpl implements BookingService{
     }
 
     @Override
-    public void cancelBooking(CancelBookingRequest cancelBookingRequest) {
+    public boolean cancelBooking(CancelBookingRequest cancelBookingRequest) {
          Long bookingId = cancelBookingRequest.getBookingId();
          Booking booking;
          try {
@@ -107,6 +107,7 @@ public class BookingServiceImpl implements BookingService{
          }else if(noOfDays>=3){
             userService.addCreditScore(user.getUserID(), creditsDeducted*0.5);
          }
+         return true;
     }
 
     @Override
@@ -135,7 +136,7 @@ public class BookingServiceImpl implements BookingService{
     }
 
     @Override
-    public boolean makeBooking(BookingRequest bookingRequest) {
+    public Booking makeBooking(BookingRequest bookingRequest) {
         LocalDate dateBooked = bookingRequest.getFacilityDate();
         Long facilityId = bookingRequest.getFacilityId();
         Facility facility = facilityService.getFacility(facilityId);
@@ -192,7 +193,7 @@ public class BookingServiceImpl implements BookingService{
             }
         }
         notificationService.sendBookingConfirmationNotificationEmail(user.getUserID(),booking);
-        return true;
+        return booking;
     }
     public boolean isAvailable(List<LocalTime> bookingTime, LocalDate dateBooked){
         for(LocalTime time: bookingTime){
