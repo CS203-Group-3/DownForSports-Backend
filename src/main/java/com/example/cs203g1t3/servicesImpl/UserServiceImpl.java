@@ -1,14 +1,14 @@
-package com.example.cs203g1t3.services;
+package com.example.cs203g1t3.servicesImpl;
 
 import com.example.cs203g1t3.models.ERole;
 import com.example.cs203g1t3.models.Role;
 import com.example.cs203g1t3.models.User;
 import com.example.cs203g1t3.payload.request.SignupRequest;
 import com.example.cs203g1t3.payload.response.MessageResponse;
-import com.example.cs203g1t3.DTO.LoginResponse;
 import com.example.cs203g1t3.exception.NotEnoughCreditException;
 import com.example.cs203g1t3.repository.UserRepository;
 import com.example.cs203g1t3.security.jwt.JwtUtils;
+import com.example.cs203g1t3.service.UserService;
 
 import jakarta.mail.internet.MimeMessage;
 import jakarta.transaction.Transactional;
@@ -35,14 +35,14 @@ import java.util.regex.Pattern;
 
 @Service
 @Transactional
-public class UserService {
+public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
 
     private BCryptPasswordEncoder encoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, BCryptPasswordEncoder encoder) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.encoder = encoder;
     }

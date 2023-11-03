@@ -14,6 +14,7 @@ import com.example.cs203g1t3.payload.response.TokenRefreshResponse;
 import com.example.cs203g1t3.repository.RoleRepository;
 import com.example.cs203g1t3.repository.UserRepository;
 import com.example.cs203g1t3.security.jwt.JwtUtils;
+import com.example.cs203g1t3.service.UserService;
 import com.example.cs203g1t3.servicesImpl.CustomUserDetails;
 import com.example.cs203g1t3.servicesImpl.RefreshTokenService;
 import com.example.cs203g1t3.servicesImpl.UserServiceImpl;
@@ -48,7 +49,7 @@ public class AuthController {
     private UserRepository userRepository;
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
     private RoleRepository roleRepository;

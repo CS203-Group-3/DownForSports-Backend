@@ -258,8 +258,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODQ3O
 {
   "userId":1,
   "facilityId":1,
-  "timeBookingMade":"2023-10-23",
-  "facilityDate":"2023-10-31",
+  "timeBookingMade":"2023-11-04",
+  "facilityDate":"2023-11-04",
   "timeSlots":[
     "14:00:00",
     "15:00:00",

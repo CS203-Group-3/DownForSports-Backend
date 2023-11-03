@@ -38,6 +38,7 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
+    @GetMapping("/")
     public List<BookingResponse> getAllBookingForBookingManager() {
         List<BookingResponse> bookingResponses = bookingService.getAllBookingNotChecked();
     

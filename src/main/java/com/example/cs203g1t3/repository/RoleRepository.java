@@ -8,6 +8,6 @@ import com.example.cs203g1t3.models.Role;
 import com.example.cs203g1t3.models.ERole;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleRepository extends JpaRepository<Role, Integer> {
     Optional<Role> findByName(ERole name);
 }

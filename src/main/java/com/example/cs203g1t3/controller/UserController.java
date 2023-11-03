@@ -2,6 +2,7 @@ package com.example.cs203g1t3.controller;
 
 import com.example.cs203g1t3.models.User;
 import com.example.cs203g1t3.security.Otp.OneTimePasswordService;
+import com.example.cs203g1t3.service.UserService;
 import com.example.cs203g1t3.servicesImpl.UserServiceImpl;
 import com.example.cs203g1t3.payload.request.ChangePasswordRequest;
 
@@ -14,14 +15,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/user")
 public class UserController {
 
-    public UserServiceImpl userService;
+    public UserService userService;
 
     private OneTimePasswordService oneTimePasswordService;
 
 //    private BCryptPasswordEncoder encoder;
 
     @Autowired
-    public UserController(UserServiceImpl us,OneTimePasswordService oneTimePasswordService) {
+    public UserController(UserService us,OneTimePasswordService oneTimePasswordService) {
         this.userService = us;
         this.oneTimePasswordService = oneTimePasswordService;
     }
@@ -55,11 +56,11 @@ public class UserController {
         return ResponseEntity.ok("Password changed successfully");
     }
 
-    @DeleteMapping("/logout/{userId}")
-    public ResponseEntity<?> logout(@PathVariable Long userId){
-        userService.logUserOut(userId);
-        User user = userService.getUser(userId);
-        return ResponseEntity.ok(user);
-    }
+    // @DeleteMapping("/logout/{userId}")
+    // public ResponseEntity<?> logout(@PathVariable Long userId){
+    //     userService.logUserOut(userId);
+    //     User user = userService.getUser(userId);
+    //     return ResponseEntity.ok(user);
+    // }
 }
 
