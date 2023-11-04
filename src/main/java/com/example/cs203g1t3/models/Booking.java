@@ -85,7 +85,8 @@ import lombok.*;
                 this.endTime.toString(),
                 this.dateBooked.toString(),
                 this.facility.getLocationString(),
-                this.bookingAttendanceChecked
+                this.bookingAttendanceChecked,
+                this.bookingAttended
             );
         }
 

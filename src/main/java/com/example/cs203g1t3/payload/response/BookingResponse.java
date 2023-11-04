@@ -20,4 +20,5 @@ public class BookingResponse {
     private String date;
     private String location;
     private Boolean bookingAttendanceChecked;
+    private Boolean bookingAttended;
 }

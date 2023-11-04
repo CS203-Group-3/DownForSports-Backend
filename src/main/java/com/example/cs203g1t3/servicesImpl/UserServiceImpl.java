@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
 
+    @Autowired
     private final RefreshTokenService refreshTokenService;
 
     private BCryptPasswordEncoder encoder;
@@ -62,20 +63,21 @@ public class UserServiceImpl implements UserService{
         return user.get();
     }
 
-    public void deleteUser(Long userId) {
-        boolean exists = userRepository.existsById(userId);
-        if (!exists) {
-            throw new IllegalStateException("User with ID " + userId + "does not exists");
-        }
-        userRepository.deleteById(userId);
-    }
+    // public void deleteUser(Long userId) {
+    //     boolean exists = userRepository.existsById(userId);
+    //     if (!exists) {
+    //         throw new IllegalStateException("User with ID " + userId + "does not exists");
+    //     }
+    //     userRepository.deleteById(userId);
+    // }
 
-    public void changePassword(Long userID, String newPassword) {
+    public String changePassword(Long userID, String newPassword) {
         // Encode the new password
         String encodedPassword = encoder.encode(newPassword);
 
         // Save the updated user with the new password
         userRepository.updatePassword(userID, encodedPassword);
+        return newPassword;
     }
 
     public void logUserOut(Long userId){

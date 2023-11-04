@@ -46,10 +46,7 @@ public class UserController {
         if (!userService.checkPassword(userId, currentPassword)) {
             return ResponseEntity.badRequest().body("Current password is incorrect");
         }
-
-        // Perform validation on the new password, e.g., length, complexity, etc.
-        // If validation fails, return an error response.
-
+        
         // Update the user's password in the database
         userService.changePassword(userId, newPassword);
 
