@@ -10,7 +10,7 @@ public interface CreditRequestService {
     
     void makeCreditRequest(CreditRequestform form);
 
-    void acceptRequest(int amount, long userId);
+    void acceptRequest(int amount, long userId, long creditRequestID);
 
     List<CreditRequestResponse> getAllCreditRequest ();
 

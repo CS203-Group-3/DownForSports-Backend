@@ -10,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.example.cs203g1t3.models.User;
 
 import jakarta.transaction.Transactional;
-import java.util.List;
 
 
 @Repository
@@ -30,4 +29,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
    @Transactional
    @Query("UPDATE User u SET u.password = :newPassword WHERE u.userID = :userId")
    void updatePassword(@Param("userId") Long userId, @Param("newPassword") String newPassword);
+
+   @Modifying
+   @Transactional
+   @Query("UPDATE User u SET u.creditScore = :newCreditScore WHERE u.userID = :userId")
+   void updateCreditScore(@Param("userId") Long userId, @Param("newCreditScore") double creditScore);
 }

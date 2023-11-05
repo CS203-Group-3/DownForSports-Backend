@@ -6,6 +6,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CreditRequestResponse {
+    private long creditID;
     private String username;
     private long userID;
     private BookingResponse bookingResponse;

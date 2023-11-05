@@ -18,6 +18,8 @@ import com.example.cs203g1t3.service.BookingService;
 import com.example.cs203g1t3.service.CreditRequestService;
 import com.example.cs203g1t3.service.UserService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class CreditRequestServiceImpl implements CreditRequestService {
 
@@ -41,8 +43,14 @@ public class CreditRequestServiceImpl implements CreditRequestService {
         creditRequestRepository.save(new CreditRequest(booking, form.getAmount(), form.getDetails()));
     }
 
-    public void acceptRequest(int amount, long userId) {
-        userService.addCreditScore(userId, amount);
+    @Transactional
+    public void acceptRequest(int amount, long userId, long creditRequestID) {
+        try {
+            userService.addCreditScore(userId, amount);
+            creditRequestRepository.deleteByCreditRequestId(creditRequestID);
+        } catch(Exception e) {
+            throw new InvalidCreditRequestException();
+        }
     }
 
     public List<CreditRequestResponse> getAllCreditRequest () {

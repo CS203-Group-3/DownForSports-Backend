@@ -311,3 +311,13 @@ GET  http://localhost:8080/api/bookings/creditrequest
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5OTE2NzM0OSwiZXhwIjoxNjk5MjUzNzQ5fQ.lw6JdUrbsJVg77eVhQy0yxGx_2C-uzWoWpTYern-Iy4
 
+
+###
+POST http://localhost:8080/api/bookings/creditrequest/confirm
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJCb29raW5nTWFuYWdlcjEiLCJpYXQiOjE2OTkxNzM4ODYsImV4cCI6MTY5OTI2MDI4Nn0.0JL8L729xd-CdndS0XskI0nkpvxvBIJb--ABMev_-fs
+
+{
+    "userID": 2,
+    "refundAmount": 10
+}

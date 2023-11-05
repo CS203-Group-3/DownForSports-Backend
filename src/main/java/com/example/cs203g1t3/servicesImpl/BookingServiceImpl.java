@@ -128,7 +128,6 @@ public class BookingServiceImpl implements BookingService{
                 booking.setBookingAttended(true);
                 break;
             case -1:
-                user.setCreditScore(currentCreditScore+booking.getCreditDeducted());
                 booking.setBookingAttended(false);
                 break;
         }

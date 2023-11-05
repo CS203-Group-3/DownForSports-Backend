@@ -41,6 +41,7 @@ public class CreditRequest {
 
     public CreditRequestResponse toCreditRequestResponse() {
         return new CreditRequestResponse(
+            this.creditID,
             this.booking.getUser().getUsername(),
             this.booking.getUser().getUserID(),
             this.booking.toBookingResponse(),

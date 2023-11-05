@@ -218,6 +218,7 @@ public class UserServiceImpl implements UserService{
             currentCreditScore = 999;
         }
         user.setCreditScore(currentCreditScore);
+        userRepository.updateCreditScore(userId, currentCreditScore);
     }
 
         public void deductCredit(Long userId, double creditDeducted){

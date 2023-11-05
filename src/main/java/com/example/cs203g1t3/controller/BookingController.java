@@ -6,8 +6,10 @@ import javax.validation.Valid;
 
 import com.example.cs203g1t3.payload.request.CancelBookingRequest;
 import com.example.cs203g1t3.payload.request.ConfirmBookingAttendanceRequest;
+import com.example.cs203g1t3.payload.request.ConfirmCredit;
 import com.example.cs203g1t3.payload.request.CreditRequestform;
 import com.example.cs203g1t3.payload.request.ViewBookingsRequest;
+import com.example.cs203g1t3.payload.request.confirmCredit;
 import com.example.cs203g1t3.payload.response.BookingResponse;
 import com.example.cs203g1t3.payload.response.CreditRequestResponse;
 import com.example.cs203g1t3.payload.response.MessageResponse;
@@ -70,7 +72,7 @@ public class BookingController {
 
     @PostMapping("/confirmbookingattendance")
     @Transactional
-//    @PreAuthorize("hasRole('ROLE_BOOKINGMANAGER')")
+    @PreAuthorize("hasRole('ROLE_BOOKINGMANAGER')")
     public ResponseEntity<Booking> confirmBookingAttendance(@RequestBody ConfirmBookingAttendanceRequest confirmBookingAttendanceRequest) {
         Long bookingId = confirmBookingAttendanceRequest.getBookingId();
         int attendanceStatus = confirmBookingAttendanceRequest.getAttendanceStatus();
@@ -122,8 +124,12 @@ public class BookingController {
 
     @PreAuthorize("hasRole('ROLE_BOOKINGMANAGER')")
     @PostMapping("/creditrequest/confirm")
-    public ResponseEntity<?> confirmCreditRequest(@RequestBody long userID ,@RequestBody int refundAmount) {
-        creditRequestService.acceptRequest(refundAmount, userID);
+    public ResponseEntity<?> confirmCreditRequest(@RequestBody ConfirmCredit request) {
+        try {
+            creditRequestService.acceptRequest(request.getAmount(), request.getUserID(), request.getCreditRequestID());
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
