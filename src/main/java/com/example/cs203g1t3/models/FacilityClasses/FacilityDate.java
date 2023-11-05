@@ -41,7 +41,7 @@ public class FacilityDate {
     @JsonIgnore
     private Facility facility;
     
-    @OneToMany(mappedBy = "facilityDate", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "facilityDate", orphanRemoval = true, cascade = CascadeType.REMOVE)
     private List<TimeSlots> timeSlots;
     private LocalDate date;
 

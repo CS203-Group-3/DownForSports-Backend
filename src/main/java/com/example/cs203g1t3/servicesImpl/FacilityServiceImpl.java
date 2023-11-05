@@ -132,7 +132,17 @@ public class FacilityServiceImpl implements FacilityService {
     // }
 
     public void deleteFacility(Long facilityId) {
-        facilityRepository.deleteById(facilityId);
+//        facilityRepository.deleteById(facilityId);
+            Facility facility = facilityRepository.findById(facilityId).orElse(null);
+            if (facility != null) {
+                // Disassociate Facility from FacilityDate
+                for (FacilityDate facilityDate : facility.getFacilityDates()) {
+                    facilityDate.setFacility(null);
+                    facilityDateRepository.save(facilityDate); // Update the relationship
+                }
+                // Now, you can safely delete the Facility
+                facilityRepository.delete(facility);
+        }
     }
 
     @Transactional

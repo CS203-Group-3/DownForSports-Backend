@@ -40,7 +40,7 @@ public class User{
 //    @Size(min = 8, message = "Password should be at least 8 characters")
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
@@ -58,10 +58,10 @@ public class User{
 //    private boolean isMember;
 
     //Email One Time Password
-    @OneToOne(mappedBy="user",cascade=CascadeType.ALL)
+    @OneToOne(mappedBy="user",cascade=CascadeType.ALL,orphanRemoval = true)
     private OneTimePassword oneTimePassword;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private List<Booking> bookings;
 

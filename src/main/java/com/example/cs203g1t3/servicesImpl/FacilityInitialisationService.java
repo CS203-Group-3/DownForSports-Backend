@@ -36,11 +36,11 @@ public class FacilityInitialisationService {
         this.facilityService = facilityService;
     }
 
-    @Transactional
-    public void initialiseFacilities() {
-        Facility badminton = new Facility("Badminton Court", "Opens from 10am to 6pm", LocalTime.of(10,0), LocalTime.of(18,0), 50, "SMU");
-        facilityService.initialiseFacility(badminton);
-    }
+//    @Transactional
+//    public void initialiseFacilities() {
+//        Facility badminton = new Facility("Badminton Court", "Opens from 10am to 6pm", LocalTime.of(10,0), LocalTime.of(18,0), 50, "SMU");
+//        facilityService.initialiseFacility(badminton);
+//    }
 
     // New implementation
     public List<TimeSlots> generateTimeSlots(LocalTime openTime, LocalTime closingTime) {

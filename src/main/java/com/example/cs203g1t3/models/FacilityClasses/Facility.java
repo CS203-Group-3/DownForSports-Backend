@@ -49,10 +49,10 @@ public class Facility {
     private int creditCost;
     private String locationString;
 
-    @OneToMany(mappedBy = "facility", orphanRemoval = true, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "facility", orphanRemoval = true, cascade = {CascadeType.DETACH, CascadeType.REFRESH})
     private List<FacilityDate> facilityDates;
 
-    @OneToMany(mappedBy = "facility", cascade = CascadeType.ALL) // putting orphanRemoval = true gives the error "A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance"
+    @OneToMany(mappedBy = "facility", cascade = {CascadeType.DETACH, CascadeType.REFRESH}) // putting orphanRemoval = true gives the error "A collection with cascade="all-delete-orphan" was no longer referenced by the owning entity instance"
     private List<Booking> bookings;
 
     public Facility(String facilityType, String description) {

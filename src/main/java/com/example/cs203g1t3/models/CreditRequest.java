@@ -1,13 +1,6 @@
 package com.example.cs203g1t3.models;
 
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -23,7 +16,7 @@ public class CreditRequest {
     @GeneratedValue (strategy =  GenerationType.IDENTITY)
     private Long creditID;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE,orphanRemoval = true)
     @JoinColumn(name = "booking_id")
     private Booking booking;
 

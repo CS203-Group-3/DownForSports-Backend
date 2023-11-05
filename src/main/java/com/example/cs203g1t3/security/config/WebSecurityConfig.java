@@ -70,13 +70,14 @@ public class WebSecurityConfig {
                     auth.requestMatchers("/api/auth/register").permitAll();
                     auth.requestMatchers("/api/auth/login").permitAll();
                     auth.requestMatchers("/api/test/all").permitAll();
+                    auth.requestMatchers("api/user/logout/?").permitAll();
 //                    auth.requestMatchers("/api/facilities").permitAll();
 //                    auth.requestMatchers(HttpMethod.POST, "/api/facilities").hasRole("ROLE_ADMIN");
                     auth.requestMatchers("/api/auth/refreshtoken").permitAll();
                     auth.requestMatchers("/api/otp/generateOtp/*").permitAll();
                     auth.requestMatchers("/api/otp/validateOtp").permitAll();
-                    auth.requestMatchers("/api/auth/registerBM").permitAll();
-                    auth.anyRequest().permitAll();
+//                    auth.requestMatchers("/api/auth/registerBM").permitAll();
+                    auth.anyRequest().authenticated();
                     
                 });
             http.authenticationProvider(authenticationProvider());

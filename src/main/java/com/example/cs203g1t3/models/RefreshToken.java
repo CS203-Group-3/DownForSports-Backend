@@ -14,7 +14,7 @@ public class RefreshToken {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long refreshTokenId;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL,orphanRemoval = true)
     @JoinColumn(name = "user_id", referencedColumnName = "userId")
     private User user;
 

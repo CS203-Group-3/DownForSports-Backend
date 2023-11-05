@@ -62,7 +62,7 @@ import lombok.*;
         @Column(name = "creditDeducted")
         private double creditDeducted;
 
-        @OneToOne(mappedBy="booking", cascade = CascadeType.ALL) 
+        @OneToOne(mappedBy="booking", cascade = CascadeType.REMOVE,orphanRemoval = true)
         private CreditRequest creditRequest;
 
         public Booking(LocalTime startTime,LocalTime endTime,LocalDateTime dateCreated, double creditDeducted){
