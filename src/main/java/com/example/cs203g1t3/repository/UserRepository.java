@@ -22,6 +22,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
    Optional<User> findByUsernameAndPassword(String username, String password);
    Optional<User> findByUserID(Long userID);
 
+   void deleteByUserID(Long userId);
+
    Boolean existsByUsername(String username);
 
    Boolean existsByEmail(String email);
@@ -35,4 +37,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
    @Transactional
    @Query("UPDATE User u SET u.creditScore = :newCreditScore WHERE u.userID = :userId")
    void updateCreditScore(@Param("userId") Long userId, @Param("newCreditScore") double creditScore);
+
+//   @Modifying
+//   @Transactional
+//   @Query("DELETE FROM users where userid = userId")
+//   void deleteById(@Param("userid") Long userId);
 }

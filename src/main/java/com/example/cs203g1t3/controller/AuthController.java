@@ -65,6 +65,11 @@ public class AuthController {
     @Autowired
     private OneTimePasswordService oneTimePasswordService;
 
+    @GetMapping("/test")
+    public String test(){
+        return "Hello World";
+    }
+
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -127,6 +132,12 @@ public class AuthController {
             return ResponseEntity.badRequest().body(e);
         }
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    @PostMapping("/deleteUser/{userId}")
+    public ResponseEntity<?> deleteUser(@Valid @RequestParam Long userId){
+        userService.deleteUser(userId);
+        return ResponseEntity.ok(new MessageResponse("Please enter the OTP!"));
     }
     
 }

@@ -63,13 +63,13 @@ public class UserServiceImpl implements UserService{
         return user.get();
     }
 
-    // public void deleteUser(Long userId) {
-    //     boolean exists = userRepository.existsById(userId);
-    //     if (!exists) {
-    //         throw new IllegalStateException("User with ID " + userId + "does not exists");
-    //     }
-    //     userRepository.deleteById(userId);
-    // }
+     public void deleteUser(Long userId) {
+         boolean exists = userRepository.existsById(userId);
+         if (!exists) {
+             throw new IllegalStateException("User with ID " + userId + "does not exists");
+         }
+         userRepository.deleteByUserID(userId);
+     }
 
     public String changePassword(Long userID, String newPassword) {
         // Encode the new password

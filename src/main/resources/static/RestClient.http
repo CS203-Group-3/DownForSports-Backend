@@ -321,3 +321,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJCb29raW5nTWFuYWdlcjEiLCJpY
     "userID": 2,
     "refundAmount": 10
 }
+
+###
+GET http://localhost:8080/api/auth/test
+Content-Type: application/json
