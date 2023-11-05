@@ -86,6 +86,8 @@ public class BookingServiceTest {
         // assertEquals(500, user.getCreditScore());
         // assertNotNull(booking2);
         verify(facilityService.getAllTimeSlotFromFacility(dateBooked,facility.getFacilityId()));
-    }   
+    }
+
+
 
 }

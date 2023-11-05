@@ -13,6 +13,7 @@ import jakarta.transaction.Transactional;
 
 
 @Repository
+@Transactional
 public interface UserRepository extends JpaRepository<User, Long> {
 
    Optional<User> findByUsername(String username);

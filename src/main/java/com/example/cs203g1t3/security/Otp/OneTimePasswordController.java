@@ -22,7 +22,7 @@ public class OneTimePasswordController {
         oneTimePasswordService.generateOneTimePassword(userId);
     }
 
-        @PostMapping("/validateOtp")
+    @PostMapping("/validateOtp")
     private Boolean validateOtp(@RequestBody OneTimePasswordResponse oneTimePasswordResponse){
         Long userId = oneTimePasswordResponse.getUserId();
         int otpInt = oneTimePasswordResponse.getOneTimePasswordCode();
