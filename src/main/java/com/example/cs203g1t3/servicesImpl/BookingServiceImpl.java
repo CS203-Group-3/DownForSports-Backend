@@ -127,9 +127,6 @@ public class BookingServiceImpl implements BookingService{
                 user.setCreditScore(currentCreditScore + booking.getCreditDeducted() * attendancePresentMultiplier);
                 booking.setBookingAttended(true);
                 break;
-            case -1:
-                booking.setBookingAttended(false);
-                break;
         }
         booking.setBookingAttendanceChecked(true);
     }
