@@ -253,7 +253,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODQ3N
 ### make booking 2
 POST http://localhost:8080/api/bookings/makebooking
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODQ3OTM5NywiZXhwIjoxNjk4NTY1Nzk3fQ.3us5DgqgigmGtAF4l-Cq84LUduZt88DQ2Qc2D_arelU
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5OTE2NzM0OSwiZXhwIjoxNjk5MjUzNzQ5fQ.lw6JdUrbsJVg77eVhQy0yxGx_2C-uzWoWpTYern-Iy4
 
 {
   "userId":1,
@@ -297,9 +297,17 @@ Content-Type: application/json
 ###
 POST http://localhost:8080/api/bookings/creditrequest
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5OTE2NzM0OSwiZXhwIjoxNjk5MjUzNzQ5fQ.lw6JdUrbsJVg77eVhQy0yxGx_2C-uzWoWpTYern-Iy4
 
 {
-    "amount" : 300,
+    "amount" : 100,
     "details" : "i want credit back",
     "bookingId" : 1
 }
+
+
+###
+GET  http://localhost:8080/api/bookings/creditrequest
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5OTE2NzM0OSwiZXhwIjoxNjk5MjUzNzQ5fQ.lw6JdUrbsJVg77eVhQy0yxGx_2C-uzWoWpTYern-Iy4
+

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.cs203g1t3.models.CreditRequest;
 import com.example.cs203g1t3.payload.request.CreditRequestform;
+import com.example.cs203g1t3.payload.response.CreditRequestResponse;
 
 public interface CreditRequestService {
     
@@ -11,6 +12,6 @@ public interface CreditRequestService {
 
     void acceptRequest(int amount, long userId);
 
-    List<CreditRequest> getAllCreditRequest ();
+    List<CreditRequestResponse> getAllCreditRequest ();
 
 }

@@ -1,6 +1,8 @@
 package com.example.cs203g1t3.servicesImpl;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import com.example.cs203g1t3.exception.InvalidCreditRequestException;
 import com.example.cs203g1t3.models.Booking;
 import com.example.cs203g1t3.models.CreditRequest;
 import com.example.cs203g1t3.payload.request.CreditRequestform;
+import com.example.cs203g1t3.payload.response.CreditRequestResponse;
 import com.example.cs203g1t3.repository.BookingRepository;
 import com.example.cs203g1t3.repository.CreditRequestRepository;
 import com.example.cs203g1t3.service.BookingService;
@@ -42,7 +45,11 @@ public class CreditRequestServiceImpl implements CreditRequestService {
         userService.addCreditScore(userId, amount);
     }
 
-    public List<CreditRequest> getAllCreditRequest () {
-        return creditRequestRepository.findAll();
+    public List<CreditRequestResponse> getAllCreditRequest () {
+        List<CreditRequest> cRequests =  creditRequestRepository.findAll();
+        List<CreditRequestResponse> responses = cRequests.stream()
+                                    .map(CreditRequest::toCreditRequestResponse)
+                                    .collect(Collectors.toList());
+        return responses;
     }
 }

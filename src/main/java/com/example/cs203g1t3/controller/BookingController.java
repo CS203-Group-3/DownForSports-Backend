@@ -9,6 +9,7 @@ import com.example.cs203g1t3.payload.request.ConfirmBookingAttendanceRequest;
 import com.example.cs203g1t3.payload.request.CreditRequestform;
 import com.example.cs203g1t3.payload.request.ViewBookingsRequest;
 import com.example.cs203g1t3.payload.response.BookingResponse;
+import com.example.cs203g1t3.payload.response.CreditRequestResponse;
 import com.example.cs203g1t3.payload.response.MessageResponse;
 import com.example.cs203g1t3.payload.response.ViewPastBookingsResponse;
 import com.example.cs203g1t3.payload.response.ViewUpcomingBookingsResponse;
@@ -114,7 +115,7 @@ public class BookingController {
     }
 
     @GetMapping("creditrequest")
-    public ResponseEntity<List<CreditRequest>> getCreditReqeust() {
+    public ResponseEntity<List<CreditRequestResponse>> getCreditReqeust() {
         return ResponseEntity.ok(creditRequestService.getAllCreditRequest());
     }
 }
