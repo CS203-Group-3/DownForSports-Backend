@@ -121,8 +121,8 @@ public class BookingController {
     }
 
     @PreAuthorize("hasRole('ROLE_BOOKINGMANAGER')")
-    @PostMapping("/creditrequest")
-    public ResponseEntity<?> confirmCreditRequest(@RequestParam long userID ,@RequestBody int refundAmount) {
+    @PostMapping("/creditrequest/confirm")
+    public ResponseEntity<?> confirmCreditRequest(@RequestBody long userID ,@RequestBody int refundAmount) {
         creditRequestService.acceptRequest(refundAmount, userID);
         return new ResponseEntity<>(HttpStatus.OK);
     }

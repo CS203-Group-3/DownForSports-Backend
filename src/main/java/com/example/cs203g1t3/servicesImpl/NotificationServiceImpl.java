@@ -42,7 +42,7 @@ public class NotificationServiceImpl {
         String facilityLocation = facility.getLocationString();
         double creditDeducted = booking.getCreditDeducted();
 
-        String messageBody = "Hello,\n\nYou have successfully made a booking on  + dateBooked" + " from " + startTime + " to " + endTime
+        String messageBody = "Hello,\n\nYou have successfully made a booking on"  + dateBooked + " from " + startTime + " to " + endTime
                 + ".\n\nHere are your booking details:\n\nBookingID: " + bookingId
                 + "\nFacilityType: " + facilityType +
                 "\nFacility Description: " + facilityDesciption
