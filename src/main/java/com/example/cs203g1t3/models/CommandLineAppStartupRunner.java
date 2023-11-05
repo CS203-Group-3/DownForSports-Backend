@@ -47,6 +47,5 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
 //         Initialize facilities
 //        facilityInitialisationService.initialiseFacilities(); // error
-
     }
 }

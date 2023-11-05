@@ -38,7 +38,7 @@ public class BookingServiceTest {
 
     
     @Test
-    void make_booking_valid_Booking_Return_Booking() throws Exception{
+    void makeBooking_validBooking_returnedBooking() throws Exception{
         User user = new User("S1325847C", "Email@email.com","Password");
         user.setUserID(1L);
         Facility facility = new Facility("TEST NAME","TEST DESCRIPTION",LocalTime.of(8,0,0),LocalTime.of(11,0,0),50,"Test Location" );
@@ -50,7 +50,6 @@ public class BookingServiceTest {
         BookingRequest bookingRequest = new BookingRequest(1L,1L,LocalDate.of(2023,11,1), timings);
         //Initialise facility with opening time 8am, closing time 11am
         facilityService.initialiseFacility(facility);
-
     }   
 
 }

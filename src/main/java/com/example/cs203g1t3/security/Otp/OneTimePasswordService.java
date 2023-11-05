@@ -92,7 +92,7 @@ public class OneTimePasswordService {
         //Validate the code and checks for expiry
         if(oneTimePasswordCode == oneTimePassword.getOneTimePasswordCode()){
             if(oneTimePassword.getExpires().compareTo(now) > 0){
-//                oneTimePasswordRepository.
+                oneTimePasswordRepository.delete(oneTimePassword);
                 return true;
             }
         }
