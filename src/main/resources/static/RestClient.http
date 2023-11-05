@@ -195,8 +195,8 @@ Content-Type: application/json
 {
     "facilityType": "basketball court",
     "description": "indoor court",
-    "openTime": "23:00",
-    "closingTime": "00:00",
+    "openTime": "09:00",
+    "closingTime": "18:00",
     "creditCost": "50",
     "locationString": "ActiveSG Sengkang" 
 }
@@ -217,7 +217,7 @@ GET http://localhost:8080/api/facilities/2/dates
 Content-Type: application/json
 
 ### Get available timeslots of a date 
-GET http://localhost:8080/api/facilities/2/dates/31/timeslots
+GET http://localhost:8080/api/facilities/2/dates/56/timeslots
 Content-Type: application/json
 
 
@@ -242,9 +242,9 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODQ3NjE2NCwiZXhwIjoxNjk4NTYyNTY0fQ.ZA_t-OtboA5YqTpH9ibzsArnuLPDku0HxEpphWXHgA0
 
 {
-    "userId":1,
+    "userId":3,
     "facilityId":1,
-    "facilityDate":"2023-11-03",
+    "facilityDate":"2023-10-31",
     "timeSlots":[
           "10:00:00",
           "11:00:00"]
@@ -253,7 +253,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODQ3N
 ### make booking 2
 POST http://localhost:8080/api/bookings/makebooking
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODQ3NjE2NCwiZXhwIjoxNjk4NTYyNTY0fQ.ZA_t-OtboA5YqTpH9ibzsArnuLPDku0HxEpphWXHgA0
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODQ3OTM5NywiZXhwIjoxNjk4NTY1Nzk3fQ.3us5DgqgigmGtAF4l-Cq84LUduZt88DQ2Qc2D_arelU
 
 {
   "userId":1,
@@ -285,13 +285,12 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODA0N
   "bookingId":1
 }
 
-### Show past bookings
+### Show upcoming bookings
 GET http://localhost:8080/api/bookings/viewpastbookings?userId=1
 Content-Type: application/json
 
-### show upcoming booking
-
-GET http://localhost:8080/api/viewupcomingbookings/?userId=1
+###
+GET http://localhost:8080/api/bookings/
 Content-Type: application/json
 
 
@@ -303,44 +302,4 @@ Content-Type: application/json
     "amount" : 300,
     "details" : "i want credit back",
     "bookingId" : 1
-}
-
-
-
-### Create facility 2
-POST http://localhost:8080/api/facilities
-Content-Type: application/json
-
-{
-    "facilityType": "basketball court",
-    "description": "indoor court",
-    "openTime": "14:00",
-    "closingTime": "15:00",
-    "creditCost": "50",
-    "locationString": "ActiveSG Sengkang" 
-}
-
-
-### view facility
-GET http://localhost:8080/api/facilities/2
-Content-Type: application/json
-
-### view facility dates
-GET http://localhost:8080/api/facilities/2/dates
-Content-Type: application/json
-
-### Get faci timeslots
-GET http://localhost:8080/api/facilities/2/dates/32/timeslots
-Content-Type: application/json
-
-### make booking 2
-POST http://localhost:8080/api/bookings/makebooking
-Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5ODQ3NjE2NCwiZXhwIjoxNjk4NTYyNTY0fQ.ZA_t-OtboA5YqTpH9ibzsArnuLPDku0HxEpphWXHgA0
-
-{
-  "userId":1,
-  "facilityId":2,
-  "facilityDate":"2023-11-06",
-  "timeSlots":["14:00:00"]
 }
