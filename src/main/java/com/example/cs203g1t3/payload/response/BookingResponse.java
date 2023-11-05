@@ -19,4 +19,5 @@ public class BookingResponse {
     private String location;
     private Boolean bookingAttendanceChecked;
     private Boolean bookingAttended;
+    private double creditDeducted;
 }
