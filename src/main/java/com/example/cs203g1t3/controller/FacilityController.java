@@ -44,7 +44,7 @@ public class FacilityController {
     private FacilityService facilityService;
 
     @PostMapping
-    // @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> createFacility(@Valid @RequestBody FacilityCreationRequest fCR) {
 
         String facilityType = fCR.getFacilityType();
@@ -74,16 +74,16 @@ public class FacilityController {
     }    
 
     @GetMapping
-public ResponseEntity<List<FacilityResponse>> getAllFacilities() {
-    List<Facility> facilities = facilityService.getAllFacilities();
+    public ResponseEntity<List<FacilityResponse>> getAllFacilities() {
+        List<Facility> facilities = facilityService.getAllFacilities();
 
-    // Using Java streams to map Facility objects to FacilityResponse objects
-    List<FacilityResponse> facilityResponses = facilities.stream()
-        .map(Facility::toFacilityResponse) 
-        .collect(Collectors.toList());
+        // Using Java streams to map Facility objects to FacilityResponse objects
+        List<FacilityResponse> facilityResponses = facilities.stream()
+            .map(Facility::toFacilityResponse) 
+            .collect(Collectors.toList());
 
-    return ResponseEntity.ok(facilityResponses);
-}
+        return ResponseEntity.ok(facilityResponses);
+    }
 
 
     @GetMapping("/{facilityId}")
