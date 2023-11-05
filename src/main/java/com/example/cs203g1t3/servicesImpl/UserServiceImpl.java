@@ -221,7 +221,7 @@ public class UserServiceImpl implements UserService{
         userRepository.updateCreditScore(userId, currentCreditScore);
     }
 
-        public void deductCredit(Long userId, double creditDeducted){
+    public void deductCredit(Long userId, double creditDeducted){
         User user = userRepository.findById(userId).orElse(null);
         if(user == null){
             return;

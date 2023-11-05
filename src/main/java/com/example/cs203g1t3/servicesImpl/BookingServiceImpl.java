@@ -98,9 +98,16 @@ public class BookingServiceImpl implements BookingService{
          //1-2days 0%
          double creditsDeducted = booking.getCreditDeducted();
          LocalDate dateNow = LocalDate.now();
-         int noOfMonths = (Period.between(dateBooked, dateNow)).getMonths();
-         int noOfDays = noOfMonths * 30 + (Period.between(dateBooked, dateNow)).getDays();
+         int noOfYears = (Period.between(dateNow, dateBooked)).getYears();
+         if(noOfYears <0){
+            throw new  IllegalStateException("Booking cannot be cancelled");
+         }
+         int noOfMonths = (Period.between(dateNow, dateBooked)).getMonths();
+         int noOfDays = noOfMonths * 30 + (Period.between(dateNow, dateBooked)).getDays();
+         System.out.println("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+         System.out.println(noOfDays);
          if(noOfDays >=6){
+            System.out.println("HHHHHHHHHHHHHHHHHHHHHHHHHHHHEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
             userService.addCreditScore(user.getUserID(), creditsDeducted);
          }else if(noOfDays >=5){
             userService.addCreditScore(user.getUserID(), creditsDeducted*0.8);
