@@ -19,6 +19,7 @@ import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.transaction.Transactional;
 
 import com.example.cs203g1t3.exception.FacilityNotFoundException;
+import com.example.cs203g1t3.exception.NotEnoughCreditException;
 import com.example.cs203g1t3.models.Booking;
 import com.example.cs203g1t3.models.CreditRequest;
 import com.example.cs203g1t3.models.FacilityClasses.Facility;
@@ -55,14 +57,17 @@ public class BookingController {
 
     @PostMapping("/makebooking")
     @Transactional
-    public ResponseEntity<Booking> createBooking(@Valid @RequestBody BookingRequest bookingRequest) {
+    public ResponseEntity<?> createBooking(@Valid @RequestBody BookingRequest bookingRequest) {
         Long facilityId = bookingRequest.getFacilityId();
         Facility facility = facilityService.getFacility(facilityId);
         if (facility == null) {
             throw new FacilityNotFoundException(facilityId);
         }
-
-        bookingService.makeBooking(bookingRequest);
+        try {
+            bookingService.makeBooking(bookingRequest);
+        } catch (NotEnoughCreditException e) {
+            return ResponseEntity.badRequest().body(e);
+        }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

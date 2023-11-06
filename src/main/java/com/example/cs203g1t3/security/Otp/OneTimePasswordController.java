@@ -4,6 +4,7 @@ package com.example.cs203g1t3.security.Otp;
 
 import com.example.cs203g1t3.exception.InvalidOtpException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,14 +24,14 @@ public class OneTimePasswordController {
     }
 
     @PostMapping("/validateOtp")
-    private Boolean validateOtp(@RequestBody OneTimePasswordResponse oneTimePasswordResponse){
+    private ResponseEntity<?> validateOtp(@RequestBody OneTimePasswordResponse oneTimePasswordResponse){
         Long userId = oneTimePasswordResponse.getUserId();
         int otpInt = oneTimePasswordResponse.getOneTimePasswordCode();
             System.out.println(otpInt);
         try{
-            return oneTimePasswordService.checkOneTimePassword(userId,otpInt);
+            return ResponseEntity.ok(oneTimePasswordService.checkOneTimePassword(userId,otpInt));
         } catch (RuntimeException e){
-            throw new InvalidOtpException("OTP is not valid!");
+            return ResponseEntity.badRequest().body("OTP is not valid!");
         }
 
     }

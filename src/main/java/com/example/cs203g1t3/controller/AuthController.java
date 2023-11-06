@@ -12,6 +12,7 @@ import com.example.cs203g1t3.payload.request.TokenRefreshRequest;
 import com.example.cs203g1t3.payload.response.JwtResponse;
 import com.example.cs203g1t3.payload.response.MessageResponse;
 import com.example.cs203g1t3.payload.response.TokenRefreshResponse;
+import com.example.cs203g1t3.payload.response.registrationResponse;
 import com.example.cs203g1t3.repository.RoleRepository;
 import com.example.cs203g1t3.repository.UserRepository;
 import com.example.cs203g1t3.security.Otp.OneTimePasswordService;
@@ -114,13 +115,14 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         Role userRole = roleRepository.findByName(ERole.ROLE_USER).get();
+        User user;
         try {
-            User user = userService.registerAccount(signUpRequest, userRole);
+            user = userService.registerAccount(signUpRequest, userRole);
             oneTimePasswordService.generateOneTimePassword(user.getUserID());
         } catch (InvalidUserException e) {
             return ResponseEntity.badRequest().body(e);
         }
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        return ResponseEntity.ok(new registrationResponse(new MessageResponse("User registered successfully!"), user.getUserID()));
     }
 
     @PostMapping("/registerBM")
