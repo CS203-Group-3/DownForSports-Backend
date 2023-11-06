@@ -27,12 +27,9 @@ public class OneTimePasswordController {
     private ResponseEntity<?> validateOtp(@RequestBody OneTimePasswordResponse oneTimePasswordResponse){
         Long userId = oneTimePasswordResponse.getUserId();
         int otpInt = oneTimePasswordResponse.getOneTimePasswordCode();
-            System.out.println(otpInt);
-        try{
-            return ResponseEntity.ok(oneTimePasswordService.checkOneTimePassword(userId,otpInt));
-        } catch (RuntimeException e){
-            return ResponseEntity.badRequest().body("OTP is not valid!");
-        }
+        boolean correctOTP = oneTimePasswordService.checkOneTimePassword(userId,otpInt);
+        if (correctOTP) return ResponseEntity.ok().body("OTP is valid, logging in");
+        else return ResponseEntity.badRequest().body("OTP is not valid!");
 
     }
 }
