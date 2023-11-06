@@ -28,24 +28,24 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
 
     @Override
     public void run(String...args) {
-        // Initialize user with admin role
-        Role adminRole = new Role(ERole.ROLE_ADMIN);
-        Role userRole = new Role(ERole.ROLE_USER);
-        Role bookingManagerRole = new Role(ERole.ROLE_BOOKINGMANAGER);
-        roleRepository.save(adminRole);
-        roleRepository.save(userRole);
-        roleRepository.save(bookingManagerRole);
-
-        String encodedPassword = passwordEncoder.encode("Pass1234!");
-        Set<Role> roles = new HashSet<>();
-        roles.add(adminRole);
-
-        User admin = new User("admin", null, encodedPassword);
-        admin.setRoles(roles);
-        userRepository.save(admin);
-
-        // Initialize facilities
-        facilityInitialisationService.initialiseFacilities(); // error
+//        // Initialize user with admin role
+//        Role adminRole = new Role(ERole.ROLE_ADMIN);
+//        Role userRole = new Role(ERole.ROLE_USER);
+//        Role bookingManagerRole = new Role(ERole.ROLE_BOOKINGMANAGER);
+//        roleRepository.save(adminRole);
+//        roleRepository.save(userRole);
+//        roleRepository.save(bookingManagerRole);
+//
+//        String encodedPassword = passwordEncoder.encode("Pass1234!");
+//        Set<Role> roles = new HashSet<>();
+//        roles.add(adminRole);
+//
+//        User admin = new User("admin", null, encodedPassword);
+//        admin.setRoles(roles);
+//        userRepository.save(admin);
+//
+//        // Initialize facilities
+//        facilityInitialisationService.initialiseFacilities(); // error
 
     }
 }
