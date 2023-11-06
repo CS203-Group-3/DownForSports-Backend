@@ -40,16 +40,15 @@ public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
 
-    @Autowired
-    private final RefreshTokenService refreshTokenService;
+//    @Autowired
+//    private final RefreshTokenService refreshTokenService;
 
     private BCryptPasswordEncoder encoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder encoder,RefreshTokenService refreshTokenService) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder encoder) {
         this.userRepository = userRepository;
         this.encoder = encoder;
-        this.refreshTokenService = refreshTokenService;
     }
 
     public List<User> getUsers() {
@@ -78,10 +77,6 @@ public class UserServiceImpl implements UserService{
         // Save the updated user with the new password
         userRepository.updatePassword(userID, encodedPassword);
         return newPassword;
-    }
-
-    public void logUserOut(Long userId){
-        refreshTokenService.deleteByUserId(userId);
     }
 
     public boolean checkPassword(Long userID, String password) {
@@ -235,6 +230,7 @@ public class UserServiceImpl implements UserService{
         user.setCreditScore(currentCreditScore-creditDeducted);
         userRepository.save(user);
         }
+
 }
 
 

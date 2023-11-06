@@ -24,8 +24,6 @@ public interface UserService {
 
     void deductCredit(Long userId, double creditDeducted);
 
-    void logUserOut(Long userId);
-
     void deleteUser(Long userId);
 }
 

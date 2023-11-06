@@ -61,7 +61,7 @@ Content-Type: application/json
 
 {
     "username": "admin",
-    "password": "B@llsD33p69"
+    "password": "Pass1234!"
 }
 
 ### Authentication success
@@ -325,3 +325,33 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJCb29raW5nTWFuYWdlcjEiLCJpY
 ###
 GET http://localhost:8080/api/auth/test
 Content-Type: application/json
+
+
+###
+GET http://localhost:8080/api/user/details/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJUMDEyNzUxMEciLCJpYXQiOjE2OTkyNjE0NTUsImV4cCI6MTY5OTM0Nzg1NX0.SMhnEvcswR4A8VacQsaM28NjCSFfFRVnfcpwRaAQEZk
+
+{
+
+}
+
+
+###
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "T0127510G",
+  "password": "Testing@123"
+}
+
+### Invalid username
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "T0127510G",
+  "email": "jevontanjinghong@gmail.com",
+  "password": "Testing@123"
+}

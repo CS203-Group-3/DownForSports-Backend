@@ -1,17 +1,13 @@
 package com.example.cs203g1t3.controller;
 
 import com.example.cs203g1t3.exception.InvalidUserException;
-import com.example.cs203g1t3.exception.TokenRefreshException;
 import com.example.cs203g1t3.models.ERole;
-import com.example.cs203g1t3.models.RefreshToken;
 import com.example.cs203g1t3.models.Role;
 import com.example.cs203g1t3.models.User;
 import com.example.cs203g1t3.payload.request.LoginRequest;
 import com.example.cs203g1t3.payload.request.SignupRequest;
-import com.example.cs203g1t3.payload.request.TokenRefreshRequest;
 import com.example.cs203g1t3.payload.response.JwtResponse;
 import com.example.cs203g1t3.payload.response.MessageResponse;
-import com.example.cs203g1t3.payload.response.TokenRefreshResponse;
 import com.example.cs203g1t3.payload.response.registrationResponse;
 import com.example.cs203g1t3.repository.RoleRepository;
 import com.example.cs203g1t3.repository.UserRepository;
@@ -19,7 +15,6 @@ import com.example.cs203g1t3.security.Otp.OneTimePasswordService;
 import com.example.cs203g1t3.security.jwt.JwtUtils;
 import com.example.cs203g1t3.service.UserService;
 import com.example.cs203g1t3.servicesImpl.CustomUserDetails;
-import com.example.cs203g1t3.servicesImpl.RefreshTokenService;
 import com.example.cs203g1t3.servicesImpl.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +55,8 @@ public class AuthController {
     @Autowired
     private JwtUtils jwtUtils;
 
-    @Autowired
-    private RefreshTokenService refreshTokenService;
+//    @Autowired
+//    private RefreshTokenService refreshTokenService;
 
     @Autowired
     private OneTimePasswordService oneTimePasswordService;
@@ -90,27 +85,27 @@ public class AuthController {
         List<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
+//        RefreshToken refreshToken = refreshTokenService.createRefreshToken(userDetails.getId());
 
         return ResponseEntity
-                .ok(new JwtResponse(jwt, refreshToken.getToken(),userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(),
+                .ok(new JwtResponse(jwt,userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(),
                         roles));
     }
 
-    @PostMapping("/refreshtoken")
-    public ResponseEntity<?> refreshtoken(@Valid @RequestBody TokenRefreshRequest request) {
-        String requestRefreshToken = request.getRefreshToken();
-
-        return refreshTokenService.findByToken(requestRefreshToken)
-                .map(refreshTokenService::verifyExpiration)
-                .map(RefreshToken::getUser)
-                .map(user -> {
-                    String token = jwtUtils.generateTokenFromUsername(user.getUsername());
-                    return ResponseEntity.ok(new TokenRefreshResponse(token, requestRefreshToken));
-                })
-                .orElseThrow(() -> new TokenRefreshException(requestRefreshToken,
-                        "Refresh token is not in database!"));
-    }
+//    @PostMapping("/refreshtoken")
+//    public ResponseEntity<?> refreshtoken(@Valid @RequestBody TokenRefreshRequest request) {
+//        String requestRefreshToken = request.getRefreshToken();
+//
+//        return refreshTokenService.findByToken(requestRefreshToken)
+//                .map(refreshTokenService::verifyExpiration)
+//                .map(RefreshToken::getUser)
+//                .map(user -> {
+//                    String token = jwtUtils.generateTokenFromUsername(user.getUsername());
+//                    return ResponseEntity.ok(new TokenRefreshResponse(token, requestRefreshToken));
+//                })
+//                .orElseThrow(() -> new TokenRefreshException(requestRefreshToken,
+//                        "Refresh token is not in database!"));
+//    }
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {

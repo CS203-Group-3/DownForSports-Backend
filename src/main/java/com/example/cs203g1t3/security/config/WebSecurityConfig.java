@@ -67,13 +67,13 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> {
                     //Add the security config here
-                    auth.requestMatchers("/api/auth/test");
+                    auth.requestMatchers("/api/auth/test").permitAll();
                     auth.requestMatchers("/api/auth/register").permitAll();
                     auth.requestMatchers("/api/auth/login").permitAll();
                     auth.requestMatchers("/api/auth/refreshtoken").permitAll();
                     auth.requestMatchers("/api/otp/generateOtp/*").permitAll();
                     auth.requestMatchers("/api/otp/validateOtp").permitAll();
-                    auth.anyRequest().authenticated();
+                    auth.anyRequest().permitAll();
                     
                 });
             http.authenticationProvider(authenticationProvider());

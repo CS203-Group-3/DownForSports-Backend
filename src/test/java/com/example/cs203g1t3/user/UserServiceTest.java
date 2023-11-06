@@ -5,10 +5,8 @@ import com.example.cs203g1t3.models.ERole;
 import com.example.cs203g1t3.models.Role;
 import com.example.cs203g1t3.models.User;
 import com.example.cs203g1t3.payload.request.SignupRequest;
-import com.example.cs203g1t3.repository.RefreshTokenRepository;
 import com.example.cs203g1t3.repository.RoleRepository;
 import com.example.cs203g1t3.repository.UserRepository;
-import com.example.cs203g1t3.servicesImpl.RefreshTokenService;
 import com.example.cs203g1t3.servicesImpl.UserServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,13 +43,9 @@ public class UserServiceTest {
     private RoleRepository roleRepository;
     @Mock
     private BCryptPasswordEncoder encoder;
-    @Mock
-    private RefreshTokenRepository refreshTokenRepository;
 
     @InjectMocks
     private UserServiceImpl userService;
-    @InjectMocks
-    private RefreshTokenService refreshTokenService;
 
 
     @BeforeEach

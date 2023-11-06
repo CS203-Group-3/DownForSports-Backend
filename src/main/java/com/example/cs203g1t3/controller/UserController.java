@@ -33,6 +33,7 @@ public class UserController {
     @GetMapping("/details/{userId}")
     public ResponseEntity<?> getUserProfile(@PathVariable Long userId) {
         User user = userService.getUser(userId);
+        System.out.println("Got User");
         return ResponseEntity.ok(user);
     }
 
@@ -53,11 +54,5 @@ public class UserController {
         return ResponseEntity.ok("Password changed successfully");
     }
 
-     @DeleteMapping("/logout/{userId}")
-     public ResponseEntity<?> logout(@PathVariable Long userId){
-         userService.logUserOut(userId);
-         User user = userService.getUser(userId);
-         return ResponseEntity.ok(user);
-     }
 }
 
