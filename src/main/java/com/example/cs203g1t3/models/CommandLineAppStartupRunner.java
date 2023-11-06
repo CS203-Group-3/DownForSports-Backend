@@ -30,7 +30,11 @@ public class CommandLineAppStartupRunner implements CommandLineRunner {
     public void run(String...args) {
         // Initialize user with admin role
         Role adminRole = new Role(ERole.ROLE_ADMIN);
+        Role userRole = new Role(ERole.ROLE_USER);
+        Role bookingManagerRole = new Role(ERole.ROLE_BOOKINGMANAGER);
         roleRepository.save(adminRole);
+        roleRepository.save(userRole);
+        roleRepository.save(bookingManagerRole);
 
         String encodedPassword = passwordEncoder.encode("Pass1234!");
         Set<Role> roles = new HashSet<>();

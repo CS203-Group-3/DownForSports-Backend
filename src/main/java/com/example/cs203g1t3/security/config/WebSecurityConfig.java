@@ -67,6 +67,7 @@ public class WebSecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> {
                     //Add the security config here
+                    auth.requestMatchers("/api/auth/test");
                     auth.requestMatchers("/api/auth/register").permitAll();
                     auth.requestMatchers("/api/auth/login").permitAll();
                     auth.requestMatchers("/api/auth/refreshtoken").permitAll();
