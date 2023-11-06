@@ -53,10 +53,12 @@ public class FacilityServiceTest {
         facility.setFacilityDates(List.of(facilityDate));
         when(facilities.findById(10L)).thenReturn(Optional.of(facility));
 
-     List<TimeSlots> timeSlots = facilityService.getAllTimeSlotFromFacility(date, 10L);
+        List<TimeSlots> timeSlots = facilityService.getAllTimeSlotFromFacility(date, 10L);
 
         assertNotNull(timeSlots);
         assertEquals(2, timeSlots.size());
+
+        verify(facilities).findById(10L);
     }
 
     @Test
@@ -68,6 +70,9 @@ public class FacilityServiceTest {
         List<TimeSlots> actual = facilityService.getAllTimeSlotFromFacility(date, 10L);
         assertNull(actual);
         
+        verify(facilities).findById(10L);
+        
+
     }
 
     
@@ -95,6 +100,8 @@ public class FacilityServiceTest {
 
         assertEquals(0, availableTimeSlots.size());
         assertEquals(new ArrayList<TimeSlots>(), availableTimeSlots);
+
+        verify(facilities).findById(10L);
     }
 
     @Test
@@ -126,6 +133,9 @@ public class FacilityServiceTest {
 
         // 8 timeslots from 1000 to 1800, 1 of which is booked. Hence 7 available timeslots.
         assertEquals(7, availableTimeSlots.size());
+
+        verify(facilities).findById(10L);
+
     }
 
     
