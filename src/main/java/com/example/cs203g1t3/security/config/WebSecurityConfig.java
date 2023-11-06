@@ -68,12 +68,10 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> {
                     //Add the security config here
                     auth.requestMatchers("/api/auth/register").permitAll();
-                    auth.requestMatchers("/api/auth/registerBM").permitAll();
                     auth.requestMatchers("/api/auth/login").permitAll();
                     auth.requestMatchers("/api/auth/refreshtoken").permitAll();
                     auth.requestMatchers("/api/otp/generateOtp/*").permitAll();
                     auth.requestMatchers("/api/otp/validateOtp").permitAll();
-                    auth.requestMatchers("/api/bookings/creditrequest/confirm").permitAll();
                     auth.anyRequest().authenticated();
                     
                 });
