@@ -113,7 +113,7 @@ public class AuthController {
         User user;
         try {
             user = userService.registerAccount(signUpRequest, userRole);
-            oneTimePasswordService.generateOneTimePassword(user.getUserID());
+            // oneTimePasswordService.generateOneTimePassword(user.getUserID());
         } catch (InvalidUserException e) {
             return ResponseEntity.badRequest().body(e);
         }
