@@ -116,7 +116,7 @@ public class BookingServiceImpl implements BookingService{
          }
          return true;
     }
-
+    //Method to confirm attendance of the user to 
     @Override
     public void confirmBookingAttendance(Long bookingId,int attendanceStatus){
          if(attendanceStatus != 1 && attendanceStatus != 0 && attendanceStatus != -1){
@@ -198,6 +198,8 @@ public class BookingServiceImpl implements BookingService{
         notificationService.sendBookingConfirmationNotificationEmail(user.getUserID(),booking);
         return booking;
     }
+
+    //Helper method
     public boolean isAvailable(List<LocalTime> bookingTime, LocalDate dateBooked){
         for(LocalTime time: bookingTime){
             if(dateBooked.isBefore(LocalDate.now())){
@@ -210,6 +212,7 @@ public class BookingServiceImpl implements BookingService{
         }
         return true;
     }
+    //Helper method
     public boolean checkAvailability(List<LocalTime>bookingTime, List<TimeSlots> facilityTimings){
         for (LocalTime t : bookingTime) {
             // check if it is available
@@ -229,7 +232,7 @@ public class BookingServiceImpl implements BookingService{
         }
         return true;
     }
-    
+    //Helper method
     public boolean isConsecutiveTimeSlots(List<LocalTime> timeslots){
         Collections.sort(timeslots);
         LocalTime start = timeslots.get(0);
